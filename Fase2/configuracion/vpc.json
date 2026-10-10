@@ -1,0 +1,47 @@
+{
+    "Vpcs": [
+        {
+            "OwnerId": "703461917799",
+            "InstanceTenancy": "default",
+            "CidrBlockAssociationSet": [
+                {
+                    "AssociationId": "vpc-cidr-assoc-054535fd2d1dece81",
+                    "CidrBlock": "10.20.0.0/24",
+                    "CidrBlockState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "vpc-zenite-fase2"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                }
+            ],
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "State": "available",
+            "CidrBlock": "10.20.0.0/24",
+            "DhcpOptionsId": "dopt-03c11a8248e4b171a"
+        }
+    ]
+}
