@@ -1,0 +1,16 @@
+# Sistema
+.DS_Store
+~$*
+
+# Secretos y credenciales (Fase 2: nunca se suben al repositorio)
+.env
+.env.*
+*.pem
+*.key
+*.ppk
+id_rsa*
+id_ed25519*
+credentials
+.aws/
+*accessKeys*.csv
+*rootkey*.csv
