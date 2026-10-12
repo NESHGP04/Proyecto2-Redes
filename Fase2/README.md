@@ -63,7 +63,7 @@ Los MD_2 a MD_5 usan estos nombres; son los que valen (los nombres de ejemplo de
 | Evidencia | Archivo |
 |---|---|
 | E01 | `01_vpc/E01_VPC_CIDR.png` |
-| E02 · E03 | `02_subredes/E02_Subredes_AWS.png` · `E03_Rutas.png` |
+| E02 · E03 | `02_subredes/E02_Subredes_AWS.png` · `E03_Rutas_Interna.png` · `E03_Rutas_DMZ.png` · `E03_Rutas_Infra.png` |
 | E04 · E05 · E06 | `03_seguridad/E04_SG_Ventas.png` · `E05_SG_TI.png` · `E06_EICE.png` |
 | E07 · E08 | `04_instancias/E07_Instancias_Privadas.png` · `E08_IP_Ventas01.png` |
 | E09 – E12 | `05_pruebas/E09_Ping_Ventas01_a_Ventas02_OK.png` · `E10_Ping_Ventas02_a_Ventas01_OK.png` · `E11_Ping_TI_a_Ventas_OK.png` · `E12_Ping_Ventas_a_TI_BLOQUEADO.png` |
@@ -83,9 +83,31 @@ Scripts en [configuracion/](configuracion/), pensados para **AWS CloudShell** (s
 Equivalente manual en la consola: VPC → *Create VPC* → *VPC only* → nombre `vpc-zenite-fase2`, IPv4 `10.20.0.0/24`,
 sin IPv6, tenancy Default → *Actions → Edit VPC settings*: DNS resolution y DNS hostnames habilitados → etiquetas.
 
+## Parte 2 – Subredes y tablas de rutas (MD_2)
+
+VPC de partida: `vpc-zenite-fase2` · `vpc-0e4c1d0b2314ab4df`. Las siete subredes van en **una sola AZ** (`us-east-1a`).
+
+| Paso | Qué hacer |
+|---|---|
+| 1 | Consola en **N. Virginia** → CloudShell → subir `01_crear_vpc.sh` y `02_crear_subredes_rutas.sh`. |
+| 2 | `bash 01_crear_vpc.sh --validar` — confirma que la VPC sigue correcta (no modifica nada). |
+| 3 | `bash 02_crear_subredes_rutas.sh` — crea las 7 subredes y `rt-zenite-interna` / `rt-zenite-dmz` / `rt-zenite-infra`, asocia cada subred, valida y genera el registro. Debe terminar en `RESULTADO: todo correcto.` |
+| 4 | Consola → VPC → *Subnets*, filtrar por la VPC y ordenar por IPv4 CIDR (columnas Name, Subnet ID, VPC, IPv4 CIDR, Availability Zone) → `evidencias/02_subredes/E02_Subredes_AWS.png`. |
+| 5 | Consola → VPC → *Route tables*, filtrar por la VPC, seleccionar cada tabla con el panel de detalles en la pestaña *Routes* (la columna *Explicit subnet associations* muestra las asociaciones) → `evidencias/02_subredes/E03_Rutas_Interna.png`, `E03_Rutas_DMZ.png`, `E03_Rutas_Infra.png`. |
+| 6 | Descargar de `~/fase2-config/` a `configuracion/`: `subnets.json`, `route-tables.json`, `subredes-validacion.txt` y `segmentacion.md` (reemplaza la plantilla con los IDs reales). Si *Download file* no funciona en el panel inferior, abrir CloudShell en pantalla completa o usar `cat` y copiar. |
+
+Para AZ distinta: `AZ=us-east-1b bash 02_crear_subredes_rutas.sh`. El script se detiene sin cambiar nada si encuentra subredes
+fuera del plan, en otra AZ o sobre `10.20.0.160/27` / `10.20.0.192/26`.
+
+Equivalente manual: *Subnets → Create subnet* (VPC `vpc-zenite-fase2`, AZ `us-east-1a`, nombre y CIDR de la tabla de
+segmentación, etiquetas `Project`, `Phase`, `Environment`) y *Route tables → Create route table* (misma VPC) → *Subnet
+associations → Edit*. No agregar rutas: cada tabla queda solo con `10.20.0.0/24 → local`.
+
 ## Control de costos y seguridad
 
-- En esta parte **no** debe existir ninguna EC2, NAT Gateway, Elastic IP ni VPN Site-to-Site (`00_verificar_entorno.sh` lo comprueba).
+- En las partes 1 y 2 **no** debe existir ninguna EC2, NAT Gateway, Elastic IP, Internet Gateway ni VPN Site-to-Site (`00_verificar_entorno.sh` y `02_crear_subredes_rutas.sh` lo comprueban).
 - Para administrar las instancias privadas se usa EC2 Instance Connect Endpoint (sin IPv4 pública y sin NAT Gateway).
 - No subir Access Keys, Secret Keys, Session Tokens, contraseñas ni llaves SSH (el `.gitignore` de la raíz bloquea los casos comunes).
+  Las variables sensibles están listadas, sin valores, en `.env.example` (raíz). Para usar los scripts fuera de CloudShell:
+  `cp .env.example .env` y llenar `.env`, que está ignorado por git. En CloudShell no hace falta.
 - Al terminar cada sesión: detener las instancias (`Stop`) y revisar Billing.

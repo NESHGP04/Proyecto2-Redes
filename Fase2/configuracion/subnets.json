@@ -1,0 +1,340 @@
+{
+    "Subnets": [
+        {
+            "AvailabilityZoneId": "use1-az1",
+            "MapCustomerOwnedIpOnLaunch": false,
+            "OwnerId": "703461917799",
+            "AssignIpv6AddressOnCreation": false,
+            "Ipv6CidrBlockAssociationSet": [],
+            "Tags": [
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "subnet-zenite-infra"
+                }
+            ],
+            "SubnetArn": "arn:aws:ec2:us-east-1:703461917799:subnet/subnet-043e821cc9ee7c765",
+            "EnableDns64": false,
+            "Ipv6Native": false,
+            "PrivateDnsNameOptionsOnLaunch": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "SubnetId": "subnet-043e821cc9ee7c765",
+            "State": "available",
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "CidrBlock": "10.20.0.144/28",
+            "AvailableIpAddressCount": 11,
+            "AvailabilityZone": "us-east-1a",
+            "DefaultForAz": false,
+            "MapPublicIpOnLaunch": false
+        },
+        {
+            "AvailabilityZoneId": "use1-az1",
+            "MapCustomerOwnedIpOnLaunch": false,
+            "OwnerId": "703461917799",
+            "AssignIpv6AddressOnCreation": false,
+            "Ipv6CidrBlockAssociationSet": [],
+            "Tags": [
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "subnet-zenite-servidores"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                }
+            ],
+            "SubnetArn": "arn:aws:ec2:us-east-1:703461917799:subnet/subnet-0990205c298b0635d",
+            "EnableDns64": false,
+            "Ipv6Native": false,
+            "PrivateDnsNameOptionsOnLaunch": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "SubnetId": "subnet-0990205c298b0635d",
+            "State": "available",
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "CidrBlock": "10.20.0.64/27",
+            "AvailableIpAddressCount": 27,
+            "AvailabilityZone": "us-east-1a",
+            "DefaultForAz": false,
+            "MapPublicIpOnLaunch": false
+        },
+        {
+            "AvailabilityZoneId": "use1-az1",
+            "MapCustomerOwnedIpOnLaunch": false,
+            "OwnerId": "703461917799",
+            "AssignIpv6AddressOnCreation": false,
+            "Ipv6CidrBlockAssociationSet": [],
+            "Tags": [
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "subnet-zenite-dmz"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                }
+            ],
+            "SubnetArn": "arn:aws:ec2:us-east-1:703461917799:subnet/subnet-0d29453584ea726c0",
+            "EnableDns64": false,
+            "Ipv6Native": false,
+            "PrivateDnsNameOptionsOnLaunch": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "SubnetId": "subnet-0d29453584ea726c0",
+            "State": "available",
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "CidrBlock": "10.20.0.112/28",
+            "AvailableIpAddressCount": 11,
+            "AvailabilityZone": "us-east-1a",
+            "DefaultForAz": false,
+            "MapPublicIpOnLaunch": false
+        },
+        {
+            "AvailabilityZoneId": "use1-az1",
+            "MapCustomerOwnedIpOnLaunch": false,
+            "OwnerId": "703461917799",
+            "AssignIpv6AddressOnCreation": false,
+            "Ipv6CidrBlockAssociationSet": [],
+            "Tags": [
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "subnet-zenite-ventas"
+                }
+            ],
+            "SubnetArn": "arn:aws:ec2:us-east-1:703461917799:subnet/subnet-0234dd20474eef1aa",
+            "EnableDns64": false,
+            "Ipv6Native": false,
+            "PrivateDnsNameOptionsOnLaunch": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "SubnetId": "subnet-0234dd20474eef1aa",
+            "State": "available",
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "CidrBlock": "10.20.0.0/27",
+            "AvailableIpAddressCount": 27,
+            "AvailabilityZone": "us-east-1a",
+            "DefaultForAz": false,
+            "MapPublicIpOnLaunch": false
+        },
+        {
+            "AvailabilityZoneId": "use1-az1",
+            "MapCustomerOwnedIpOnLaunch": false,
+            "OwnerId": "703461917799",
+            "AssignIpv6AddressOnCreation": false,
+            "Ipv6CidrBlockAssociationSet": [],
+            "Tags": [
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "subnet-zenite-visitantes"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                }
+            ],
+            "SubnetArn": "arn:aws:ec2:us-east-1:703461917799:subnet/subnet-0edb31ab5f88d89fb",
+            "EnableDns64": false,
+            "Ipv6Native": false,
+            "PrivateDnsNameOptionsOnLaunch": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "SubnetId": "subnet-0edb31ab5f88d89fb",
+            "State": "available",
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "CidrBlock": "10.20.0.32/27",
+            "AvailableIpAddressCount": 27,
+            "AvailabilityZone": "us-east-1a",
+            "DefaultForAz": false,
+            "MapPublicIpOnLaunch": false
+        },
+        {
+            "AvailabilityZoneId": "use1-az1",
+            "MapCustomerOwnedIpOnLaunch": false,
+            "OwnerId": "703461917799",
+            "AssignIpv6AddressOnCreation": false,
+            "Ipv6CidrBlockAssociationSet": [],
+            "Tags": [
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "subnet-zenite-vpn"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                }
+            ],
+            "SubnetArn": "arn:aws:ec2:us-east-1:703461917799:subnet/subnet-061f6bea484702eec",
+            "EnableDns64": false,
+            "Ipv6Native": false,
+            "PrivateDnsNameOptionsOnLaunch": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "SubnetId": "subnet-061f6bea484702eec",
+            "State": "available",
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "CidrBlock": "10.20.0.128/28",
+            "AvailableIpAddressCount": 11,
+            "AvailabilityZone": "us-east-1a",
+            "DefaultForAz": false,
+            "MapPublicIpOnLaunch": false
+        },
+        {
+            "AvailabilityZoneId": "use1-az1",
+            "MapCustomerOwnedIpOnLaunch": false,
+            "OwnerId": "703461917799",
+            "AssignIpv6AddressOnCreation": false,
+            "Ipv6CidrBlockAssociationSet": [],
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "subnet-zenite-ti"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                }
+            ],
+            "SubnetArn": "arn:aws:ec2:us-east-1:703461917799:subnet/subnet-0688bbf577464f544",
+            "EnableDns64": false,
+            "Ipv6Native": false,
+            "PrivateDnsNameOptionsOnLaunch": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+            },
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "SubnetId": "subnet-0688bbf577464f544",
+            "State": "available",
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "CidrBlock": "10.20.0.96/28",
+            "AvailableIpAddressCount": 11,
+            "AvailabilityZone": "us-east-1a",
+            "DefaultForAz": false,
+            "MapPublicIpOnLaunch": false
+        }
+    ]
+}

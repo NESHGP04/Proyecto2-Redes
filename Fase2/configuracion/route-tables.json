@@ -1,0 +1,206 @@
+{
+    "RouteTables": [
+        {
+            "Associations": [
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0f4d7322bdbc3c88d",
+                    "RouteTableId": "rtb-003c14fc932b0a079",
+                    "SubnetId": "subnet-061f6bea484702eec",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                },
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0688354ddd4710fa3",
+                    "RouteTableId": "rtb-003c14fc932b0a079",
+                    "SubnetId": "subnet-0234dd20474eef1aa",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                },
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0730514e063da0d0b",
+                    "RouteTableId": "rtb-003c14fc932b0a079",
+                    "SubnetId": "subnet-0688bbf577464f544",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                },
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0b353c63dc642ec78",
+                    "RouteTableId": "rtb-003c14fc932b0a079",
+                    "SubnetId": "subnet-0edb31ab5f88d89fb",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                },
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0868dffff7bed5e9d",
+                    "RouteTableId": "rtb-003c14fc932b0a079",
+                    "SubnetId": "subnet-0990205c298b0635d",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-003c14fc932b0a079",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "10.20.0.0/24",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "rt-zenite-interna"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                }
+            ],
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "OwnerId": "703461917799"
+        },
+        {
+            "Associations": [
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0352d4ce03a9dec5b",
+                    "RouteTableId": "rtb-02a9c591ec4299135",
+                    "SubnetId": "subnet-043e821cc9ee7c765",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-02a9c591ec4299135",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "10.20.0.0/24",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "rt-zenite-infra"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                }
+            ],
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "OwnerId": "703461917799"
+        },
+        {
+            "Associations": [
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0a660f7004f2e23f5",
+                    "RouteTableId": "rtb-003940fecf347d53d",
+                    "SubnetId": "subnet-0d29453584ea726c0",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-003940fecf347d53d",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "10.20.0.0/24",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "rt-zenite-dmz"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                }
+            ],
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "OwnerId": "703461917799"
+        },
+        {
+            "Associations": [
+                {
+                    "Main": true,
+                    "RouteTableAssociationId": "rtbassoc-061ec18330590c683",
+                    "RouteTableId": "rtb-0018789e96aaf0a54",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-0018789e96aaf0a54",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "10.20.0.0/24",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                }
+            ],
+            "Tags": [],
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "OwnerId": "703461917799"
+        }
+    ]
+}

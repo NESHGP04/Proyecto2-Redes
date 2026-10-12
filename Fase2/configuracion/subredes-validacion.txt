@@ -1,0 +1,63 @@
+Validación de subredes y rutas de vpc-zenite-fase2 · 2026-10-12 07:28:43 UTC
+  VPC ID: vpc-0e4c1d0b2314ab4df · región: us-east-1 · AZ: us-east-1a
+  [OK]    Subredes en la VPC (total)                   7
+  -- subnet-zenite-ventas (10.20.0.0/27) · subnet-0234dd20474eef1aa · IP disponibles: 27 de 32 (AWS reserva 5)
+  [OK]    Estado                                       available
+  [OK]    Availability Zone                            us-east-1a
+  [OK]    MapPublicIpOnLaunch                          false
+  [OK]    Tag Name                                     subnet-zenite-ventas
+  [OK]    Tags Project/Phase/Environment               ZenitePrestige/Fase2/Prototype
+  [OK]    Route table asociada                         rt-zenite-interna
+  -- subnet-zenite-visitantes (10.20.0.32/27) · subnet-0edb31ab5f88d89fb · IP disponibles: 27 de 32 (AWS reserva 5)
+  [OK]    Estado                                       available
+  [OK]    Availability Zone                            us-east-1a
+  [OK]    MapPublicIpOnLaunch                          false
+  [OK]    Tag Name                                     subnet-zenite-visitantes
+  [OK]    Tags Project/Phase/Environment               ZenitePrestige/Fase2/Prototype
+  [OK]    Route table asociada                         rt-zenite-interna
+  -- subnet-zenite-servidores (10.20.0.64/27) · subnet-0990205c298b0635d · IP disponibles: 27 de 32 (AWS reserva 5)
+  [OK]    Estado                                       available
+  [OK]    Availability Zone                            us-east-1a
+  [OK]    MapPublicIpOnLaunch                          false
+  [OK]    Tag Name                                     subnet-zenite-servidores
+  [OK]    Tags Project/Phase/Environment               ZenitePrestige/Fase2/Prototype
+  [OK]    Route table asociada                         rt-zenite-interna
+  -- subnet-zenite-ti (10.20.0.96/28) · subnet-0688bbf577464f544 · IP disponibles: 11 de 16 (AWS reserva 5)
+  [OK]    Estado                                       available
+  [OK]    Availability Zone                            us-east-1a
+  [OK]    MapPublicIpOnLaunch                          false
+  [OK]    Tag Name                                     subnet-zenite-ti
+  [OK]    Tags Project/Phase/Environment               ZenitePrestige/Fase2/Prototype
+  [OK]    Route table asociada                         rt-zenite-interna
+  -- subnet-zenite-dmz (10.20.0.112/28) · subnet-0d29453584ea726c0 · IP disponibles: 11 de 16 (AWS reserva 5)
+  [OK]    Estado                                       available
+  [OK]    Availability Zone                            us-east-1a
+  [OK]    MapPublicIpOnLaunch                          false
+  [OK]    Tag Name                                     subnet-zenite-dmz
+  [OK]    Tags Project/Phase/Environment               ZenitePrestige/Fase2/Prototype
+  [OK]    Route table asociada                         rt-zenite-dmz
+  -- subnet-zenite-vpn (10.20.0.128/28) · subnet-061f6bea484702eec · IP disponibles: 11 de 16 (AWS reserva 5)
+  [OK]    Estado                                       available
+  [OK]    Availability Zone                            us-east-1a
+  [OK]    MapPublicIpOnLaunch                          false
+  [OK]    Tag Name                                     subnet-zenite-vpn
+  [OK]    Tags Project/Phase/Environment               ZenitePrestige/Fase2/Prototype
+  [OK]    Route table asociada                         rt-zenite-interna
+  -- subnet-zenite-infra (10.20.0.144/28) · subnet-043e821cc9ee7c765 · IP disponibles: 11 de 16 (AWS reserva 5)
+  [OK]    Estado                                       available
+  [OK]    Availability Zone                            us-east-1a
+  [OK]    MapPublicIpOnLaunch                          false
+  [OK]    Tag Name                                     subnet-zenite-infra
+  [OK]    Tags Project/Phase/Environment               ZenitePrestige/Fase2/Prototype
+  [OK]    Route table asociada                         rt-zenite-infra
+  -- Solapamiento y reservas
+  [OK]    Subredes que se solapan                      0
+  [OK]    Reserva 10.20.0.160/27 libre                 0
+  [OK]    Reserva 10.20.0.192/26 libre                 0
+  -- Route tables (solo la ruta local)
+  [OK]    rt-zenite-interna (rtb-003c14fc932b0a079) rutas 10.20.0.0/24->local
+  [OK]    rt-zenite-dmz (rtb-003940fecf347d53d) rutas  10.20.0.0/24->local
+  [OK]    rt-zenite-infra (rtb-02a9c591ec4299135) rutas 10.20.0.0/24->local
+  [OK]    Internet Gateway asociado a la VPC           0
+  Control de costos (esta parte debe estar en 0): EC2=0 NAT=0 ElasticIP=0
+RESULTADO: todo correcto.
