@@ -3,6 +3,9 @@
 # Ejecutar en AWS CloudShell antes de crear la VPC (MD_1).
 set -uo pipefail
 
+ENV_FILE="$(cd "$(dirname "$0")" && pwd)/../../.env"
+[[ -f "$ENV_FILE" ]] && { set -a; source "$ENV_FILE"; set +a; }
+
 REGION="us-east-1"
 awsr() { aws --region "$REGION" "$@"; }
 

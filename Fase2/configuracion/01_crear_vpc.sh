@@ -9,6 +9,9 @@
 # Salida en ~/fase2-config/: vpc.json y vpc-validacion.txt
 set -euo pipefail
 
+ENV_FILE="$(cd "$(dirname "$0")" && pwd)/../../.env"
+[[ -f "$ENV_FILE" ]] && { set -a; source "$ENV_FILE"; set +a; }
+
 REGION="us-east-1"
 VPC_NAME="vpc-zenite-fase2"
 VPC_CIDR="10.20.0.0/24"
