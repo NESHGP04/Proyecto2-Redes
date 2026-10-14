@@ -88,3 +88,45 @@
 
 **6. Pendiente**
 - [ ] Revisar Billing al terminar (Marinés). No se crearon NAT Gateway, Elastic IP ni instancias en este paso.
+
+# Bitácora – Fase 2 (parte instancias de prueba · MD_4)
+
+## 2026-10-14
+
+**1. Punto de partida**
+- MD_3 entregado (Security Groups y EICE): `zenite-ventas` `sg-01f1eb855a2b85df7`, `zenite-ti` `sg-0e73e9942dd403016`,
+  `zenite-eice` `sg-0697e7f5646e28ab4` (solo para el endpoint) y `eice-zenite-fase2` `eice-0f41a9a04ed4dc3e2`, disponible en
+  `subnet-zenite-infra` (`10.20.0.150`). Los archivos de MD_3 aún no están en el repositorio.
+- Instancias del plan: `zp-ventas-01` `10.20.0.10` y `zp-ventas-02` `10.20.0.11` en `subnet-zenite-ventas`; `zp-ti-01`
+  `10.20.0.102` en `subnet-zenite-ti`. Las tres IP están fuera de las reservadas por AWS.
+
+**2. Decisiones**
+- Se automatiza con `configuracion/04_crear_instancias.sh` (mismo estilo que los scripts anteriores: CloudShell, idempotente,
+  modo `--validar`, salida en `~/fase2-config/`). Busca subredes, Security Groups y EICE por nombre, no por ID copiado a mano.
+- AMI: la Amazon Linux 2023 estándar más reciente (la variante minimal no trae `ec2-instance-connect`). Tipo `t3.micro`
+  por defecto (configurable con `TIPO=`); el script muestra si el tipo es Free Tier en la cuenta.
+- Sin IPv4 pública y sin key pair: la administración es solo por EC2 Instance Connect Endpoint.
+- IMDSv2 obligatorio (`HttpTokens=required`) y créditos de CPU en modo `standard` (en `unlimited`, el valor por defecto de
+  T3, un uso alto de CPU puede generar cargos).
+- User data: `hostnamectl set-hostname` y `preserve_hostname: true` en cloud-init, para que el nombre no vuelva a
+  `ip-10-20-0-x` después de detener y encender las instancias entre sesiones.
+- Etiquetas: `Name`, `Project`, `Phase`, `Role` (MD_4) más `Environment` y `Owner`, como en el resto de recursos. El disco
+  raíz (8 GiB gp3, valor por defecto de la AMI) se etiqueta `<instancia>-root`.
+- Antes de crear nada el script comprueba que el EICE esté disponible, que existan subredes y Security Groups y que ninguna
+  IP del plan esté ocupada. La validación revisa, por instancia: estado, status checks, subred, IP privada, ausencia de IP
+  pública, Security Group, regla TCP/22 desde `zenite-eice`, IMDSv2 y etiquetas; además la salida TCP/22 de `zenite-eice` y
+  que la VPC siga sin Internet Gateway, NAT Gateway ni Elastic IP.
+- `.gitignore`: se agregó `*credentials*.csv`. El CSV de acceso a la consola no coincidía con ninguna regla.
+
+**3. Pruebas del script (sin AWS)**
+- Probado contra LocalStack (emulador de EC2) con AWS CLI y bash 5. El emulador no implementa EICE, así que esa llamada
+  se simuló con un JSON. Casos: sin EICE (se detiene sin crear nada), IP del plan ocupada por otra interfaz (se detiene),
+  creación completa, reejecución (reutiliza las 3, sin duplicados), instancia detenida (la enciende) y regla TCP/22
+  eliminada (`--validar` marca la falla). Todos con el resultado esperado.
+- El emulador no guarda `MetadataOptions`, así que el check de IMDSv2 solo se puede confirmar en AWS.
+
+**4. Pendiente**
+- [ ] Ejecutar `04_crear_instancias.sh` en CloudShell y registrar resultado e IDs.
+- [ ] Capturas E07 y E08; `~/info-fase2.txt` en las tres instancias.
+- [ ] Copiar `instances.json` e `instancias-validacion.txt` a `configuracion/` y redactar `reporte/04_instancias_de_prueba.md`.
+- [ ] Detener las instancias al terminar si MD_5 no se hace en la misma sesión.

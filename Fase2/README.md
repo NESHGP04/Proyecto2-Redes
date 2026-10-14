@@ -103,6 +103,33 @@ Equivalente manual: *Subnets → Create subnet* (VPC `vpc-zenite-fase2`, AZ `us-
 segmentación, etiquetas `Project`, `Phase`, `Environment`) y *Route tables → Create route table* (misma VPC) → *Subnet
 associations → Edit*. No agregar rutas: cada tabla queda solo con `10.20.0.0/24 → local`.
 
+## Parte 4 – Instancias de prueba (MD_4)
+
+Parte de lo entregado en MD_3: Security Groups `zenite-ventas` (`sg-01f1eb855a2b85df7`), `zenite-ti` (`sg-0e73e9942dd403016`)
+y `zenite-eice` (`sg-0697e7f5646e28ab4`, solo para el endpoint), y `eice-zenite-fase2` (`eice-0f41a9a04ed4dc3e2`) en
+`subnet-zenite-infra`. Las instancias usan Amazon Linux 2023, sin IPv4 pública y sin llave SSH.
+
+| Paso | Qué hacer |
+|---|---|
+| 1 | Consola en **N. Virginia** → CloudShell → subir `04_crear_instancias.sh`. |
+| 2 | `bash 04_crear_instancias.sh` — comprueba subredes, Security Groups, EICE e IPs libres; crea `zp-ventas-01` (`10.20.0.10`), `zp-ventas-02` (`10.20.0.11`) y `zp-ti-01` (`10.20.0.102`); espera los status checks 2/2 y valida. Debe terminar en `RESULTADO: todo correcto.` Si los checks tardan, repetir con `--validar`. |
+| 3 | Consola → EC2 → *Instances*, columnas Name, Instance ID, Instance state, Private IPv4, Subnet ID y Public IPv4 (vacía) → `evidencias/04_instancias/E07_Instancias_Privadas.png`. |
+| 4 | En cada instancia: *Connect* → *EC2 Instance Connect* → *Connect using EC2 Instance Connect Endpoint* → `eice-zenite-fase2`, usuario `ec2-user`. Ejecutar el bloque de MD_4 que guarda `~/info-fase2.txt`. En `zp-ventas-01`, captura de `ip -4 addr` → `evidencias/04_instancias/E08_IP_Ventas01.png`. |
+| 5 | Descargar de `~/fase2-config/` a `configuracion/`: `instances.json` e `instancias-validacion.txt`. |
+
+Otro tipo de instancia: `TIPO=t4g.micro bash 04_crear_instancias.sh` (la AMI se elige según la arquitectura). El script
+avisa si el tipo no es Free Tier en la cuenta y se detiene sin crear nada si falta el EICE, un Security Group o una subred,
+o si alguna IP del plan ya está en uso. Desde CloudShell también se puede entrar a una instancia con
+`aws ec2-instance-connect ssh --instance-id <id> --os-user ec2-user --connection-type eice`.
+
+Equivalente manual: *EC2 → Launch instances* → nombre, Amazon Linux 2023, `t3.micro`, sin key pair → *Network settings →
+Edit*: VPC `vpc-zenite-fase2`, subred, *Auto-assign public IP: Disable*, Security Group existente → *Advanced network
+configuration → Primary IP* → *Advanced details*: *Metadata version: V2 only*, *Credit specification: Standard* y el user
+data de MD_4 → etiquetas `Project`, `Phase`, `Environment`, `Owner`, `Role`.
+
+Si EC2 Instance Connect no conecta: esperar a 2/2, revisar que `zenite-ventas` / `zenite-ti` permitan TCP/22 desde
+`zenite-eice` (la validación lo comprueba) y que el usuario IAM tenga `ec2-instance-connect:OpenTunnel`. No abrir SSH a `0.0.0.0/0`.
+
 ## Control de costos y seguridad
 
 - En las partes 1 y 2 **no** debe existir ninguna EC2, NAT Gateway, Elastic IP, Internet Gateway ni VPN Site-to-Site (`00_verificar_entorno.sh` y `02_crear_subredes_rutas.sh` lo comprueban).
@@ -110,4 +137,12 @@ associations → Edit*. No agregar rutas: cada tabla queda solo con `10.20.0.0/2
 - No subir Access Keys, Secret Keys, Session Tokens, contraseñas ni llaves SSH (el `.gitignore` de la raíz bloquea los casos comunes).
   Las variables sensibles están listadas, sin valores, en `.env.example` (raíz). Para usar los scripts fuera de CloudShell:
   `cp .env.example .env` y llenar `.env`, que está ignorado por git. En CloudShell no hace falta.
-- Al terminar cada sesión: detener las instancias (`Stop`) y revisar Billing.
+- Al terminar cada sesión: detener las instancias (`Stop`) y revisar Billing. Desde CloudShell:
+  ```bash
+  aws ec2 stop-instances --region us-east-1 --instance-ids $(aws ec2 describe-instances --region us-east-1 \
+    --filters "Name=tag:Phase,Values=Fase2" "Name=instance-state-name,Values=running" \
+    --query "Reservations[].Instances[].InstanceId" --output text)
+  ```
+  Detenidas no cobran cómputo, pero el disco EBS (8 GiB por instancia) sí. Para volver: `bash 04_crear_instancias.sh` las enciende.
+- La consola web usa usuario y contraseña de IAM; esa contraseña no sirve para la AWS CLI y no se guarda en el repositorio
+  (`.gitignore` bloquea `*credentials*.csv`). En CloudShell no hacen falta Access Keys.
