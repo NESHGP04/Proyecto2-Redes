@@ -1,0 +1,7 @@
+[ec2-user@zp-ventas-01 ~]$ ip route get 10.20.0.11
+10.20.0.11 dev ens5 src 10.20.0.10 uid 1000 
+    cache 
+[ec2-user@zp-ventas-01 ~]$ ip route get 10.20.0.102
+10.20.0.102 via 10.20.0.1 dev ens5 src 10.20.0.10 uid 1000 
+    cache 
+[ec2-user@zp-ventas-01 ~]$ 

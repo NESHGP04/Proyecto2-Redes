@@ -1,0 +1,229 @@
+{
+    "SecurityGroups": [
+        {
+            "GroupId": "sg-0b9d5495abc26cd0a",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ],
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "SecurityGroupArn": "arn:aws:ec2:us-east-1:703461917799:security-group/sg-0b9d5495abc26cd0a",
+            "OwnerId": "703461917799",
+            "GroupName": "default",
+            "Description": "default VPC security group",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "-1",
+                    "UserIdGroupPairs": [
+                        {
+                            "UserId": "703461917799",
+                            "GroupId": "sg-0b9d5495abc26cd0a"
+                        }
+                    ],
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ]
+        },
+        {
+            "GroupId": "sg-01f1eb855a2b85df7",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "sg-zenite-ventas"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Role",
+                    "Value": "Ventas"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                }
+            ],
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "SecurityGroupArn": "arn:aws:ec2:us-east-1:703461917799:security-group/sg-01f1eb855a2b85df7",
+            "OwnerId": "703461917799",
+            "GroupName": "zenite-ventas",
+            "Description": "Reglas de prueba para red Ventas",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 22,
+                    "ToPort": 22,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "SSH desde EICE",
+                            "UserId": "703461917799",
+                            "GroupId": "sg-0697e7f5646e28ab4"
+                        }
+                    ],
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                },
+                {
+                    "IpProtocol": "icmp",
+                    "FromPort": -1,
+                    "ToPort": -1,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "ICMP Ventas-Ventas",
+                            "UserId": "703461917799",
+                            "GroupId": "sg-01f1eb855a2b85df7"
+                        },
+                        {
+                            "Description": "ICMP TI-a-Ventas",
+                            "UserId": "703461917799",
+                            "GroupId": "sg-0e73e9942dd403016"
+                        }
+                    ],
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ]
+        },
+        {
+            "GroupId": "sg-0e73e9942dd403016",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "sg-zenite-ti"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Role",
+                    "Value": "TI"
+                }
+            ],
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "SecurityGroupArn": "arn:aws:ec2:us-east-1:703461917799:security-group/sg-0e73e9942dd403016",
+            "OwnerId": "703461917799",
+            "GroupName": "zenite-ti",
+            "Description": "Reglas de prueba para red TI",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 22,
+                    "ToPort": 22,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "SSH desde EICE",
+                            "UserId": "703461917799",
+                            "GroupId": "sg-0697e7f5646e28ab4"
+                        }
+                    ],
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                },
+                {
+                    "IpProtocol": "icmp",
+                    "FromPort": -1,
+                    "ToPort": -1,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "ICMP TI-TI",
+                            "UserId": "703461917799",
+                            "GroupId": "sg-0e73e9942dd403016"
+                        }
+                    ],
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ]
+        },
+        {
+            "GroupId": "sg-0697e7f5646e28ab4",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 22,
+                    "ToPort": 22,
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "Description": "SSH hacia la VPC",
+                            "CidrIp": "10.20.0.0/24"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Role",
+                    "Value": "Management"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "sg-zenite-eice"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase2"
+                }
+            ],
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "SecurityGroupArn": "arn:aws:ec2:us-east-1:703461917799:security-group/sg-0697e7f5646e28ab4",
+            "OwnerId": "703461917799",
+            "GroupName": "zenite-eice",
+            "Description": "Acceso SSH desde EC2 Instance Connect Endpoint",
+            "IpPermissions": []
+        }
+    ]
+}

@@ -43,7 +43,7 @@
             "State": "available",
             "VpcId": "vpc-0e4c1d0b2314ab4df",
             "CidrBlock": "10.20.0.144/28",
-            "AvailableIpAddressCount": 11,
+            "AvailableIpAddressCount": 10,
             "AvailabilityZone": "us-east-1a",
             "DefaultForAz": false,
             "MapPublicIpOnLaunch": false
@@ -187,7 +187,7 @@
             "State": "available",
             "VpcId": "vpc-0e4c1d0b2314ab4df",
             "CidrBlock": "10.20.0.0/27",
-            "AvailableIpAddressCount": 27,
+            "AvailableIpAddressCount": 25,
             "AvailabilityZone": "us-east-1a",
             "DefaultForAz": false,
             "MapPublicIpOnLaunch": false
@@ -331,7 +331,7 @@
             "State": "available",
             "VpcId": "vpc-0e4c1d0b2314ab4df",
             "CidrBlock": "10.20.0.96/28",
-            "AvailableIpAddressCount": 11,
+            "AvailableIpAddressCount": 10,
             "AvailabilityZone": "us-east-1a",
             "DefaultForAz": false,
             "MapPublicIpOnLaunch": false

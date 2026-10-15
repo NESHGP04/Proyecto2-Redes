@@ -1,0 +1,78 @@
+fase2-config $ aws ec2 describe-security-groups \
+>   --region us-east-1 \
+>   --filters "Name=vpc-id,Values=$VPC_ID" \
+>   --output json > security-groups.json
+fase2-config $ aws ec2 describe-security-groups \
+>   --region us-east-1 \
+>   --filters "Name=vpc-id,Values=$VPC_ID" \
+>   --query 'SecurityGroups[].{Nombre:GroupName,ID:GroupId}' \
+>   --output table
+-------------------------------------------
+|         DescribeSecurityGroups          |
++-----------------------+-----------------+
+|          ID           |     Nombre      |
++-----------------------+-----------------+
+|  sg-0b9d5495abc26cd0a |  default        |
+|  sg-01f1eb855a2b85df7 |  zenite-ventas  |
+|  sg-0e73e9942dd403016 |  zenite-ti      |
+|  sg-0697e7f5646e28ab4 |  zenite-eice    |
++-----------------------+-----------------+
+fase2-config $ python3 - <<'PY'
+> import json
+> 
+> with open("security-groups.json") as archivo:
+>     grupos = json.load(archivo)["SecurityGroups"]
+> 
+> nombres = {g["GroupId"]: g["GroupName"] for g in grupos}
+> 
+> for grupo in grupos:
+>     if grupo["GroupName"] not in ("zenite-ventas", "zenite-ti", "zenite-eice"):
+>         continue
+>     print(f'\nGRUPO: {grupo["GroupName"]} | {grupo["GroupId"]}')
+>     for titulo, campo in (
+>         ("ENTRADA", "IpPermissions"),
+>         ("SALIDA", "IpPermissionsEgress")
+>     ):
+>         print(titulo)
+>         reglas = grupo.get(campo, [])
+>         if not reglas:
+>             print("  Sin reglas")
+>         for regla in reglas:
+>             protocolo = regla["IpProtocol"]
+>             detalle = (
+>                 "Todo el tráfico" if protocolo == "-1"
+>                 else f'{protocolo} [{regla.get("FromPort", "-")}, {regla.get("ToPort", "-")}]'
+>             )
+>             destinos = [
+>                 r["CidrIp"] for r in regla.get("IpRanges", [])
+>             ] + [
+>                 r["CidrIpv6"] for r in regla.get("Ipv6Ranges", [])
+>             ] + [
+>                 nombres.get(r["GroupId"], r["GroupId"])
+>                 for r in regla.get("UserIdGroupPairs", [])
+>             ] + [
+>                 r["PrefixListId"] for r in regla.get("PrefixListIds", [])
+>             ]
+>             print(f'  {detalle} | {"; ".join(destinos)}')
+> PY
+
+GRUPO: zenite-ventas | sg-01f1eb855a2b85df7
+ENTRADA
+  tcp [22, 22] | zenite-eice
+  icmp [-1, -1] | zenite-ventas; zenite-ti
+SALIDA
+  Todo el tráfico | 0.0.0.0/0
+
+GRUPO: zenite-ti | sg-0e73e9942dd403016
+ENTRADA
+  tcp [22, 22] | zenite-eice
+  icmp [-1, -1] | zenite-ti
+SALIDA
+  Todo el tráfico | 0.0.0.0/0
+
+GRUPO: zenite-eice | sg-0697e7f5646e28ab4
+ENTRADA
+  Sin reglas
+SALIDA
+  tcp [22, 22] | 10.20.0.0/24
+fase2-config $ 

@@ -1,0 +1,58 @@
+fase2-config $ aws ec2 describe-route-tables \
+>   --region us-east-1 \
+>   --filters "Name=vpc-id,Values=$VPC_ID" \
+>   --output json > route-tables.json
+fase2-config $ python3 - <<'PY'
+> import json
+> 
+> with open("route-tables.json") as archivo:
+>     datos = json.load(archivo)
+> 
+> for tabla in datos["RouteTables"]:
+>     nombre = next(
+>         (t["Value"] for t in tabla.get("Tags", []) if t["Key"] == "Name"),
+>         "Sin nombre"
+>     )
+>     print(f'\nTabla: {nombre} | {tabla["RouteTableId"]}')
+>     for asociacion in tabla.get("Associations", []):
+>         if asociacion.get("Main"):
+>             print("  Asociación: principal de la VPC")
+>         elif "SubnetId" in asociacion:
+>             print("  Subred:", asociacion["SubnetId"])
+>     for ruta in tabla["Routes"]:
+>         destino = (
+>             ruta.get("DestinationCidrBlock")
+>             or ruta.get("DestinationIpv6CidrBlock")
+>             or ruta.get("DestinationPrefixListId")
+>         )
+>         objetivo = next(
+>             (ruta[k] for k in (
+>                 "GatewayId", "NatGatewayId", "TransitGatewayId",
+>                 "NetworkInterfaceId", "VpcPeeringConnectionId",
+>                 "InstanceId", "EgressOnlyInternetGatewayId"
+>             ) if k in ruta),
+>             "Consultar JSON"
+>         )
+>         print(f'  Ruta: {destino} -> {objetivo} | Estado: {ruta.get("State", "-")}')
+> PY
+
+Tabla: rt-zenite-interna | rtb-003c14fc932b0a079
+  Subred: subnet-0234dd20474eef1aa
+  Subred: subnet-0990205c298b0635d
+  Subred: subnet-0688bbf577464f544
+  Subred: subnet-0edb31ab5f88d89fb
+  Subred: subnet-061f6bea484702eec
+  Ruta: 10.20.0.0/24 -> local | Estado: active
+
+Tabla: rt-zenite-infra | rtb-02a9c591ec4299135
+  Subred: subnet-043e821cc9ee7c765
+  Ruta: 10.20.0.0/24 -> local | Estado: active
+
+Tabla: rt-zenite-dmz | rtb-003940fecf347d53d
+  Subred: subnet-0d29453584ea726c0
+  Ruta: 10.20.0.0/24 -> local | Estado: active
+
+Tabla: Sin nombre | rtb-0018789e96aaf0a54
+  Asociación: principal de la VPC
+  Ruta: 10.20.0.0/24 -> local | Estado: active
+fase2-config $ 

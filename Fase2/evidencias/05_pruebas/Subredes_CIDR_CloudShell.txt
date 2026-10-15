@@ -1,0 +1,56 @@
+~ $ mkdir -p ~/fase2-config
+~ $ cd ~/fase2-config
+fase2-config $ pwd
+/home/cloudshell-user/fase2-config
+fase2-config $ aws ec2 describe-vpcs \
+>   --region us-east-1 \
+>   --filters "Name=tag:Name,Values=vpc-zenite-fase2" \
+>   --query "Vpcs[].{ID:VpcId,CIDR:CidrBlock}" \
+>   --output table
+~ $ mkdir -p ~/fase2-config
+~ $ cd ~/fase2-config
+fase2-config $ pwd
+/home/cloudshell-user/fase2-config
+fase2-config $ aws ec2 describe-vpcs \
+>   --region us-east-1 \
+>   --filters "Name=tag:Name,Values=vpc-zenite-fase2" \
+>   --query "Vpcs[].{ID:VpcId,CIDR:CidrBlock}" \
+>   --output table
+-------------------------------------------
+|              DescribeVpcs               |
++---------------+-------------------------+
+|     CIDR      |           ID            |
++---------------+-------------------------+
+|  10.20.0.0/24 |  vpc-0e4c1d0b2314ab4df  |
++---------------+-------------------------+
+fase2-config $ VPC_ID=vpc-0e4c1d0b2314ab4df
+fase2-config $ aws ec2 describe-vpcs \
+>   --region us-east-1 \
+>   --vpc-ids "$VPC_ID" \
+>   --output json > vpc.json
+fase2-config $ python3 -c 'import json; d=json.load(open("vpc.json")); print("VPC:", d["Vpcs"][0]["VpcId"]); print("CIDR:", d["Vpcs"][0]["CidrBlock"])'
+VPC: vpc-0e4c1d0b2314ab4df
+CIDR: 10.20.0.0/24
+fase2-config $ aws ec2 describe-subnets \
+>   --region us-east-1 \
+>   --filters "Name=vpc-id,Values=$VPC_ID" \
+>   --output json > subnets.json
+fase2-config $ aws ec2 describe-subnets \
+>   --region us-east-1 \
+>   --filters "Name=vpc-id,Values=$VPC_ID" \
+>   --query 'Subnets[].{Nombre:Tags[?Key==`Name`]|[0].Value,CIDR:CidrBlock,ID:SubnetId}' \
+>   --output table
+----------------------------------------------------------------------------
+|                              DescribeSubnets                             |
++----------------+----------------------------+----------------------------+
+|      CIDR      |            ID              |          Nombre            |
++----------------+----------------------------+----------------------------+
+|  10.20.0.144/28|  subnet-043e821cc9ee7c765  |  subnet-zenite-infra       |
+|  10.20.0.64/27 |  subnet-0990205c298b0635d  |  subnet-zenite-servidores  |
+|  10.20.0.112/28|  subnet-0d29453584ea726c0  |  subnet-zenite-dmz         |
+|  10.20.0.0/27  |  subnet-0234dd20474eef1aa  |  subnet-zenite-ventas      |
+|  10.20.0.32/27 |  subnet-0edb31ab5f88d89fb  |  subnet-zenite-visitantes  |
+|  10.20.0.128/28|  subnet-061f6bea484702eec  |  subnet-zenite-vpn         |
+|  10.20.0.96/28 |  subnet-0688bbf577464f544  |  subnet-zenite-ti          |
++----------------+----------------------------+----------------------------+
+fase2-config $ 
