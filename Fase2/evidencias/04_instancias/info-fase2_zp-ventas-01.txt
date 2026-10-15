@@ -1,0 +1,36 @@
+=== FECHA ===
+Thu Oct 15 00:21:00 UTC 2026
+=== HOSTNAME ===
+zp-ventas-01
+=== DIRECCIONES ===
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    altname enp0s5
+    altname eni-0af63ea716171fae4
+    altname device-number-0.0
+    inet 10.20.0.10/27 metric 512 brd 10.20.0.31 scope global dynamic ens5
+       valid_lft 3327sec preferred_lft 3327sec
+=== RUTAS ===
+default via 10.20.0.1 dev ens5 proto dhcp src 10.20.0.10 metric 512 
+10.20.0.0/27 dev ens5 proto kernel scope link src 10.20.0.10 metric 512 
+10.20.0.1 dev ens5 proto dhcp scope link src 10.20.0.10 metric 512 
+10.20.0.2 dev ens5 proto dhcp scope link src 10.20.0.10 metric 512 
+=== SISTEMA ===
+NAME="Amazon Linux"
+VERSION="2023"
+ID="amzn"
+ID_LIKE="fedora"
+VERSION_ID="2023"
+PLATFORM_ID="platform:al2023"
+PRETTY_NAME="Amazon Linux 2023.12.20261013"
+ANSI_COLOR="0;33"
+CPE_NAME="cpe:2.3:o:amazon:amazon_linux:2023"
+HOME_URL="https://aws.amazon.com/linux/amazon-linux-2023/"
+DOCUMENTATION_URL="https://docs.aws.amazon.com/linux/"
+SUPPORT_URL="https://aws.amazon.com/premiumsupport/"
+BUG_REPORT_URL="https://github.com/amazonlinux/amazon-linux-2023"
+VENDOR_NAME="AWS"
+VENDOR_URL="https://aws.amazon.com/"
+SUPPORT_END="2029-06-30"

@@ -1,0 +1,6 @@
+[zp-ventas-01 · 2026-10-15 00:33:00 UTC]$ ping -c 4 -W 2 10.20.0.102
+PING 10.20.0.102 (10.20.0.102) 56(84) bytes of data.
+
+--- 10.20.0.102 ping statistics ---
+4 packets transmitted, 0 received, 100% packet loss, time 3138ms
+

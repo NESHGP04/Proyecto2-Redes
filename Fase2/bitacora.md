@@ -125,8 +125,52 @@
   eliminada (`--validar` marca la falla). Todos con el resultado esperado.
 - El emulador no guarda `MetadataOptions`, así que el check de IMDSv2 solo se puede confirmar en AWS.
 
-**4. Pendiente**
-- [ ] Ejecutar `04_crear_instancias.sh` en CloudShell y registrar resultado e IDs.
-- [ ] Capturas E07 y E08; `~/info-fase2.txt` en las tres instancias.
-- [ ] Copiar `instances.json` e `instancias-validacion.txt` a `configuracion/` y redactar `reporte/04_instancias_de_prueba.md`.
-- [ ] Detener las instancias al terminar si MD_5 no se hace en la misma sesión.
+**4. Acceso a AWS desde la Mac (sin Access Keys)**
+- El usuario IAM `Ernesto` solo tenía contraseña de consola, que no sirve para la AWS CLI. Marinés le agregó la política
+  administrada `SignInLocalDevelopmentAccess` y una inline `fase2-instancias` (`ec2:Describe*`, `RunInstances`, `CreateTags`,
+  `Start/Stop/TerminateInstances`, `ec2-instance-connect:OpenTunnel` y `SendSSHPublicKey`).
+- AWS CLI 2.38 instalada con Homebrew; `aws login --profile zenite` da credenciales temporales (hasta 12 h) a partir de la
+  sesión de consola. Identidad comprobada: `arn:aws:iam::703461917799:user/Ernesto`.
+- Antes de crear nada: `00_verificar_entorno.sh` (EC2/NAT/EIP/VPN en 0), `04_crear_instancias.sh --validar` (EICE
+  `create-complete`, salida TCP/22 de `zenite-eice` hacia ambos grupos), entrada TCP/22 desde `zenite-eice` en `zenite-ventas`
+  y `zenite-ti`, IP del plan libres, `t3.micro` Free Tier y `run-instances --dry-run` aceptado.
+
+**5. Ejecución en AWS (17:46 – 18:04 hora de Guatemala)**
+- `zp-ventas-01` (`i-0f3bd7b0615933e00`) y `zp-ventas-02` (`i-05a7f9ee1a6e93000`) creadas a las 17:46.
+- `zp-ti-01` falló con `PendingVerification`: AWS verifica la cuenta la primera vez que se lanzan varias instancias en la
+  región y mientras tanto no deja crear más. El script se detuvo sin dejar nada a medias. Se reintentó cada 5 minutos; en el
+  primer reintento (18:01) creó `zp-ti-01` (`i-0378a8624df39958b`) y reutilizó las dos de Ventas.
+- Validación completa en `[OK]` (`configuracion/instancias-validacion.txt`, 18:04): 3 instancias `running`, status checks
+  `ok/ok`, IP y subred del plan, sin IPv4 pública, Security Group correcto, TCP/22 desde `zenite-eice`, IMDSv2 `required`,
+  etiquetas, EICE disponible e IGW/NAT/EIP en 0. AMI `ami-08c982207dfbf2b27` (AL2023.12.20261013).
+- `~/info-fase2.txt` generado en las tres (18:21) por EICE desde la AWS CLI, con una llave SSH temporal que se borró al
+  terminar. Hostname, IP (`/27` en Ventas, `/28` en TI) y ruta por defecto al VPC Router (`.1` / `.97`) correctos. Copias en
+  `evidencias/04_instancias/info-fase2_<instancia>.txt`.
+
+**6. Capturas**
+- La primera vez no se veían las instancias: la consola estaba en Ohio (`us-east-2`); el proyecto está en N. Virginia.
+- E07 en dos capturas, porque la tabla no muestra a la vez nombre e IP/subred: `E07_Instancias_Privadas.png` (nombre, ID,
+  estado, 3/3, sin IPv4 pública) y `E07_Instancias_Privadas_IP_Subred.png` (Security Group, IP privada, Subnet ID). Apoyo:
+  `E07_Detalle_zp-ventas-01.png` (detalle con IMDSv2 `Required`).
+- E08: `E08_IP_Ventas01.png`, terminal de `zp-ventas-01` por EICE con `ip -4 addr` → `10.20.0.10/27`.
+- Capturas de apoyo en `evidencias/04_instancias/extra/`.
+- Sección del reporte redactada: `reporte/04_instancias_de_prueba.md`.
+
+**Estado de la parte instancias de prueba (MD_4): completa.**
+
+**7. Pruebas de conectividad (MD_5, 18:32 – 18:41)**
+- Reglas vigentes: `zenite-ventas` acepta ICMP desde `zenite-ventas` y `zenite-ti`; `zenite-ti` solo desde `zenite-ti`;
+  ambos aceptan TCP/22 solo desde `zenite-eice`; `zenite-eice` sale por TCP/22 hacia `10.20.0.0/24`.
+- Desde la AWS CLI por EICE (salida en `evidencias/05_pruebas/*.txt`): Ventas01 -> Ventas02 4/4, Ventas02 -> Ventas01 4/4,
+  TI -> Ventas01 y Ventas02 4/4, Ventas01 -> TI 0/4 y Ventas02 -> TI 0/4 (100% pérdida).
+- Repetidas en la consola para las capturas E09 – E12 con el mismo resultado.
+- Sección del reporte redactada: `reporte/05_pruebas_de_conectividad.md`.
+
+**8. Instancias detenidas y costos**
+- Las tres detenidas a las 18:41 (`2026-10-15 00:41:34 GMT`). Encendidas: Ventas 55 min cada una, TI 40 min; total
+  ≈ 2.5 horas-instancia de `t3.micro` (Free Tier).
+- Después de detenerlas: 0 instancias `running` en `us-east-1`, NAT Gateway 0, Elastic IP 0, Internet Gateway 0.
+- Para la demo: `bash 04_crear_instancias.sh` las vuelve a encender y valida.
+
+**9. Pendiente**
+- [ ] Captura de AWS Billing (Marinés; el usuario `Ernesto` no tiene permisos de Billing ni de Cost Explorer).

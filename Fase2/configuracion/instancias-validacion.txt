@@ -1,0 +1,42 @@
+Validación de las instancias de prueba de vpc-zenite-fase2 · 2026-10-14 18:04:35 CST
+  VPC ID: vpc-0e4c1d0b2314ab4df · región: us-east-1
+  [OK]    Instancias del plan (no terminadas)          3
+  -- zp-ventas-01 · i-0f3bd7b0615933e00 · t3.micro · ami-08c982207dfbf2b27
+  [OK]    Estado                                       running
+  [OK]    Status checks (sistema/instancia)            ok/ok
+  [OK]    Subred (subnet-zenite-ventas)                subnet-0234dd20474eef1aa
+  [OK]    IP privada                                   10.20.0.10
+  [OK]    IPv4 pública                                ninguna
+  [OK]    Security Group                               zenite-ventas
+  [OK]    TCP/22 desde zenite-eice                     sí
+  [OK]    IMDSv2 obligatorio                           required
+  [OK]    Tags Name/Project/Phase/Role                 zp-ventas-01/ZenitePrestige/Fase2/Ventas
+  -- zp-ventas-02 · i-05a7f9ee1a6e93000 · t3.micro · ami-08c982207dfbf2b27
+  [OK]    Estado                                       running
+  [OK]    Status checks (sistema/instancia)            ok/ok
+  [OK]    Subred (subnet-zenite-ventas)                subnet-0234dd20474eef1aa
+  [OK]    IP privada                                   10.20.0.11
+  [OK]    IPv4 pública                                ninguna
+  [OK]    Security Group                               zenite-ventas
+  [OK]    TCP/22 desde zenite-eice                     sí
+  [OK]    IMDSv2 obligatorio                           required
+  [OK]    Tags Name/Project/Phase/Role                 zp-ventas-02/ZenitePrestige/Fase2/Ventas
+  -- zp-ti-01 · i-0378a8624df39958b · t3.micro · ami-08c982207dfbf2b27
+  [OK]    Estado                                       running
+  [OK]    Status checks (sistema/instancia)            ok/ok
+  [OK]    Subred (subnet-zenite-ti)                    subnet-0688bbf577464f544
+  [OK]    IP privada                                   10.20.0.102
+  [OK]    IPv4 pública                                ninguna
+  [OK]    Security Group                               zenite-ti
+  [OK]    TCP/22 desde zenite-eice                     sí
+  [OK]    IMDSv2 obligatorio                           required
+  [OK]    Tags Name/Project/Phase/Role                 zp-ti-01/ZenitePrestige/Fase2/TI
+  -- EC2 Instance Connect Endpoint
+  [OK]    EICE en la VPC                               create-complete
+    eice-0f41a9a04ed4dc3e2 · subnet-043e821cc9ee7c765 · eice-zenite-fase2
+  [OK]    zenite-eice permite salida TCP/22 a zenite-ventas sí
+  [OK]    zenite-eice permite salida TCP/22 a zenite-ti sí
+  -- Control de costos
+  [OK]    Internet Gateway / NAT Gateway / Elastic IP  0/0/0
+  [OK]    Instancias encendidas en la VPC              3
+RESULTADO: todo correcto.

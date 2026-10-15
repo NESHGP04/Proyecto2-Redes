@@ -65,7 +65,7 @@ Los MD_2 a MD_5 usan estos nombres; son los que valen (los nombres de ejemplo de
 | E01 | `01_vpc/E01_VPC_CIDR.png` |
 | E02 · E03 | `02_subredes/E02_Subredes_AWS.png` · `E03_Rutas_Interna.png` · `E03_Rutas_DMZ.png` · `E03_Rutas_Infra.png` |
 | E04 · E05 · E06 | `03_seguridad/E04_SG_Ventas.png` · `E05_SG_TI.png` · `E06_EICE.png` |
-| E07 · E08 | `04_instancias/E07_Instancias_Privadas.png` · `E08_IP_Ventas01.png` |
+| E07 · E08 | `04_instancias/E07_Instancias_Privadas.png` · `E07_Instancias_Privadas_IP_Subred.png` · `E07_Detalle_zp-ventas-01.png` · `E08_IP_Ventas01.png` |
 | E09 – E12 | `05_pruebas/E09_Ping_Ventas01_a_Ventas02_OK.png` · `E10_Ping_Ventas02_a_Ventas01_OK.png` · `E11_Ping_TI_a_Ventas_OK.png` · `E12_Ping_Ventas_a_TI_BLOQUEADO.png` |
 
 ## Parte 1 – AWS y VPC (MD_1)
@@ -115,7 +115,13 @@ y `zenite-eice` (`sg-0697e7f5646e28ab4`, solo para el endpoint), y `eice-zenite-
 | 2 | `bash 04_crear_instancias.sh` — comprueba subredes, Security Groups, EICE e IPs libres; crea `zp-ventas-01` (`10.20.0.10`), `zp-ventas-02` (`10.20.0.11`) y `zp-ti-01` (`10.20.0.102`); espera los status checks 2/2 y valida. Debe terminar en `RESULTADO: todo correcto.` Si los checks tardan, repetir con `--validar`. |
 | 3 | Consola → EC2 → *Instances*, columnas Name, Instance ID, Instance state, Private IPv4, Subnet ID y Public IPv4 (vacía) → `evidencias/04_instancias/E07_Instancias_Privadas.png`. |
 | 4 | En cada instancia: *Connect* → *EC2 Instance Connect* → *Connect using EC2 Instance Connect Endpoint* → `eice-zenite-fase2`, usuario `ec2-user`. Ejecutar el bloque de MD_4 que guarda `~/info-fase2.txt`. En `zp-ventas-01`, captura de `ip -4 addr` → `evidencias/04_instancias/E08_IP_Ventas01.png`. |
-| 5 | Descargar de `~/fase2-config/` a `configuracion/`: `instances.json` e `instancias-validacion.txt`. |
+| 5 | Descargar de `~/fase2-config/` a `configuracion/`: `instances.json` e `instancias-validacion.txt`. Copiar cada `~/info-fase2.txt` a `evidencias/04_instancias/info-fase2_<instancia>.txt`. |
+
+Estado (2026-10-14): completa. Instancias `i-0f3bd7b0615933e00` (`zp-ventas-01`), `i-05a7f9ee1a6e93000` (`zp-ventas-02`) y
+`i-0378a8624df39958b` (`zp-ti-01`), validación en `[OK]`. Sección del reporte: [reporte/04_instancias_de_prueba.md](reporte/04_instancias_de_prueba.md).
+
+También se puede correr desde una Mac sin Access Keys: AWS CLI ≥ 2.32, política `SignInLocalDevelopmentAccess` en el usuario
+IAM, `aws login --profile <perfil>` y `AWS_PROFILE=<perfil> bash 04_crear_instancias.sh`.
 
 Otro tipo de instancia: `TIPO=t4g.micro bash 04_crear_instancias.sh` (la AMI se elige según la arquitectura). El script
 avisa si el tipo no es Free Tier en la cuenta y se detiene sin crear nada si falta el EICE, un Security Group o una subred,
