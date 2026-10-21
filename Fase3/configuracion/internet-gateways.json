@@ -1,0 +1,36 @@
+{
+    "InternetGateways": [
+        {
+            "Attachments": [
+                {
+                    "State": "available",
+                    "VpcId": "vpc-0e4c1d0b2314ab4df"
+                }
+            ],
+            "InternetGatewayId": "igw-00f6efb87a444f270",
+            "OwnerId": "703461917799",
+            "Tags": [
+                {
+                    "Key": "Phase",
+                    "Value": "Fase3"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "igw-zenite-fase3"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                }
+            ]
+        }
+    ]
+}

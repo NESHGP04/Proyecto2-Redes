@@ -1,0 +1,5 @@
+2026-10-21 21:59:11 UTC · IGW creado igw-00f6efb87a444f270
+2026-10-21 21:59:18 UTC · Elastic IP reservada eipalloc-08484da0aa1e91f69
+2026-10-21 21:59:20 UTC · NAT creado nat-02a62a4b46102f109 (inicio del cobro por hora)
+2026-10-21 22:31:38 UTC · NAT eliminado nat-02a62a4b46102f109 (fin del cobro por hora)
+2026-10-21 22:31:41 UTC · Elastic IP liberada eipalloc-08484da0aa1e91f69

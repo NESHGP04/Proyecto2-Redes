@@ -1,0 +1,45 @@
+{
+    "Addresses": [
+        {
+            "AllocationId": "eipalloc-08484da0aa1e91f69",
+            "AssociationId": "eipassoc-09e8d2bdafa20e777",
+            "Domain": "vpc",
+            "NetworkInterfaceId": "eni-0eb9ce65cf3be6d0c",
+            "NetworkInterfaceOwnerId": "703461917799",
+            "PrivateIpAddress": "10.20.0.148",
+            "Tags": [
+                {
+                    "Key": "Creador",
+                    "Value": "root"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "eip-nat-zenite-fase3"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase3"
+                },
+                {
+                    "Key": "Inicio",
+                    "Value": "2026-10-21T21:59:16Z"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "us-east-1",
+            "PublicIp": "3.95.121.55"
+        }
+    ]
+}

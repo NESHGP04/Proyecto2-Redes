@@ -1,0 +1,46 @@
+Validación de las instancias nuevas de Fase 3 · vpc-zenite-fase2 · 2026-10-21 22:06:41 UTC
+  VPC ID: vpc-0e4c1d0b2314ab4df · región: us-east-1
+  [OK]    Instancias del plan (no terminadas)          4
+  -- Security Group zenite-servidores (sg-0bd52634dd2e6bb61)
+  [OK]    Existe                                       sí
+  [OK]    TCP/22 de entrada desde zenite-eice          sí
+    entrada actual: tcp:22 (la Persona 5 puede ampliarla)
+  -- Security Group zenite-visitantes (sg-017872344baac8a39)
+  [OK]    Existe                                       sí
+  [OK]    TCP/22 de entrada desde zenite-eice          sí
+    entrada actual: tcp:22 (la Persona 5 puede ampliarla)
+  -- zp-ntp-01 · i-0410455bc4b28d3fe · t3.micro · ami-0856027a77429315a · al2023
+  [OK]    Estado y status checks                       running ok/ok
+  [OK]    Subred (subnet-zenite-servidores)            subnet-0990205c298b0635d
+  [OK]    IP privada                                   10.20.0.68
+  [OK]    IPv4 pública                                ninguna
+  [OK]    Security Group                               zenite-servidores
+  [OK]    IMDSv2 obligatorio                           required
+  [OK]    Tags Name/Project/Phase/Role                 zp-ntp-01/ZenitePrestige/Fase3/NTP
+  -- zp-ldap-01 · i-04f9cc2b9ee3f77cd · t3.micro · ami-02a9cdd4e98bc3c78 · ubuntu
+  [OK]    Estado y status checks                       running ok/ok
+  [OK]    Subred (subnet-zenite-servidores)            subnet-0990205c298b0635d
+  [OK]    IP privada                                   10.20.0.69
+  [OK]    IPv4 pública                                ninguna
+  [OK]    Security Group                               zenite-servidores
+  [OK]    IMDSv2 obligatorio                           required
+  [OK]    Tags Name/Project/Phase/Role                 zp-ldap-01/ZenitePrestige/Fase3/LDAP
+  -- zp-intranet-01 · i-07330a665030d940e · t3.micro · ami-0856027a77429315a · al2023
+  [OK]    Estado y status checks                       running ok/ok
+  [OK]    Subred (subnet-zenite-servidores)            subnet-0990205c298b0635d
+  [OK]    IP privada                                   10.20.0.71
+  [OK]    IPv4 pública                                ninguna
+  [OK]    Security Group                               zenite-servidores
+  [OK]    IMDSv2 obligatorio                           required
+  [OK]    Tags Name/Project/Phase/Role                 zp-intranet-01/ZenitePrestige/Fase3/Intranet
+  -- zp-visitantes-01 · i-05dc9139e9d858330 · t3.micro · ami-0856027a77429315a · al2023
+  [OK]    Estado y status checks                       running ok/ok
+  [OK]    Subred (subnet-zenite-visitantes)            subnet-0edb31ab5f88d89fb
+  [OK]    IP privada                                   10.20.0.36
+  [OK]    IPv4 pública                                ninguna
+  [OK]    Security Group                               zenite-visitantes
+  [OK]    IMDSv2 obligatorio                           required
+  [OK]    Tags Name/Project/Phase/Role                 zp-visitantes-01/ZenitePrestige/Fase3/Visitantes
+  -- Resumen
+  4 instancia(s) zp-* encendida(s) en la VPC (≈ US$0.0104 por hora cada una).
+RESULTADO: todo correcto.

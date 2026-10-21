@@ -1,0 +1,55 @@
+{
+    "NatGateways": [
+        {
+            "CreateTime": "2026-10-21T21:59:20+00:00",
+            "NatGatewayAddresses": [
+                {
+                    "AllocationId": "eipalloc-08484da0aa1e91f69",
+                    "NetworkInterfaceId": "eni-0eb9ce65cf3be6d0c",
+                    "PrivateIp": "10.20.0.148",
+                    "PublicIp": "3.95.121.55",
+                    "AssociationId": "eipassoc-09e8d2bdafa20e777",
+                    "IsPrimary": true,
+                    "Status": "succeeded"
+                }
+            ],
+            "NatGatewayId": "nat-02a62a4b46102f109",
+            "State": "available",
+            "SubnetId": "subnet-043e821cc9ee7c765",
+            "VpcId": "vpc-0e4c1d0b2314ab4df",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Fase3"
+                },
+                {
+                    "Key": "Inicio",
+                    "Value": "2026-10-21T21:59:19Z"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Creador",
+                    "Value": "root"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "nat-zenite-fase3"
+                }
+            ],
+            "ConnectivityType": "public",
+            "AvailabilityMode": "zonal",
+            "AttachedAppliances": []
+        }
+    ]
+}

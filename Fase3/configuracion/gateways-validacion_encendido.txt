@@ -1,0 +1,11 @@
+Validación de gateways (encendido) · vpc-zenite-fase2 · vpc-0e4c1d0b2314ab4df · 2026-10-21 22:27:17 UTC
+  [OK]    Internet Gateway igw-zenite-fase3 adjunto a la VPC sí
+  [OK]    rt-zenite-infra: 0.0.0.0/0 -> IGW (activa)     igw-00f6efb87a444f270 active
+  [OK]    rt-zenite-dmz sin ruta por defecto (solo local) ninguna
+  [OK]    NAT Gateway nat-zenite-fase3 disponible        available
+  [OK]    NAT en subnet-zenite-infra                     subnet-043e821cc9ee7c765
+  [OK]    IP privada del NAT                             10.20.0.148
+  [OK]    IPv4 pública (Elastic IP) asociada            sí
+  [OK]    rt-zenite-interna: 0.0.0.0/0 -> NAT (activa)   nat-02a62a4b46102f109 active
+  Info: NAT creado por root el 2026-10-21T21:59:19Z (hace 0.4 h)
+RESULTADO: todo correcto.
