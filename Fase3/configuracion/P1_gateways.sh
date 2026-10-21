@@ -40,9 +40,20 @@ case "$MODO" in crear|destruir|--validar|--validar-apagado) ;; *) uso ;; esac
 
 awsr() { aws --region "$REGION" --output json "$@"; }
 mkdir -p "$OUT_DIR"
+QUIEN=$(aws sts get-caller-identity --output json | jq -r '.Arn | if endswith(":root") then "root" else (split("/") | last) end')
 
-tagspec() {  # tipo de recurso, nombre -> valor para --tag-specifications
-  echo "ResourceType=$1,Tags=[{Key=Name,Value=$2},{Key=Project,Value=ZenitePrestige},{Key=Phase,Value=Fase3},{Key=Environment,Value=Prototype},{Key=Owner,Value=Grupo30}]"
+tagspec() {  # tipo de recurso, nombre, [tiempo] -> valor para --tag-specifications ("tiempo" agrega Creador e Inicio)
+  local ex=""
+  [[ "${3:-}" == "tiempo" ]] && ex=",{Key=Creador,Value=$QUIEN},{Key=Inicio,Value=$(date -u +%Y-%m-%dT%H:%M:%SZ)}"
+  echo "ResourceType=$1,Tags=[{Key=Name,Value=$2},{Key=Project,Value=ZenitePrestige},{Key=Phase,Value=Fase3},{Key=Environment,Value=Prototype},{Key=Owner,Value=Grupo30}$ex]"
+}
+nat_info() {  # JSON del NAT -> quién lo creó y hace cuánto
+  jq -r '(.Tags // [] | map({(.Key): .Value}) | add // {}) as $t
+    | if $t.Inicio then "creado por \($t.Creador // "?") el \($t.Inicio) (hace \((((now - ($t.Inicio | fromdateiso8601)) / 360) | floor) / 10) h)"
+      else "sin datos de quién lo creó" end' <<<"$1"
+}
+nat_horas() {  # JSON del NAT -> horas enteras encendido (vacío si no hay dato)
+  jq -r '(.Tags // [] | map({(.Key): .Value}) | add // {}) as $t | if $t.Inicio then ((now - ($t.Inicio | fromdateiso8601)) / 3600 | floor) else empty end' <<<"$1"
 }
 registrar() { echo "$(date '+%Y-%m-%d %H:%M:%S %Z') · $*" >> "$OUT_DIR/gateways-sesiones.log"; }
 ip2int() { local IFS=.; set -- $1; echo $(( ($1 << 24) + ($2 << 16) + ($3 << 8) + $4 )); }
@@ -184,7 +195,7 @@ crear() {
   eip=$(eip_json)
   if [[ -z "$eip" ]]; then
     echo "Reservando Elastic IP $EIP_NAME ..."
-    eip=$(awsr ec2 allocate-address --domain vpc --tag-specifications "$(tagspec elastic-ip "$EIP_NAME")" | jq -c '.')
+    eip=$(awsr ec2 allocate-address --domain vpc --tag-specifications "$(tagspec elastic-ip "$EIP_NAME" tiempo)" | jq -c '.')
     registrar "Elastic IP reservada $(jq -r '.AllocationId' <<<"$eip")"
   else
     echo "Ya existe la Elastic IP $EIP_NAME ($(jq -r '.AllocationId' <<<"$eip")); se reutiliza."
@@ -195,7 +206,7 @@ crear() {
   if [[ -z "$nat" ]]; then
     echo "Creando NAT Gateway $NAT_NAME en $SUBNET_NAT con IP privada $NAT_IP ..."
     nat_id=$(awsr ec2 create-nat-gateway --subnet-id "$sn_id" --allocation-id "$alloc" --private-ip-address "$NAT_IP" \
-             --tag-specifications "$(tagspec natgateway "$NAT_NAME")" | jq -r '.NatGateway.NatGatewayId')
+             --tag-specifications "$(tagspec natgateway "$NAT_NAME" tiempo)" | jq -r '.NatGateway.NatGatewayId')
     registrar "NAT creado $nat_id (inicio del cobro por hora)"
   else
     nat_id=$(jq -r '.NatGatewayId' <<<"$nat")
@@ -301,6 +312,11 @@ validar() {  # encendido | apagado
       check "IPv4 pública (Elastic IP) asociada" "sí" "$([[ -n "$(jq -r '.NatGatewayAddresses[0].PublicIp // empty' <<<"$nat")" ]] && echo sí || echo no)"
       d=$(ruta_default "$rtN")
       check "$RT_INTERNA: 0.0.0.0/0 -> NAT (activa)" "$(jq -r '.NatGatewayId' <<<"$nat") active" "${d:-ninguna}"
+      echo "  Info: NAT $(nat_info "$nat")"
+      n=$(nat_horas "$nat")
+      if [[ -n "$n" ]] && (( n >= 8 )); then
+        echo "  AVISO: el NAT lleva $n horas encendido (≈ US\$0.05 por hora). Si nadie lo usa, destrúyelo: bash P1_gateways.sh destruir"
+      fi
     fi
   else
     check "NAT Gateway vivo (pending/available/deleting)" "0" "$([[ -n "$nat" ]] && echo 1 || echo 0)"
@@ -329,6 +345,11 @@ case "$MODO" in
   destruir)
     echo "Plan: quitar 0.0.0.0/0 de $RT_INTERNA, eliminar el NAT Gateway $NAT_NAME y liberar la Elastic IP $EIP_NAME."
     echo "      El Internet Gateway y su ruta en $RT_INFRA se conservan."
+    nat=$(nat_json)
+    if [[ -n "$nat" ]]; then
+      echo "      NAT actual: $(jq -r '.NatGatewayId' <<<"$nat") · $(nat_info "$nat")."
+      echo "      ¿Alguien más lo está usando? Avisa al grupo antes de destruirlo."
+    fi
     confirmar
     destruir
     echo
