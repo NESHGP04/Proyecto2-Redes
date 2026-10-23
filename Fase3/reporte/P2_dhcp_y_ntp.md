@@ -1,6 +1,6 @@
 # DHCP y NTP: configuración de red y sincronización de hora
 
-*Sección del reporte de Fase 3 · Camila Richter · servicios de administración de la red: entrega automática de configuración (DHCP) y hora común para todas las instancias (NTP).*
+*Sección del reporte de Fase 3 · Persona 2 · servicios de administración de la red: entrega automática de configuración (DHCP) y hora común para todas las instancias (NTP).*
 
 ## 1. Objetivo de esta parte
 
@@ -89,6 +89,17 @@ Las pruebas de instancia se hicieron **dentro de cada instancia**, conectadas po
 
 *Figura NTP-03. `zp-ti-01`: `^*` en `10.20.0.68` (Reach 377), stratum 5, `Leap status Normal`.*
 
+### Observaciones de comportamiento (fuera de la matriz)
+
+| Instancia | Qué se observó | Hora (UTC) | Fig. |
+|---|---|---|---|
+| `zp-visitantes-01` (`10.20.0.36`, subred Visitantes) | Recibe por DHCP `NTP 10.20.0.68` y `Search Domains zenite.internal`, pero `chronyc sources` muestra `10.20.0.68` como `^?` con Reach 0 y `tracking` indica `Leap status Not synchronised` (stratum 0). Es consecuencia esperada del aislamiento: `zenite-servidores` no permite UDP 123 desde Visitantes. | 23:25:19 | NTP-OBS |
+| `zp-ldap-01` (`10.20.0.69`, Ubuntu 24.04) | Recibe por DHCP `NTP 10.20.0.68` y `Search Domains zenite.internal`, pero se sincroniza con Amazon Time Sync (`^*` en `169.254.169.123`, stratum 3); `10.20.0.68` no aparece entre sus fuentes. No se modificó su configuración (instancia de la Persona 3). | por completar | – |
+
+![NTP-OBS – zp-visitantes-01 sin sincronizar](../evidencias/02_dhcp_ntp/FASE3_NTP-OBS_Visitantes_sin_sincronizar.png)
+
+*Figura NTP-OBS. `zp-visitantes-01`: la fuente `10.20.0.68` no responde (`^?`, Reach 0) y el reloj figura como no sincronizado.*
+
 ### Fallos y correcciones
 
 | Prueba | Error encontrado | Acción correctiva | Repetición |
@@ -102,6 +113,9 @@ Las pruebas de instancia se hicieron **dentro de cada instancia**, conectadas po
 - **El dominio `zenite.internal` es solo un sufijo.** No existe un servidor DNS que resuelva nombres de ese dominio; el DNS interno corresponde a una fase posterior.
 - **Efecto sobre toda la VPC.** El nuevo Option Set se aplica a las instancias de los demás paquetes al arrancar o al renovar su lease.
 - El servicio NTP depende de la regla UDP 123 en `zenite-servidores`; sin ella los clientes aparecen con `Reach 0`.
+- **Visitantes no sincroniza su hora.** Recibe el servidor NTP `10.20.0.68` por DHCP, pero no tiene permiso para llegar a él (aislamiento de la subred); su única fuente configurada queda inalcanzable. Una opción para la fase final es darle a esa subred un respaldo con Amazon Time Sync, sin abrirle acceso a la red interna (que este tráfico no lo filtren los Security Groups es lo que indica la documentación de AWS; por verificar).
+- **Ubuntu 24.04 (`zp-ldap-01`) no adopta el NTP del DHCP.** La instancia recibe la opción, pero su Chrony se sincroniza con Amazon Time Sync. Amazon Linux 2023 sí la adopta (`sourcedir /run/chrony.d`). Si se quiere que use el servidor interno, hay que configurarlo explícitamente en esa instancia (la administra la Persona 3).
+- Solo se verificaron los clientes `zp-ventas-01` y `zp-ti-01` (más las observaciones anteriores); `zp-ventas-02` y `zp-intranet-01` no se incluyeron en las pruebas.
 - Errores sin consecuencia durante el trabajo (no son fallos de prueba): un comando de CloudShell escrito sin `bash P2_dhcp_optionset.sh` delante, y un comando `aws` ejecutado dentro de una instancia (sin credenciales, por diseño); ambos se repitieron en el lugar correcto.
 
 ## 7. Documentación consultada
@@ -121,5 +135,5 @@ Las pruebas de instancia se hicieron **dentro de cada instancia**, conectadas po
 | `Fase3/configuracion/P2_dhcp_optionset.sh` | Crea y asocia el Option Set (`crear`, `--validar`). |
 | `Fase3/configuracion/dhcp-options.json` | Exportación del Option Set creado. |
 | `Fase3/configuracion/chrony/chrony-servidor.conf` | Configuración de Chrony de `zp-ntp-01`. |
-| `Fase3/evidencias/02_dhcp_ntp/FASE3_DHCP-01` a `NTP-03` | Capturas de las pruebas. |
+| `Fase3/evidencias/02_dhcp_ntp/FASE3_DHCP-01` a `NTP-03`, `FASE3_NTP-OBS_...` | Capturas de las pruebas y de la observación de Visitantes. |
 | `Fase3/bitacora/P2.md` | Bitácora de la Persona 2. |
