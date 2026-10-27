@@ -1,0 +1,13 @@
+# tls.ldif - Fase 3, Persona 3
+# Certificado y llave de slapd para LDAPS (636) y StartTLS (389). Es autofirmado: el mismo certificado hace de CA.
+# Lo aplica P3_ldap.sh con: ldapmodify -Y EXTERNAL -H ldapi:/// -f tls.ldif
+dn: cn=config
+changetype: modify
+replace: olcTLSCACertificateFile
+olcTLSCACertificateFile: /etc/ldap/zenite-ldap.crt
+-
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/ldap/zenite-ldap.crt
+-
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/ldap/zenite-ldap.key

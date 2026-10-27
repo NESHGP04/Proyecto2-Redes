@@ -1,0 +1,82 @@
+# zenite.ldif - Fase 3, Persona 3
+# Arbol de Zenite Prestige bajo dc=zenite,dc=internal. La raiz (dc=zenite,dc=internal) y cn=admin las crea slapd al instalarse.
+# Usuarios ficticios, solo de laboratorio. P3_ldap.sh reemplaza @@HASH_USUARIOS@@ por el hash SSHA de LDAP_USER_PASSWORD
+# antes de cargarlo: en el repositorio no hay contrasenas ni hashes.
+
+dn: ou=People,dc=zenite,dc=internal
+objectClass: organizationalUnit
+ou: People
+description: Usuarios de Zenite Prestige
+
+dn: ou=Groups,dc=zenite,dc=internal
+objectClass: organizationalUnit
+ou: Groups
+description: Grupos de Zenite Prestige
+
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+objectClass: posixGroup
+cn: ventas
+gidNumber: 10001
+description: Departamento de Ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+objectClass: posixGroup
+cn: ti
+gidNumber: 10002
+description: Departamento de TI
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+objectClass: inetOrgPerson
+objectClass: posixAccount
+uid: ventas01
+cn: Usuario Ventas 01
+sn: Ventas 01
+ou: Ventas
+uidNumber: 10101
+gidNumber: 10001
+homeDirectory: /home/ventas01
+loginShell: /bin/bash
+userPassword: @@HASH_USUARIOS@@
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+objectClass: inetOrgPerson
+objectClass: posixAccount
+uid: ventas02
+cn: Usuario Ventas 02
+sn: Ventas 02
+ou: Ventas
+uidNumber: 10102
+gidNumber: 10001
+homeDirectory: /home/ventas02
+loginShell: /bin/bash
+userPassword: @@HASH_USUARIOS@@
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+objectClass: inetOrgPerson
+objectClass: posixAccount
+uid: ti01
+cn: Usuario TI 01
+sn: TI 01
+ou: TI
+uidNumber: 10201
+gidNumber: 10002
+homeDirectory: /home/ti01
+loginShell: /bin/bash
+userPassword: @@HASH_USUARIOS@@
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+objectClass: inetOrgPerson
+objectClass: posixAccount
+uid: ti02
+cn: Usuario TI 02
+sn: TI 02
+ou: TI
+uidNumber: 10202
+gidNumber: 10002
+homeDirectory: /home/ti02
+loginShell: /bin/bash
+userPassword: @@HASH_USUARIOS@@
