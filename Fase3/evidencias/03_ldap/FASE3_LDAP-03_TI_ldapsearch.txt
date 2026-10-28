@@ -1,0 +1,52 @@
+$ uname -n; hostname -I; date -u
+zp-ti-01
+10.20.0.102 
+Wed Oct 28 00:15:35 UTC 2026
+
+$ ldapsearch -x -LLL -H ldap://10.20.0.69 -b dc=zenite,dc=internal "(|(objectClass=posixAccount)(objectClass=posixGroup))" uid cn gidNumber memberUid
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+gidNumber: 10001
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+gidNumber: 10002
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+gidNumber: 10001
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+gidNumber: 10001
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+gidNumber: 10002
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+gidNumber: 10002
+
+exit=0
+
+$ LDAPTLS_CACERT=~/zenite-ldap.crt ldapsearch -x -LLL -H ldaps://10.20.0.69 -b dc=zenite,dc=internal "(objectClass=posixGroup)" cn memberUid
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+exit=0

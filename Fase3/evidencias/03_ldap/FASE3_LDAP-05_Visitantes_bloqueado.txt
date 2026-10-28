@@ -1,0 +1,15 @@
+$ uname -n; hostname -I; date -u
+zp-visitantes-01
+10.20.0.36 
+Wed Oct 28 00:16:21 UTC 2026
+
+$ ldapsearch -x -o nettimeout=5 -LLL -H ldap://10.20.0.69 -b dc=zenite,dc=internal "(uid=*)" uid 2>&1
+ldap_sasl_bind(SIMPLE): Can't contact LDAP server (-1)
+exit=255
+
+$ LDAPTLS_CACERT=~/zenite-ldap.crt ldapsearch -x -o nettimeout=5 -LLL -H ldaps://10.20.0.69 -b dc=zenite,dc=internal "(uid=*)" uid 2>&1
+ldap_sasl_bind(SIMPLE): Can't contact LDAP server (-1)
+exit=255
+
+$ timeout 5 bash -c "</dev/tcp/10.20.0.69/389" 2>&1
+exit=124

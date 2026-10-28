@@ -1,0 +1,18 @@
+$ uname -n; hostname -I; date -u
+zp-ventas-01
+10.20.0.10 
+Wed Oct 28 00:16:11 UTC 2026
+
+# ~/.p3_correcta: contrasena de laboratorio de ventas01 (archivo 600, no se muestra) | ~/.p3_erronea: contrasena incorrecta
+
+$ LDAPTLS_CACERT=~/zenite-ldap.crt ldapwhoami -x -H ldaps://10.20.0.69 -D uid=ventas01,ou=People,dc=zenite,dc=internal -y ~/.p3_correcta
+dn:uid=ventas01,ou=People,dc=zenite,dc=internal
+exit=0
+
+$ LDAPTLS_CACERT=~/zenite-ldap.crt ldapwhoami -x -H ldaps://10.20.0.69 -D uid=ventas01,ou=People,dc=zenite,dc=internal -y ~/.p3_erronea
+ldap_bind: Invalid credentials (49)
+exit=49
+
+$ ldapwhoami -x -H ldaps://10.20.0.69 -D ... -y ~/.p3_correcta   # sin LDAPTLS_CACERT (certificado no confiable)
+ldap_sasl_bind(SIMPLE): Can't contact LDAP server (-1)
+exit=255

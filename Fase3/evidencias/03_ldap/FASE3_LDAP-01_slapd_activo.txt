@@ -1,0 +1,31 @@
+$ uname -n; date -u
+zp-ldap-01
+Wed Oct 28 00:10:07 UTC 2026
+
+$ bash P3_ldap.sh --validar
+== P3_ldap.sh --validar · zp-ldap-01 · 2026-10-28 00:10:07 UTC
+tee: /home/ubuntu/fase3-config/P3_ldap.log: Permission denied
+[OK] slapd en ejecucion
+[OK] Escucha en TCP 389
+[OK] Escucha en TCP 636
+[OK] Usuarios en ou=People: 4
+[OK] Grupos en ou=Groups: 2
+[OK] userPassword no visible sin autenticar
+[OK] LDAPS responde en 10.20.0.69:636 con certificado valido
+[OK] Certificado con SAN IP:10.20.0.69
+RESULTADO: todo correcto.
+
+$ sudo ss -tlnp | grep slapd
+LISTEN 0      2048         0.0.0.0:389       0.0.0.0:*    users:(("slapd",pid=10645,fd=8))                      
+LISTEN 0      2048         0.0.0.0:636       0.0.0.0:*    users:(("slapd",pid=10645,fd=11))                     
+LISTEN 0      2048            [::]:389          [::]:*    users:(("slapd",pid=10645,fd=9))                      
+LISTEN 0      2048            [::]:636          [::]:*    users:(("slapd",pid=10645,fd=12))                     
+
+$ systemctl is-active slapd
+active
+
+$ openssl x509 -in /etc/ldap/zenite-ldap.crt -noout -subject -enddate -ext subjectAltName
+subject=O = Zenite Prestige, CN = zp-ldap-01.zenite.internal
+notAfter=Oct 28 00:09:34 2027 GMT
+X509v3 Subject Alternative Name: 
+    IP Address:10.20.0.69, DNS:zp-ldap-01.zenite.internal
