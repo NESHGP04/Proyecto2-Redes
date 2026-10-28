@@ -24,6 +24,8 @@ OUT_DIR="$(getent passwd "${SUDO_USER:-$(id -un)}" | cut -d: -f6)/fase3-config"
 MODO="${1:---validar}"
 
 mkdir -p "$OUT_DIR"
+touch "$OUT_DIR/P3_ldap.log"
+[[ -n "${SUDO_USER:-}" ]] && chown -R "$SUDO_USER:" "$OUT_DIR"   # que el log siga escribible sin sudo
 exec > >(tee -a "$OUT_DIR/P3_ldap.log") 2>&1
 echo "== P3_ldap.sh $MODO · $(uname -n) · $(date -u '+%Y-%m-%d %H:%M:%S') UTC"
 ERRORES=0
@@ -75,8 +77,7 @@ instalar() {
 
   TMP=$(mktemp -d)
   trap 'rm -rf "$TMP"' EXIT
-  printf %s "$LDAP_ADMIN_PASSWORD" > "$TMP/admin"
-  printf %s "$LDAP_USER_PASSWORD" > "$TMP/usuario"
+  (umask 077; printf %s "$LDAP_ADMIN_PASSWORD" > "$TMP/admin"; printf %s "$LDAP_USER_PASSWORD" > "$TMP/usuario")
 
   # 1. slapd y ldap-utils
   if dpkg -s slapd >/dev/null 2>&1; then
