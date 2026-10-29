@@ -1,5 +1,7 @@
 # P4 – Intranet de Zenite Prestige
 
+**Para la siguiente persona:** [guía de comandos para encender, verificar y apagar la intranet](P4_guia_levantar_intranet.md).
+
 Estado: **checkpoint 3 completado con salida compartida por el usuario**. Nginx instalado, servicio activo, paquete
 transferido por EICE y sitio publicado; `nginx -t` correcto y HTTP 200 con el título de Zenite desde `127.0.0.1`.
 Pendientes: revisión visual del sitio desplegado, respuesta de CSS/JavaScript y pruebas WEB-01 a WEB-05 desde sus orígenes.
