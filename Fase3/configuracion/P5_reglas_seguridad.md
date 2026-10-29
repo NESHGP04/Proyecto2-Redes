@@ -104,6 +104,20 @@ Ventas, Servidores, VPN, DMZ e Infra se quedan en la ACL predeterminada (permite
 
 WEB-01 a WEB-05 (P4) y LDAP-05 (P3) dependen de las mismas reglas.
 
+**Defensa en profundidad (qué capa bloquea cada prueba).** Las pruebas SEG-03, SEG-04 y SEG-05 fallan por el Security Group
+**y** por la ACL, así que el resultado de la prueba no aísla una sola capa. Hacia Visitantes y desde TI no hay ningún SG de
+destino que acepte al origen, y la ACL lo repite con una denegación propia. Como la ACL se conserva aunque se cambie un SG, se
+documentan las dos capas y la regla de ACL se muestra en la consola:
+
+| Prueba | Bloqueo en el Security Group | Bloqueo en la Network ACL |
+|---|---|---|
+| SEG-05 (Visitantes → resto) | Ningún SG de destino admite a `zenite-visitantes` como origen | `acl-zenite-visitantes` salida **200** deniega `10.20.0.0/24` |
+| SEG-03 (Ventas → TI) | `zenite-ti` no admite a `zenite-ventas` | `acl-zenite-ti` entrada: solo TCP 22 desde el EICE, retorno 1024-65535 y echo reply; el echo request y TCP 22 desde Ventas no pasan |
+| SEG-04 (Servidores → TI) | `zenite-ti` no admite a `zenite-servidores` | igual que SEG-03 |
+
+Evidencia de la ACL como tal: captura de *VPC → Network ACLs* con `acl-zenite-visitantes` y `acl-zenite-ti`
+(pendiente, Checkpoint 7), además de la salida de `P5_acls.sh --validar`.
+
 ## 6. Decisiones pendientes de aprobación
 
 | ID | Decisión | Recomendación |
