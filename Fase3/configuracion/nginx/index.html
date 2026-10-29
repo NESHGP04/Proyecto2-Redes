@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es-GT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Intranet de Zenite Prestige Guatemala: inventario, repuestos y taller.">
+  <title>Zenite Prestige | Intranet</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="intranet.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+  <aside class="sidebar" aria-label="Navegación principal">
+    <a class="brand" href="#inicio" aria-label="Zenite Prestige, inicio">
+      <span class="monogram" aria-hidden="true">Z<span> / </span>P</span>
+      <span class="brand-name">ZENITE PRESTIGE<small>GUATEMALA</small></span>
+    </a>
+    <p class="nav-label">ESPACIO DE TRABAJO</p>
+    <nav>
+      <a href="#inicio"><span aria-hidden="true">01</span> Vista general</a>
+      <a href="#inventario"><span aria-hidden="true">02</span> Inventario</a>
+      <a href="#repuestos"><span aria-hidden="true">03</span> Repuestos</a>
+      <a href="#taller"><span aria-hidden="true">04</span> Taller</a>
+    </nav>
+    <div class="sidebar-bottom"><span class="status-dot" aria-hidden="true"></span> Portal interno<small>Zenite Prestige · Fase 3</small></div>
+  </aside>
+
+  <div class="workspace" id="inicio">
+    <header class="topbar"><span>Operaciones <span class="breadcrumb">/ Vista general</span></span><span class="internal-label">USO INTERNO</span></header>
+    <main id="contenido">
+      <section class="intro" aria-labelledby="welcome">
+        <div><p class="eyebrow">PRECISIÓN EN CADA DETALLE</p><h1 id="welcome">Todo listo para<br>el siguiente destino.</h1><p class="intro-copy">Tu punto de encuentro con el inventario,<br class="desktop-break"> los repuestos y la operación del taller.</p></div>
+        <div class="edition"><span>ZENITE</span><strong>Operations</strong><small>Mercedes-Benz · BMW · Porsche</small></div>
+      </section>
+
+      <p class="demo-notice"><strong>Entorno de demostración.</strong> Los vehículos, existencias y horarios son ficticios. Esta vista estática no registra cambios.</p>
+
+      <section class="metrics" aria-label="Resumen de demostración">
+        <article><span class="metric-label">Vehículos en inventario</span><strong>06<span>unidades</span></strong><p>3 disponibles · 2 reservados · 1 en preparación</p></article>
+        <article><span class="metric-label">Referencias de repuestos</span><strong>04<span>referencias</span></strong><p>1 referencia con existencia baja</p></article>
+        <article><span class="metric-label">Espacios en taller</span><strong>02<span>libres de 4</span></strong><p>Disponibilidad de la jornada de ejemplo</p></article>
+      </section>
+
+      <section id="inventario" class="inventory" aria-labelledby="inventory-title">
+        <div class="section-heading"><div><p class="eyebrow">SHOWROOM</p><h2 id="inventory-title">Inventario de vehículos</h2></div><span class="section-note">Colección de demostración</span></div>
+        <div class="inventory-tools">
+          <div class="filters" role="group" aria-label="Filtrar por marca">
+            <button type="button" class="selected" data-brand="Todas" aria-pressed="true">Todas</button>
+            <button type="button" data-brand="Mercedes-Benz" aria-pressed="false">Mercedes-Benz</button>
+            <button type="button" data-brand="BMW" aria-pressed="false">BMW</button>
+            <button type="button" data-brand="Porsche" aria-pressed="false">Porsche</button>
+          </div>
+          <label class="search"><span>Buscar vehículo</span><input id="vehicle-search" type="search" placeholder="Modelo, código o estado…" autocomplete="off"></label>
+        </div>
+        <noscript><p class="no-script">Activa JavaScript para buscar y filtrar. El inventario completo está disponible abajo.</p></noscript>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla de vehículos; desplázate horizontalmente si es necesario">
+          <table>
+            <caption class="sr-only">Inventario ficticio de vehículos de Zenite Prestige</caption>
+            <thead><tr><th scope="col">Vehículo</th><th scope="col">Código</th><th scope="col">Año</th><th scope="col">Motorización</th><th scope="col">Estado</th></tr></thead>
+            <tbody id="vehicles">
+              <tr data-brand="Mercedes-Benz"><th scope="row"><span class="vehicle-mark">MB</span><span class="vehicle-name">Clase C 200<small>Mercedes-Benz · Sedán</small></span></th><td>ZP-001</td><td>2025</td><td>Gasolina</td><td><span class="badge available">Disponible</span></td></tr>
+              <tr data-brand="BMW"><th scope="row"><span class="vehicle-mark">BM</span><span class="vehicle-name">X3 xDrive20i<small>BMW · SUV</small></span></th><td>ZP-002</td><td>2025</td><td>Gasolina</td><td><span class="badge reserved">Reservado</span></td></tr>
+              <tr data-brand="Porsche"><th scope="row"><span class="vehicle-mark">PO</span><span class="vehicle-name">Macan<small>Porsche · SUV</small></span></th><td>ZP-003</td><td>2024</td><td>Gasolina</td><td><span class="badge available">Disponible</span></td></tr>
+              <tr data-brand="Mercedes-Benz"><th scope="row"><span class="vehicle-mark">MB</span><span class="vehicle-name">GLC 300<small>Mercedes-Benz · SUV</small></span></th><td>ZP-004</td><td>2025</td><td>Gasolina</td><td><span class="badge preparation">En preparación</span></td></tr>
+              <tr data-brand="BMW"><th scope="row"><span class="vehicle-mark">BM</span><span class="vehicle-name">320i<small>BMW · Sedán</small></span></th><td>ZP-005</td><td>2024</td><td>Gasolina</td><td><span class="badge available">Disponible</span></td></tr>
+              <tr data-brand="Porsche"><th scope="row"><span class="vehicle-mark">PO</span><span class="vehicle-name">Taycan<small>Porsche · Sedán</small></span></th><td>ZP-006</td><td>2025</td><td>Eléctrica</td><td><span class="badge reserved">Reservado</span></td></tr>
+            </tbody>
+          </table>
+          <p id="empty-state" class="empty-state" hidden>No hay vehículos que coincidan. Prueba otra marca o búsqueda.</p>
+        </div>
+        <p id="result-count" class="result-count" role="status">6 vehículos en esta vista</p>
+      </section>
+
+      <div class="operations-grid">
+        <section id="repuestos" class="panel" aria-labelledby="parts-title">
+          <div class="section-heading"><div><p class="eyebrow">POSTVENTA</p><h2 id="parts-title">Repuestos</h2></div><span class="number-label">04</span></div>
+          <ul class="parts-list">
+            <li><span>Filtro de aceite<small>REP-001 · Mercedes-Benz</small></span><span class="stock">12 <small>unidades</small></span></li>
+            <li><span>Pastillas de freno<small>REP-002 · BMW</small></span><span class="stock low">2 <small>Existencia baja</small></span></li>
+            <li><span>Filtro de aire<small>REP-003 · Porsche</small></span><span class="stock">8 <small>unidades</small></span></li>
+            <li><span>Limpiaparabrisas<small>REP-004 · Multimarca</small></span><span class="stock">6 <small>juegos</small></span></li>
+          </ul>
+        </section>
+        <section id="taller" class="panel" aria-labelledby="workshop-title">
+          <div class="section-heading"><div><p class="eyebrow">SERVICIO TÉCNICO</p><h2 id="workshop-title">Agenda del taller</h2></div><span class="number-label">02 / 04</span></div>
+          <p class="workshop-note">Jornada de ejemplo · 08:00 a 17:00</p>
+          <ul class="workshop-list">
+            <li><span class="bay">01</span><span>Mantenimiento preventivo<small>Clase C 200 · 08:00–10:00</small></span><span class="badge reserved">Ocupado</span></li>
+            <li><span class="bay">02</span><span>Diagnóstico general<small>X3 xDrive20i · 08:00–11:00</small></span><span class="badge reserved">Ocupado</span></li>
+            <li><span class="bay">03</span><span>Espacio disponible<small>Sin asignación</small></span><span class="badge available">Libre</span></li>
+            <li><span class="bay">04</span><span>Espacio disponible<small>Sin asignación</small></span><span class="badge available">Libre</span></li>
+          </ul>
+        </section>
+      </div>
+      <footer><span class="footer-brand">ZENITE PRESTIGE <span>GUATEMALA</span></span><span>Intranet · Datos de demostración</span></footer>
+    </main>
+  </div>
+</body>
+</html>

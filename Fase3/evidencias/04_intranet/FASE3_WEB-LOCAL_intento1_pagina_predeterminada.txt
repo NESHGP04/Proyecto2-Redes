@@ -1,0 +1,36 @@
+Fuente: salida real compartida por el usuario en el chat, transcrita sin ejecutarla localmente.
+Prueba local de publicación, intento 1. No equivale a WEB-01 a WEB-05.
+Resultado: fallo de contenido; se recibió la página predeterminada.
+Hora: cabecera HTTP Date del servidor, 2026-10-29 07:24:31 UTC.
+
+[ec2-user@zp-intranet-01 ~]$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+[ec2-user@zp-intranet-01 ~]$ sudo systemctl reload nginx
+[ec2-user@zp-intranet-01 ~]$ curl --noproxy '*' -sS --max-time 10 -D - -o /tmp/P4_index_obtenido.html http://127.0.0.1/
+HTTP/1.1 200 OK
+Server: nginx/1.30.5
+Date: Thu, 29 Oct 2026 07:24:31 GMT
+Content-Type: text/html
+Content-Length: 896
+Last-Modified: Wed, 16 Sep 2026 21:09:29 GMT
+Connection: keep-alive
+ETag: "6aab0589-380"
+Accept-Ranges: bytes
+
+[ec2-user@zp-intranet-01 ~]$ head -n 12 /tmp/P4_index_obtenido.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+
+Corrección: instalar ~/p4-intranet/nginx.conf en /etc/nginx/nginx.conf, validar y recargar Nginx.
+Repetición: FASE3_WEB-LOCAL_intento2_Intranet_HTTP200.txt.

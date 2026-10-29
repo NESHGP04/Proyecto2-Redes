@@ -1,0 +1,37 @@
+Fuente: salida real compartida por el usuario en el chat, transcrita sin ejecutarla localmente.
+Prueba local de publicación, intento 2. No equivale a WEB-01 a WEB-05.
+Resultado: HTTP 200 y título de la intranet correctos.
+Hora: cabecera HTTP Date del servidor, 2026-10-29 07:26:32 UTC (01:26:32 Guatemala).
+La primera salida compartida empieza con el resultado de nginx -t; se conserva así.
+
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+[ec2-user@zp-intranet-01 ~]$ sudo systemctl reload nginx
+[ec2-user@zp-intranet-01 ~]$ curl --noproxy '*' -sS --max-time 10 -D - -o /tmp/P4_index_obtenido.html http://127.0.0.1/
+HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 29 Oct 2026 07:26:32 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 8456
+Last-Modified: Thu, 29 Oct 2026 07:23:52 GMT
+Connection: keep-alive
+ETag: "6ae2f488-2108"
+X-Content-Type-Options: nosniff
+Referrer-Policy: no-referrer
+Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'
+Accept-Ranges: bytes
+
+[ec2-user@zp-intranet-01 ~]$ head -n 12 /tmp/P4_index_obtenido.html
+<!doctype html>
+<html lang="es-GT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Intranet de Zenite Prestige Guatemala: inventario, repuestos y taller.">
+  <title>Zenite Prestige | Intranet</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="intranet.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+[ec2-user@zp-intranet-01 ~]$

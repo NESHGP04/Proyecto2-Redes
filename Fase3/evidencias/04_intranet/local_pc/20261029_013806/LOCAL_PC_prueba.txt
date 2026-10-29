@@ -1,0 +1,21 @@
+Prueba en la computadora local. No se contacta ni modifica AWS.
+Fecha America/Guatemala: 2026-10-29T01:38:06.886930-06:00
+Servidor: Python HTTP limitado a 127.0.0.1; no es Nginx.
+La prueba no valida Security Groups, ACL ni WEB-01 a WEB-05.
+[OK] Título, enlaces internos, IDs únicos y recursos locales correctos; sin CDN.
+[OK] JavaScript: sintaxis correcta.
+[OK] Filtros de las tres marcas, búsqueda combinada, acentos, código, contador, cero resultados y restablecimiento: correctos en DOM simulado.
+[OK] GET /: HTTP 200, 8456 bytes, contenido idéntico al archivo original; text/html.
+[OK] GET /styles.css: HTTP 200, 9814 bytes, contenido idéntico al archivo original; text/css.
+[OK] GET /intranet.js: HTTP 200, 1580 bytes, contenido idéntico al archivo original; text/javascript.
+[OK] Ruta inexistente: HTTP 404 en el servidor de prueba.
+[OK] Firefox cargó el sitio y generó captura escritorio: 1440,1400; revisión visual posterior.
+[OK] Firefox cargó el sitio y generó captura movil: 390,2300; revisión visual posterior.
+[OK] Servidor local detenido y perfiles temporales eliminados al finalizar.
+RESULTADO: comprobaciones HTTP y funcionales locales correctas. Capturas pendientes de inspección visual.
+
+Inspección visual posterior de las capturas por el asistente:
+[OK] Escritorio: navegación, tarjetas, búsqueda e inventario legibles, sin superposiciones visibles.
+[OK] Móvil: navegación y paneles se apilan; la tabla conserva su contenedor con desplazamiento horizontal.
+Las capturas corresponden al tamaño de ventana, no a toda la página; el contenido restante se consulta desplazando.
+RESULTADO FINAL: prueba local aprobada dentro del alcance HTTP, DOM simulado y revisión visual.
