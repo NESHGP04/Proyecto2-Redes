@@ -1,0 +1,7 @@
+Validación de DNS · zenite.dernait.com · IP esperada 18.210.66.163 · 2026-11-06 00:03:14 UTC
+  -- DNS-01 · el dominio resuelve a la Elastic IP de la web
+  [OK]    A zenite.dernait.com -> Elastic IP (@8.8.8.8)        18.210.66.163
+  [OK]    A zenite.dernait.com -> Elastic IP (@1.1.1.1)        18.210.66.163
+  -- DNS-02 · dos resolutores distintos coinciden
+  [OK]    8.8.8.8 y 1.1.1.1 dan la misma respuesta             18.210.66.163
+RESULTADO: todo correcto.

@@ -1,0 +1,52 @@
+Validación de la base pública (encendido) · vpc-zenite-fase2 · vpc-0e4c1d0b2314ab4df · 2026-11-06 00:08:48 UTC
+  -- Rutas
+  [OK]    Internet Gateway igw-zenite-fase3 adjunto            sí
+  [OK]    rt-zenite-dmz: 0.0.0.0/0 -> IGW (activa)             igw-00f6efb87a444f270 active
+  [OK]    Existe rt-zenite-vpn                                 sí
+  [OK]    rt-zenite-vpn: 0.0.0.0/0 -> IGW (activa)             igw-00f6efb87a444f270 active
+  [OK]    subnet-zenite-vpn asociada a rt-zenite-vpn           rtb-0c4e169f00a248de8
+  -- Security Group zenite-dmz (sg-06c3d521d3586f2b5)
+  [OK]    Existe                                               sí
+  [OK]    TCP/22 de entrada desde zenite-eice                  sí
+  [OK]    Entradas 0.0.0.0/0 fuera de las excepciones D10      ninguna
+    [INFO] entrada actual: tcp:22 (la Persona 3 completa las reglas)
+  -- Security Group zenite-vpn (sg-044aad87e64e20906)
+  [OK]    Existe                                               sí
+  [OK]    TCP/22 de entrada desde zenite-eice                  sí
+  [OK]    Entradas 0.0.0.0/0 fuera de las excepciones D10      ninguna
+    [INFO] entrada actual: tcp:22 (la Persona 3 completa las reglas)
+  -- zp-web-01 · i-06b59507240cfa8e7 · t3.micro · ami-0d6dd9e8265d48906 · ubuntu
+  [OK]    Estado y status checks                               running ok/ok
+  [OK]    Subred (subnet-zenite-dmz)                           subnet-0d29453584ea726c0
+  [OK]    IP privada                                           10.20.0.116
+  [OK]    Tipo de instancia                                    t3.micro
+  [OK]    Security Group                                       zenite-dmz
+  [OK]    IMDSv2 obligatorio                                   required
+  [OK]    Tags Name/Project/Phase/Role                         zp-web-01/ZenitePrestige/Final/Web
+  [OK]    Elastic IP eip-zenite-web asociada a zp-web-01       i-06b59507240cfa8e7
+    [INFO] IP pública: 18.210.66.163
+  [OK]    TCP/22 de 18.210.66.163 desde CloudShell (DMZ-04)    cerrado
+  -- zp-vpn-01 · i-050e09727e2a06139 · t3.micro · ami-0d6dd9e8265d48906 · ubuntu
+  [OK]    Estado y status checks                               running ok/ok
+  [OK]    Subred (subnet-zenite-vpn)                           subnet-061f6bea484702eec
+  [OK]    IP privada                                           10.20.0.132
+  [OK]    Tipo de instancia                                    t3.micro
+  [OK]    Security Group                                       zenite-vpn
+  [OK]    IMDSv2 obligatorio                                   required
+  [OK]    Tags Name/Project/Phase/Role                         zp-vpn-01/ZenitePrestige/Final/VPN
+  [OK]    Elastic IP eip-zenite-vpn asociada a zp-vpn-01       i-050e09727e2a06139
+    [INFO] IP pública: 3.228.84.176
+  [OK]    TCP/22 de 3.228.84.176 desde CloudShell (DMZ-04)     cerrado
+  -- zp-monitor-01 · i-00e786cb51a422c36 · t3.small · ami-0d6dd9e8265d48906 · ubuntu
+  [OK]    Estado y status checks                               running ok/ok
+  [OK]    Subred (subnet-zenite-ti)                            subnet-0688bbf577464f544
+  [OK]    IP privada                                           10.20.0.103
+  [OK]    Tipo de instancia                                    t3.small
+  [OK]    Security Group                                       zenite-ti
+  [OK]    IMDSv2 obligatorio                                   required
+  [OK]    Tags Name/Project/Phase/Role                         zp-monitor-01/ZenitePrestige/Final/Monitor
+  [OK]    Sin IPv4 pública                                    ninguna
+  -- Barrido de IP públicas (DMZ-03)
+  [OK]    zp-* con IP pública distintas de web y VPN          ninguna
+  [INFO]  Elastic IP en la cuenta: 2 · instancias zp-* encendidas: 3
+RESULTADO: todo correcto.
