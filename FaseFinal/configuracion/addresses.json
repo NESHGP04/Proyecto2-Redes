@@ -1,0 +1,88 @@
+{
+    "Addresses": [
+        {
+            "AllocationId": "eipalloc-043ed2c86d162bff3",
+            "AssociationId": "eipassoc-00e141e803372d203",
+            "Domain": "vpc",
+            "NetworkInterfaceId": "eni-001691ad343c3e438",
+            "NetworkInterfaceOwnerId": "703461917799",
+            "PrivateIpAddress": "10.20.0.116",
+            "Tags": [
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Final"
+                },
+                {
+                    "Key": "Creador",
+                    "Value": "root"
+                },
+                {
+                    "Key": "Inicio",
+                    "Value": "2026-11-05T21:52:57Z"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "eip-zenite-web"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "us-east-1",
+            "InstanceId": "i-06b59507240cfa8e7",
+            "PublicIp": "18.210.66.163"
+        },
+        {
+            "AllocationId": "eipalloc-0e3c263d637223a5f",
+            "AssociationId": "eipassoc-02d1bcfd0e2d4d438",
+            "Domain": "vpc",
+            "NetworkInterfaceId": "eni-050740f89b90ba0a9",
+            "NetworkInterfaceOwnerId": "703461917799",
+            "PrivateIpAddress": "10.20.0.132",
+            "Tags": [
+                {
+                    "Key": "Owner",
+                    "Value": "Grupo30"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Prototype"
+                },
+                {
+                    "Key": "Inicio",
+                    "Value": "2026-11-05T21:53:06Z"
+                },
+                {
+                    "Key": "Phase",
+                    "Value": "Final"
+                },
+                {
+                    "Key": "Creador",
+                    "Value": "root"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "eip-zenite-vpn"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ZenitePrestige"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "us-east-1",
+            "InstanceId": "i-050e09727e2a06139",
+            "PublicIp": "3.228.84.176"
+        }
+    ]
+}

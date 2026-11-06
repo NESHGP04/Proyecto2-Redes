@@ -1,0 +1,24 @@
+Control de costos · cuenta 703461917799 · 2026-11-06 00:24:16 UTC
+  -- us-east-1: lo que cobra ahora
+  [ATENCION] Instancias encendidas                             3
+            zp-vpn-01              t3.micro   ≈ US$0.0104/h
+            zp-web-01              t3.micro   ≈ US$0.0104/h
+            zp-monitor-01          t3.small   ≈ US$0.0208/h
+  [INFO]  Instancias con IPv4 pública (Elastic IP incluidas)  2
+  [OK]    NAT Gateways                                         0
+  [INFO]  Elastic IP                                           2 en total · 2 asociadas · 0 sin asociar (cada una ≈ US$0.005/h aunque la instancia esté apagada)
+  [OK]    Elastic IP sin asociar                               0
+  [INFO]  Volúmenes EBS                                       10 · 88 GiB (≈ US$7.0400/mes, también con las instancias apagadas)
+  Estimación ahora: ≈ US$0.0516 por hora · ≈ US$1.2384 por día (cómputo + NAT + IPv4; sin discos ni tráfico)
+  -- Barrido de las demás regiones (instancias, NAT, Elastic IP, volúmenes)
+  [OK]    Otras regiones                                       sin instancias, NAT, Elastic IP ni volúmenes
+  -- Gasto del mes (2026-11-01 a 2026-11-07, Cost Explorer; puede tardar hasta un día en reflejar)
+    Amazon Elastic Compute Cloud - Compute   US$1.52
+    EC2 - Other                              US$0.65
+  TOTAL DEL MES                              US$2.17
+  -- Presupuestos y alertas (AWS Budgets)
+  [INFO]  Presupuesto My Monthly Cost Budget: límite 15.0 USD · gastado 2.172 · MONTHLY
+            alerta: ACTUAL GREATER_THAN 100.0% del límite
+            alerta: ACTUAL GREATER_THAN 85.0% del límite
+            alerta: FORECASTED GREATER_THAN 100.0% del límite
+RESULTADO: sin hallazgos.

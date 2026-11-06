@@ -1,0 +1,536 @@
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-04720727b2a9b668e",
+            "OwnerId": "703461917799",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2026-11-05T21:52:32.054000+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0def1e984dde63f3b",
+                                "EbsCardIndex": 0
+                            }
+                        }
+                    ],
+                    "ClientToken": "3d42ae63-6ae8-40a6-8bda-a13bcdd6cf57",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "703461917799",
+                                "PublicDnsName": "ec2-3-228-84-176.compute-1.amazonaws.com",
+                                "PublicIp": "3.228.84.176"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-11-05T21:52:32+00:00",
+                                "AttachmentId": "eni-attach-0f9e811b8378388e5",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-044aad87e64e20906",
+                                    "GroupName": "zenite-vpn"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:ff:dd:e4:a3:99",
+                            "NetworkInterfaceId": "eni-050740f89b90ba0a9",
+                            "OwnerId": "703461917799",
+                            "PrivateDnsName": "ip-10-20-0-132.ec2.internal",
+                            "PrivateIpAddress": "10.20.0.132",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "703461917799",
+                                        "PublicDnsName": "ec2-3-228-84-176.compute-1.amazonaws.com",
+                                        "PublicIp": "3.228.84.176"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-10-20-0-132.ec2.internal",
+                                    "PrivateIpAddress": "10.20.0.132"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-061f6bea484702eec",
+                            "VpcId": "vpc-0e4c1d0b2314ab4df",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-044aad87e64e20906",
+                            "GroupName": "zenite-vpn"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Environment",
+                            "Value": "Prototype"
+                        },
+                        {
+                            "Key": "Project",
+                            "Value": "ZenitePrestige"
+                        },
+                        {
+                            "Key": "Role",
+                            "Value": "VPN"
+                        },
+                        {
+                            "Key": "Name",
+                            "Value": "zp-vpn-01"
+                        },
+                        {
+                            "Key": "Owner",
+                            "Value": "Grupo30"
+                        },
+                        {
+                            "Key": "Phase",
+                            "Value": "Final"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-11-05T21:52:32+00:00",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "uefi",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false,
+                        "HiddenByDefault": false
+                    },
+                    "SecondaryInterfaces": [],
+                    "InstanceId": "i-050e09727e2a06139",
+                    "ImageId": "ami-0d6dd9e8265d48906",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-10-20-0-132.ec2.internal",
+                    "PublicDnsName": "ec2-3-228-84-176.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t3.micro",
+                    "LaunchTime": "2026-11-06T00:04:38+00:00",
+                    "Placement": {
+                        "AvailabilityZoneId": "use1-az1",
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-061f6bea484702eec",
+                    "VpcId": "vpc-0e4c1d0b2314ab4df",
+                    "PrivateIpAddress": "10.20.0.132",
+                    "PublicIpAddress": "3.228.84.176"
+                }
+            ]
+        },
+        {
+            "ReservationId": "r-028c69b9f93599cbd",
+            "OwnerId": "703461917799",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2026-11-05T21:52:26.395000+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0f08a6ecdf56ca8ca",
+                                "EbsCardIndex": 0
+                            }
+                        }
+                    ],
+                    "ClientToken": "ea1a81a2-4f86-40e9-ab88-3aba4546ed6c",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "703461917799",
+                                "PublicDnsName": "ec2-18-210-66-163.compute-1.amazonaws.com",
+                                "PublicIp": "18.210.66.163"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-11-05T21:52:26+00:00",
+                                "AttachmentId": "eni-attach-09e302ac8fc3bb7dc",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-06c3d521d3586f2b5",
+                                    "GroupName": "zenite-dmz"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:ff:d1:b0:b8:5d",
+                            "NetworkInterfaceId": "eni-001691ad343c3e438",
+                            "OwnerId": "703461917799",
+                            "PrivateDnsName": "ip-10-20-0-116.ec2.internal",
+                            "PrivateIpAddress": "10.20.0.116",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "703461917799",
+                                        "PublicDnsName": "ec2-18-210-66-163.compute-1.amazonaws.com",
+                                        "PublicIp": "18.210.66.163"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-10-20-0-116.ec2.internal",
+                                    "PrivateIpAddress": "10.20.0.116"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0d29453584ea726c0",
+                            "VpcId": "vpc-0e4c1d0b2314ab4df",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-06c3d521d3586f2b5",
+                            "GroupName": "zenite-dmz"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Environment",
+                            "Value": "Prototype"
+                        },
+                        {
+                            "Key": "Name",
+                            "Value": "zp-web-01"
+                        },
+                        {
+                            "Key": "Role",
+                            "Value": "Web"
+                        },
+                        {
+                            "Key": "Owner",
+                            "Value": "Grupo30"
+                        },
+                        {
+                            "Key": "Phase",
+                            "Value": "Final"
+                        },
+                        {
+                            "Key": "Project",
+                            "Value": "ZenitePrestige"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-11-05T21:52:26+00:00",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "uefi",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false,
+                        "HiddenByDefault": false
+                    },
+                    "SecondaryInterfaces": [],
+                    "InstanceId": "i-06b59507240cfa8e7",
+                    "ImageId": "ami-0d6dd9e8265d48906",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-10-20-0-116.ec2.internal",
+                    "PublicDnsName": "ec2-18-210-66-163.compute-1.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t3.micro",
+                    "LaunchTime": "2026-11-06T00:04:16+00:00",
+                    "Placement": {
+                        "AvailabilityZoneId": "use1-az1",
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0d29453584ea726c0",
+                    "VpcId": "vpc-0e4c1d0b2314ab4df",
+                    "PrivateIpAddress": "10.20.0.116",
+                    "PublicIpAddress": "18.210.66.163"
+                }
+            ]
+        },
+        {
+            "ReservationId": "r-083a75f43d55f37da",
+            "OwnerId": "703461917799",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2026-11-05T21:52:38.014000+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0337fbff64ccd7451",
+                                "EbsCardIndex": 0
+                            }
+                        }
+                    ],
+                    "ClientToken": "07f8aa0b-0476-4203-8f22-33b2ac3ff460",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2026-11-05T21:52:38+00:00",
+                                "AttachmentId": "eni-attach-0c25d7acdea4d96c9",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-0e73e9942dd403016",
+                                    "GroupName": "zenite-ti"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:ff:c5:19:ed:07",
+                            "NetworkInterfaceId": "eni-0e12734374b244b9d",
+                            "OwnerId": "703461917799",
+                            "PrivateDnsName": "ip-10-20-0-103.ec2.internal",
+                            "PrivateIpAddress": "10.20.0.103",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-10-20-0-103.ec2.internal",
+                                    "PrivateIpAddress": "10.20.0.103"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0688bbf577464f544",
+                            "VpcId": "vpc-0e4c1d0b2314ab4df",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-0e73e9942dd403016",
+                            "GroupName": "zenite-ti"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Project",
+                            "Value": "ZenitePrestige"
+                        },
+                        {
+                            "Key": "Name",
+                            "Value": "zp-monitor-01"
+                        },
+                        {
+                            "Key": "Phase",
+                            "Value": "Final"
+                        },
+                        {
+                            "Key": "Environment",
+                            "Value": "Prototype"
+                        },
+                        {
+                            "Key": "Owner",
+                            "Value": "Grupo30"
+                        },
+                        {
+                            "Key": "Role",
+                            "Value": "Monitor"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-11-05T21:52:38+00:00",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "uefi",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false,
+                        "HiddenByDefault": false
+                    },
+                    "SecondaryInterfaces": [],
+                    "InstanceId": "i-00e786cb51a422c36",
+                    "ImageId": "ami-0d6dd9e8265d48906",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-10-20-0-103.ec2.internal",
+                    "PublicDnsName": "",
+                    "StateTransitionReason": "",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t3.small",
+                    "LaunchTime": "2026-11-06T00:04:59+00:00",
+                    "Placement": {
+                        "AvailabilityZoneId": "use1-az1",
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "us-east-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0688bbf577464f544",
+                    "VpcId": "vpc-0e4c1d0b2314ab4df",
+                    "PrivateIpAddress": "10.20.0.103"
+                }
+            ]
+        }
+    ]
+}
