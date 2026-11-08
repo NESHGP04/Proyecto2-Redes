@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block titulo %}Gestión recibida{% endblock %}
+{% block contenido %}
+<section class="narrow">
+  <p class="eyebrow">GESTIÓN REGISTRADA</p>
+  <h1>Gestión recibida</h1>
+  <p class="lead">{{ tipo }} · {{ vehiculo.marca }} {{ vehiculo.nombre }}</p>
+  <p>Tu código de seguimiento es:</p>
+  <p class="tracking">{{ codigo }}</p>
+  <p class="muted">Guárdalo: lo necesitas para consultar el estado. El estado inicial es «Recibida».</p>
+  <a class="button" href="/consulta">Consultar estado</a>
+</section>
+{% endblock %}

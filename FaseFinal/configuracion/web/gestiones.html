@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block titulo %}Gestiones{% endblock %}
+{% block contenido %}
+<section class="narrow">
+  <p class="eyebrow">ATENCIÓN AL CLIENTE</p>
+  <h1>Realiza una gestión</h1>
+  <p class="lead">Al enviar, recibirás un código de seguimiento para consultar el estado.</p>
+  {% if errores %}
+  <div class="errors" role="alert"><ul>{% for e in errores %}<li>{{ e }}</li>{% endfor %}</ul></div>
+  {% endif %}
+  <form method="post" action="/gestiones" class="form">
+    <label>Tipo de gestión
+      <select name="tipo" required>
+        <option value="">Selecciona…</option>
+        {% for k, t in tipos.items() %}<option value="{{ k }}" {% if datos.get('tipo') == k %}selected{% endif %}>{{ t }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Vehículo
+      <select name="vehiculo" required>
+        <option value="">Selecciona…</option>
+        {% for k, v in vehiculos.items() %}<option value="{{ k }}" {% if datos.get('vehiculo') == k %}selected{% endif %}>{{ v.marca }} {{ v.nombre }} ({{ k }})</option>{% endfor %}
+      </select>
+    </label>
+    <label>Nombre (ficticio)
+      <input type="text" name="nombre" minlength="2" maxlength="60" required autocomplete="off" value="{{ datos.get('nombre', '') }}">
+    </label>
+    <label>Correo (ficticio)
+      <input type="email" name="correo" maxlength="120" required autocomplete="off" value="{{ datos.get('correo', '') }}">
+    </label>
+    <label>Mensaje (opcional, máximo 300 caracteres)
+      <textarea name="mensaje" maxlength="300" rows="4">{{ datos.get('mensaje', '') }}</textarea>
+    </label>
+    <button type="submit" class="button">Enviar gestión</button>
+  </form>
+</section>
+{% endblock %}

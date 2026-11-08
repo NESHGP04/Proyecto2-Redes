@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es-GT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Zenite Prestige Guatemala: vehículos de lujo Mercedes-Benz, BMW y Porsche.">
+  <title>{% block titulo %}Zenite Prestige{% endblock %} | Zenite Prestige Guatemala</title>
+  <link rel="stylesheet" href="/static/portal.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Zenite Prestige, inicio"><span class="monogram" aria-hidden="true">Z / P</span> ZENITE PRESTIGE <small>GUATEMALA</small></a>
+    <nav aria-label="Navegación principal">
+      <a href="/">Inicio</a>
+      <a href="/gestiones">Gestiones</a>
+      <a href="/consulta">Consultar estado</a>
+    </nav>
+  </header>
+  <p class="notice"><strong>Prototipo académico.</strong> Los vehículos y datos son ficticios. No ingreses datos personales reales.</p>
+  <main id="contenido">{% block contenido %}{% endblock %}</main>
+  <footer><span>ZENITE PRESTIGE <small>GUATEMALA</small></span><span>Mercedes-Benz · BMW · Porsche</span></footer>
+</body>
+</html>

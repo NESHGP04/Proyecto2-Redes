@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block titulo %}Inicio{% endblock %}
+{% block contenido %}
+<section class="hero">
+  <p class="eyebrow">PRECISIÓN EN CADA DETALLE</p>
+  <h1>Tu próximo destino<br>empieza aquí.</h1>
+  <p class="lead">Conoce nuestros vehículos disponibles y realiza tus gestiones en línea: cotizaciones y pruebas de manejo.</p>
+  <a class="button" href="/gestiones">Hacer una gestión</a>
+</section>
+<section aria-labelledby="disponibles">
+  <p class="eyebrow">SHOWROOM</p>
+  <h2 id="disponibles">Vehículos disponibles</h2>
+  <div class="cards">
+    {% for codigo, v in vehiculos.items() %}
+    <article class="card">
+      <span class="mark" aria-hidden="true">{{ v.marca[:2]|upper }}</span>
+      <h3>{{ v.nombre }}</h3>
+      <p class="muted">{{ v.marca }} · {{ v.tipo }}</p>
+      <p>{{ v.anio }} · {{ v.motor }}</p>
+      <p class="code">{{ codigo }}</p>
+      <span class="badge">Disponible</span>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

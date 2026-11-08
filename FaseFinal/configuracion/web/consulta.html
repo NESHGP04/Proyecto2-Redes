@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block titulo %}Consultar estado{% endblock %}
+{% block contenido %}
+<section class="narrow">
+  <p class="eyebrow">SEGUIMIENTO</p>
+  <h1>Consultar una gestión</h1>
+  {% if error %}<div class="errors" role="alert"><p>{{ error }}</p></div>{% endif %}
+  <form method="post" action="/consulta" class="form">
+    <label>Código de seguimiento
+      <input type="text" name="codigo" maxlength="20" required autocomplete="off" placeholder="ZP-XXXXXXXX" value="{{ codigo or '' }}">
+    </label>
+    <button type="submit" class="button">Consultar</button>
+  </form>
+  {% if fila %}
+  <dl class="result">
+    <dt>Tipo</dt><dd>{{ tipos.get(fila['tipo'], fila['tipo']) }}</dd>
+    <dt>Vehículo</dt><dd>{% set v = vehiculos.get(fila['vehiculo']) %}{% if v %}{{ v.marca }} {{ v.nombre }}{% else %}{{ fila['vehiculo'] }}{% endif %}</dd>
+    <dt>Estado</dt><dd><span class="badge">{{ fila['estado'] }}</span></dd>
+    <dt>Registrada</dt><dd>{{ fila['creado_utc'] }}</dd>
+  </dl>
+  {% endif %}
+</section>
+{% endblock %}
