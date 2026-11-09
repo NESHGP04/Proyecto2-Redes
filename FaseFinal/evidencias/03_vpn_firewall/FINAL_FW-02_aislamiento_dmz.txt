@@ -1,0 +1,18 @@
+FW-02 · La DMZ no llega a la red interna (CloudShell -> EICE, 2026-11-09)
+Capas que bloquean desde zp-web-01 (10.20.0.116):
+  1) acl-zenite-dmz salida 200 deny 10.20.0.0/24 (stateless; antes solo pasan EICE y TI)
+  2) Security Groups: zenite-servidores y zenite-ti no admiten nada desde zenite-dmz
+Control: zp-vpn-01 si llega a la Intranet (F-06 + acl-zenite-vpn 140) y tampoco llega a TI.
+Nota: zp-ldap-01 (10.20.0.69) estaba apagada; el bloqueo de .69 lo prueba la ACL (200 deny) y la validacion de SG.
+
+configuracion $ bash P3_eice.sh zp-web-01 "t 10.20.0.71 80; t 10.20.0.69 636; t 10.20.0.102 22; t 10.20.0.103 22"
+== zp-web-01 · 2026-11-09 08:09:45 UTC
+[BLOQUEADO] 10.20.0.71:80 sin respuesta en 5 s
+[BLOQUEADO] 10.20.0.69:636 sin respuesta en 5 s
+[BLOQUEADO] 10.20.0.102:22 sin respuesta en 5 s
+[BLOQUEADO] 10.20.0.103:22 sin respuesta en 5 s
+configuracion $ bash P3_eice.sh zp-vpn-01 "t 10.20.0.71 80; t 10.20.0.102 22"
+== zp-vpn-01 · 2026-11-09 08:10:11 UTC
+[ABIERTO] 10.20.0.71:80
+[BLOQUEADO] 10.20.0.102:22 sin respuesta en 5 s
+(t = timeout 5 bash -c "</dev/tcp/IP/PUERTO")

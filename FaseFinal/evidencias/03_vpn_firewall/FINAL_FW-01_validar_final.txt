@@ -1,0 +1,51 @@
+FW-01 / FW-04 · Validacion final del firewall (solo lectura) · 2026-11-09 14:49:13 UTC
+Comando (CloudShell): bash P3_firewall_final.sh --validar | grep -v '^\[OK\]'
+(se filtran las lineas [OK]; no quedo ninguna [FALLA])
+
+== P3_firewall_final.sh --validar · 2026-11-09 14:49:13 UTC
+--- paso base
+--- paso vpn
+--- paso monitoreo
+--- paso acl-dmz
+--- paso acl-vpn
+--- comprobaciones globales
+[INFO] IP publica 3.228.84.176 -> zp-vpn-01 (i-050e09727e2a06139)
+[INFO] IP publica 18.210.66.163 -> zp-web-01 (i-06b59507240cfa8e7)
+[INFO] La prueba real del EICE (FW-04) es entrar a cada instancia: bash P3_eice.sh <zp-nombre> true
+RESULTADO: todo correcto.
+
+Entre las lineas [OK] filtradas (vistas completas en las corridas de aplicar acl-dmz y acl-vpn):
+[OK] FW-01: las unicas entradas desde Internet son TCP 80 y 443 en zenite-dmz y UDP 1194 en zenite-vpn
+[OK] Solo zp-web-01 y zp-vpn-01 tienen IP publica
+[OK] zenite-servidores no admite entradas desde zenite-dmz
+[OK] zenite-ti no admite entradas desde zenite-dmz
+[OK] zenite-ti no admite entradas desde zenite-vpn
+[OK] zenite-servidores admite desde zenite-vpn solo TCP 80 (o nada)
+[OK] EICE disponible (create-complete)
+
+FW-04 (EICE real tras cada cambio, CloudShell -> EICE):
+zp-web-01 08:02:44 (tras acl-dmz) y 08:08:49 (tras hardening) · zp-vpn-01 08:07:17 (tras acl-vpn) y 14:47:12
+zp-monitor-01 08:09:02 · zp-ti-01 08:15:16 · zp-intranet-01 08:15:30 · zp-visitantes-01 08:11:03
+
+Cierre de costos, mismo dia:
+Validación de la base pública (apagado) · vpc-zenite-fase2 · vpc-0e4c1d0b2314ab4df · 2026-11-09 14:52:30 UTC
+[OK] NAT Gateway vivo (pending/available/deleting) 0
+[OK] rt-zenite-interna sin ruta por defecto ninguna
+[OK] Instancias zp-* encendidas 0
+[OK] Elastic IP ajenas al plan (NAT u otras) ninguna
+[INFO] Elastic IP reservadas en la cuenta: 2 (cada una ≈ US$0.12 por día, también con la instancia detenida)
+RESULTADO: todo correcto.
+
+configuracion $ bash P1_costos.sh
+Control de costos · cuenta 703461917799 · 2026-11-09 14:52:58 UTC
+-- us-east-1: lo que cobra ahora
+[OK] Instancias encendidas 0
+[INFO] Instancias con IPv4 pública (Elastic IP incluidas) 2
+[OK] NAT Gateways 0
+[INFO] Elastic IP 2 en total · 2 asociadas · 0 sin asociar (cada una ≈ US$0.005/h aunque la instancia esté apagada)
+[OK] Elastic IP sin asociar 0
+[INFO] Volúmenes EBS 10 · 88 GiB (≈ US$7.0400/mes, también con las instancias apagadas)
+Estimación ahora: ≈ US$0.0100 por hora · ≈ US$0.2400 por día (cómputo + NAT + IPv4; sin discos ni tráfico)
+-- Barrido de las demás regiones (instancias, NAT, Elastic IP, volúmenes)
+[OK] Otras regiones sin instancias, NAT, Elastic IP ni volúmenes
+RESULTADO: sin hallazgos.

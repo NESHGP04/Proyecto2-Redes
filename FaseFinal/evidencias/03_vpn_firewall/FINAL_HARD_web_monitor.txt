@@ -1,0 +1,21 @@
+Hardening (P5_hardening.sh de Fase 3, sin cambios) en las instancias nuevas de la fase final · 2026-11-09
+Antes (--validar): 6 fallos en cada una (permitrootlogin without-password, x11forwarding yes, maxauthtries 6,
+ModemManager, multipathd y udisks2 activos).
+
+== zp-web-01 · 2026-11-09 08:08:42 UTC
+[OK] sshd -t correcto y ssh recargado
+[OK] ModemManager desactivado / multipathd desactivado / fwupd desactivado / udisks2 desactivado
+[OK] sshd permitrootlogin = no / x11forwarding = no / maxauthtries = 3
+[OK] sshd passwordauthentication = no / pubkeyauthentication = yes / kbdinteractiveauthentication = no
+RESULTADO: todo correcto.
+== zp-web-01 · 2026-11-09 08:08:49 UTC
+[OK] EICE sigue entrando a zp-web-01
+
+== zp-monitor-01 · 2026-11-09 08:08:54 UTC
+(mismas lineas [OK])
+RESULTADO: todo correcto.
+== zp-monitor-01 · 2026-11-09 08:09:02 UTC
+[OK] EICE sigue entrando a zp-monitor-01
+
+zp-vpn-01 se endurecio antes con el mismo script (todo [OK]).
+Puertos en escucha en zp-web-01 tras el hardening: 22, 80, 443 y 127.0.0.1:8000 (app de P2, solo local).

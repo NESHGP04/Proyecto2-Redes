@@ -1,0 +1,62 @@
+FW-06 · Regresion de las pruebas de seguridad de Fase 3 · 2026-11-09 (CloudShell -> EICE)
+
+--- Scripts de P5 (sin modificar), solo lectura
+=== P5_security_groups.sh --validar · 08:13:54 UTC
+Validacion completa sin fallos.        (23 lineas [OK])
+=== P5_acls.sh --validar · 08:14:16 UTC
+[FALLA] subnet-zenite-vpn no esta en la ACL predeterminada     <- cambio intencional (acl-zenite-vpn, P3)
+[FALLA] subnet-zenite-dmz no esta en la ACL predeterminada     <- cambio intencional (acl-zenite-dmz, P3)
+(25 lineas [OK]; acl-zenite-ti y acl-zenite-visitantes siguen como en Fase 3, mas la entrada/salida 130 de SNMP en Visitantes)
+
+--- SEG-02 · zp-ti-01 -> Servidores (permitido) y hacia las instancias nuevas
+== zp-ti-01 · 2026-11-09 08:15:16 UTC
+[ABIERTO] ping 10.20.0.71
+[ABIERTO] 10.20.0.71:22
+[ABIERTO] 10.20.0.116:22
+[ABIERTO] 10.20.0.132:22
+
+--- HARD-02 · nmap desde zp-ti-01 hacia las instancias nuevas
+Starting Nmap 7.93 ( https://nmap.org ) at 2026-11-09 08:15 UTC
+Nmap scan report for ip-10-20-0-116.ec2.internal (10.20.0.116)
+Host is up (0.00019s latency).
+Not shown: 1026 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+Nmap scan report for ip-10-20-0-132.ec2.internal (10.20.0.132)
+Host is up (0.00020s latency).
+Not shown: 1026 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+Nmap done: 2 IP addresses (2 hosts up) scanned in 8.94 seconds
+(Desde TI, 80/443 de la DMZ salen filtrados: acl-zenite-dmz entrada 200 niega la VPC antes de 300/310.)
+
+--- SEG-04 · Servidores -> zp-ti-01 (bloqueado)
+== zp-intranet-01 · 2026-11-09 08:15:30 UTC
+[BLOQUEADO] ping 10.20.0.102
+[BLOQUEADO] 10.20.0.102:22 sin respuesta en 5 s
+[BLOQUEADO] 10.20.0.116:443 sin respuesta en 5 s      (Servidores tampoco llega a la DMZ por IP privada)
+
+--- SEG-05 · Visitantes -> resto (bloqueado): ver FINAL_FW-07_visitantes.txt (08:11:03 UTC)
+--- SEG-03 (Ventas -> TI): no repetida; zp-ventas-01 apagada. zenite-ti y acl-zenite-ti no cambiaron (P5_security_groups/P5_acls sin fallos en TI).
+--- SEG-06 (Visitantes -> Internet por NAT): no repetida; necesita el NAT de P1 (apagado, D12). La salida de Visitantes no cambio.
+
+--- HARD-01 / HARD-03 · sshd y servicios (P5_hardening.sh --validar)
+== zp-intranet-01 · 2026-11-09 08:16:07 UTC
+[FALLA] gssproxy sigue activo
+tcp LISTEN 0 128 0.0.0.0:22 0.0.0.0:*
+tcp LISTEN 0 511 0.0.0.0:80 0.0.0.0:*
+tcp LISTEN 0 128 [::]:22 [::]:*
+Validacion con 1 fallo(s).
+== zp-ti-01 · 2026-11-09 08:16:18 UTC
+[FALLA] gssproxy sigue activo
+tcp LISTEN 0 128 0.0.0.0:22 0.0.0.0:*
+tcp LISTEN 0 128 [::]:22 [::]:*
+Validacion con 1 fallo(s).
+== zp-vpn-01 · 2026-11-09 08:16:29 UTC
+Validacion completa sin fallos.
+(zp-web-01 y zp-monitor-01: ver FINAL_HARD_web_monitor.txt)
+Causa de gssproxy (zp-ti-01, 08:16:54 UTC): "systemctl is-enabled gssproxy" -> disabled, pero WantedBy=auth-rpcgss-module.service
+lo arranca en cada inicio. disable no basta; la correccion es "systemctl mask gssproxy" (script de P5). No abre puertos de red.
+sshd (HARD-03) sigue correcto en todas: sin contrasena, sin root, MaxAuthTries 3.
+
+--- HARD-04 · Entradas desde 0.0.0.0/0: ahora 3 excepciones justificadas (D10): ver FINAL_FW-01_validar_final.txt

@@ -1,0 +1,12 @@
+FW-03 · Desde Internet (Mac del equipo) solo responden los puertos D10 · 2026-11-09 08:13:21 UTC
+zp-web-01 EIP 18.210.66.163 (zenite.dernait.com) · zp-vpn-01 EIP 3.228.84.176 (zenite-vpn.dernait.com)
+
+$ nc -vz -G 5 -w 5 <EIP> <puerto>
+nc: connectx to 18.210.66.163 port 22 (tcp) failed: Operation timed out
+nc: connectx to 18.210.66.163 port 8080 (tcp) failed: Operation timed out
+nc: connectx to 3.228.84.176 port 22 (tcp) failed: Operation timed out
+nc: connectx to 3.228.84.176 port 8080 (tcp) failed: Operation timed out
+Connection to 18.210.66.163 port 443 [tcp/https] succeeded!
+
+SSH solo entra por EICE (TCP 22 desde zenite-eice en los SG y entrada 100 de las ACL).
+UDP 1194: ver FINAL_VPN-02 (la conexion OpenVPN real).

@@ -1,0 +1,52 @@
+VPN-02 / VPN-03 / VPN-05 · Cliente openvpn 2.7.9 (Homebrew) en la Mac del equipo, perfil trabajador01 · 2026-11-09
+Comando (Terminal del usuario): sudo /opt/homebrew/sbin/openvpn --config ~/zenite-vpn/trabajador01.ovpn
+Conecta a zenite-vpn.dernait.com UDP 1194 (EIP 3.228.84.176).
+
+--- VPN-02 · 14:46:13 UTC · IP del pool y split tunnel
+utun6: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1500
+	inet 10.30.0.2 --> 10.30.0.2 netmask 0xffffffe0
+$ netstat -rn -f inet | grep -E '^10\.20|^10\.30'
+10.20/24           10.30.0.1          UGSc                utun6
+10.30/27           10.30.0.2          UGSc                utun6
+$ route -n get 18.210.66.163 | grep interface     (Internet sigue por la red local: split tunnel)
+  interface: en0
+$ ping -c2 -t3 10.30.0.1
+2 packets transmitted, 2 packets received, 0.0% packet loss
+
+Servidor (CloudShell -> EICE), 14:47:12 UTC:
+== zp-vpn-01 · 2026-11-09 14:47:12 UTC
+$ sudo bash vpn/P3_vpn_servidor.sh --validar | tail -12
+[OK] llave de la CA solo para root (modo 600)
+[OK] /etc/openvpn/easy-rsa modo 700
+[OK] zenite.conf: tls-crypt /etc/openvpn/server/tls-crypt.key
+[OK] zenite.conf: crl-verify /etc/openvpn/server/crl.pem
+[OK] zenite.conf: verify-client-cert require
+[OK] zenite.conf: remote-cert-tls client
+[OK] zenite.conf: tls-version-min 1.2
+[OK] CRL vigente hasta May 8 07:55:49 2027 GMT
+[INFO] certificados revocados en la CRL: 1
+[INFO] perfiles generados (solo nombres): revocado01.ovpn trabajador01.ovpn
+[INFO] clientes conectados: 1 trabajador01=10.30.0.2
+RESULTADO: todo correcto.
+
+--- VPN-03 · 14:46:22 UTC · Intranet por la VPN
+$ curl -sS -I -m 8 http://10.20.0.71/
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 09 Nov 2026 14:46:21 GMT
+Content-Type: text/html; charset=utf-8
+$ curl -sS -o /dev/null -m 8 -w 'intranet %{http_code} %{size_download} bytes\n' http://10.20.0.71/
+intranet 200 8456 bytes
+
+--- VPN-05 · el perfil es solo Intranet (zp-ti-01 encendida como control)
+$ nc -vz -G 5 -w 5 <IP> <puerto>
+nc: connectx to 10.20.0.102 port 22 (tcp) failed: Operation timed out      (TI, SSH)
+nc: connectx to 10.20.0.71 port 22 (tcp) failed: Operation timed out       (Intranet, SSH)
+nc: connectx to 10.20.0.71 port 8080 (tcp) failed: Operation timed out     (Intranet, otro puerto)
+nc: connectx to 10.20.0.116 port 443 (tcp) failed: Operation timed out     (DMZ por IP privada)
+nc: connectx to 10.20.0.132 port 22 (tcp) failed: Operation timed out      (el propio servidor VPN)
+$ ping -c2 -t3 10.20.0.102
+2 packets transmitted, 0 packets received, 100.0% packet loss
+Capas: iptables ZENITE-VPN-FWD en zp-vpn-01 (DROP a 10.20.0.96/28, ACCEPT solo 10.20.0.71 TCP 80, DROP resto)
+       + zenite-ti no admite nada desde zenite-vpn + acl-zenite-vpn salida 200 deny 10.20.0.0/24 (salvo 140 TCP 80 a Servidores).
+Nota: zp-web-01 ya estaba apagada en esta prueba; el bloqueo hacia 10.20.0.116 lo da igualmente la cadena ZENITE-VPN-FWD.

@@ -1,0 +1,38 @@
+VPN-03 (preparacion) · La Intranet acepta la subred de la VPN · 2026-11-09 (CloudShell -> EICE)
+Con MASQUERADE (D7) la Intranet ve a los clientes VPN como 10.20.0.132 (zp-vpn-01). Hace falta:
+  1) SG zenite-servidores <- zenite-vpn TCP 80 (F-06, P3_firewall_final.sh aplicar vpn, 07:52:41 UTC)
+  2) allow 10.20.0.128/28 en el nginx de zp-intranet-01 (respaldo /etc/nginx/nginx.conf.antes-vpn)
+
+Antes:
+== zp-intranet-01 · 2026-11-09 07:56:40 UTC
+/etc/nginx/nginx.conf:36: allow 127.0.0.1;
+/etc/nginx/nginx.conf:37: allow 10.20.0.0/27; # Ventas
+/etc/nginx/nginx.conf:38: allow 10.20.0.96/28; # TI
+/etc/nginx/nginx.conf:39: allow 10.20.0.64/27; # Servidores (incluye la propia instancia)
+/etc/nginx/nginx.conf:40: deny all;
+active
+
+Cambio (cp -a respaldo, sed para insertar la linea antes de "deny all", nginx -t, reload):
+== zp-intranet-01 · 2026-11-09 07:57:03 UTC
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+recargado
+# Coincide la primera regla aplicable. No confiar en X-Forwarded-For.
+allow 127.0.0.1;
+allow 10.20.0.0/27; # Ventas
+allow 10.20.0.96/28; # TI
+allow 10.20.0.64/27; # Servidores (incluye la propia instancia)
+allow 10.20.0.128/28; # VPN: NAT de zp-vpn-01 (fase final, P3)
+deny all;
+
+local 200
+
+Comprobacion desde el servidor VPN:
+== zp-vpn-01 · 2026-11-09 07:57:20 UTC
+vpn->intranet 200
+[INFO] certificados revocados en la CRL: 1
+[INFO] perfiles generados (solo nombres): revocado01.ovpn trabajador01.ovpn
+RESULTADO: todo correcto.
+
+Nota: el cambio se hizo solo en la instancia. Fase3/configuracion/nginx/nginx.conf (repositorio, de P2/Fase 3) no se toco;
+si se reinstala la Intranet con ese archivo hay que agregar la misma linea.

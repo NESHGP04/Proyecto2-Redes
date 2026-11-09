@@ -1,0 +1,28 @@
+FW-04 · ACL de DMZ y VPN aplicadas sin cortar EICE ni los servicios publicos (2026-11-09)
+
+== P3_firewall_final.sh aplicar acl-dmz · 2026-11-09 08:00:48 UTC
+[OK] ACL creada: acl-zenite-dmz = acl-05c8ba767f1345c57 (20 entradas)
+[OK] subnet-zenite-dmz asociada a acl-05c8ba767f1345c57
+RESULTADO: todo correcto.
+== zp-web-01 · 2026-11-09 08:02:44 UTC        (bash P3_eice.sh zp-web-01 ...)
+apt-salida 200
+18.210.66.163 zenite.dernait.com
+Mac (Internet), 08:02:37 UTC:
+https 200 verify=0
+http 301 -> https://zenite.dernait.com/
+
+== P3_firewall_final.sh aplicar acl-vpn · 2026-11-09 08:05:14 UTC
+[OK] ACL creada: acl-zenite-vpn = acl-0d68b812eba2c9ddb (21 entradas; antes la subred usaba acl-067acfb0422ab4b7e)
+[OK] subnet-zenite-vpn asociada a acl-0d68b812eba2c9ddb
+RESULTADO: todo correcto.
+== zp-vpn-01 · 2026-11-09 08:07:17 UTC        (bash P3_eice.sh zp-vpn-01 ...)
+intranet 200
+apt-salida 200
+active                                        (openvpn-server@zenite)
+
+Comprobaciones globales de ambas corridas (extracto):
+[OK] FW-01: las unicas entradas desde Internet son TCP 80 y 443 en zenite-dmz y UDP 1194 en zenite-vpn
+[OK] Solo zp-web-01 y zp-vpn-01 tienen IP publica
+[OK] EICE disponible (create-complete)
+[OK] EICE: zenite-dmz|servidores|ti|ventas|visitantes|vpn admiten TCP 22 desde zenite-eice
+[OK] EICE: acl-zenite-* permiten SSH (100) y su retorno (100) antes de cualquier denegacion

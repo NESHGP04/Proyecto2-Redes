@@ -1,0 +1,5 @@
+VPN-04 · Sin VPN la Intranet no es alcanzable desde Internet (Mac del equipo) · 2026-11-09 14:41:23 UTC
+$ ifconfig | grep -c 'inet 10.30.0'          -> 0   (sin tunel)
+$ netstat -rn -f inet | grep -c '^10.20'     -> 0   (sin ruta a la VPC)
+$ curl -sS -o /dev/null -m 8 -w 'intranet %{http_code}\n' http://10.20.0.71/
+intranet 000   (tiempo agotado: 10.20.0.0/24 es privada y no hay ruta)

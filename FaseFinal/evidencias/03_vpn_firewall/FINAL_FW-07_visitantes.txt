@@ -1,0 +1,16 @@
+FW-07 · Visitantes no llega a la DMZ ni a la red interna (CloudShell -> EICE, 2026-11-09)
+Capas que bloquean desde zp-visitantes-01 (10.20.0.36):
+  1) acl-zenite-visitantes (P5, Fase 3): niega 10.20.0.0/24 salvo EICE y SNMP desde TI (entrada 130, agregada por P3)
+  2) acl-zenite-dmz entrada 200 deny 10.20.0.0/24 (para 10.20.0.116)
+  3) Security Groups: zenite-dmz, zenite-servidores y zenite-ti no admiten nada desde zenite-visitantes
+zp-visitantes-01 se encendio solo para esta prueba y se apago enseguida.
+
+configuracion $ bash P3_eice.sh zp-visitantes-01 "hostname -I; t 10.20.0.116 443; t 10.20.0.116 80; t 10.20.0.71 80; t 10.20.0.102 22; t 10.20.0.132 1194"
+== zp-visitantes-01 · 2026-11-09 08:11:03 UTC
+10.20.0.36
+[BLOQUEADO] 10.20.0.116:443 sin respuesta en 5 s
+[BLOQUEADO] 10.20.0.116:80 sin respuesta en 5 s
+[BLOQUEADO] 10.20.0.71:80 sin respuesta en 5 s
+[BLOQUEADO] 10.20.0.102:22 sin respuesta en 5 s
+[BLOQUEADO] 10.20.0.132:1194 sin respuesta en 5 s   (prueba TCP; la VPN escucha UDP: solo confirma que no hay camino)
+(t = timeout 5 bash -c "</dev/tcp/IP/PUERTO")

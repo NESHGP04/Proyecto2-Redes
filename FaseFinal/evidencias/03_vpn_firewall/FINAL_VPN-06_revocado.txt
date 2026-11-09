@@ -1,0 +1,18 @@
+VPN-06 · Un certificado revocado no entra · 2026-11-09
+Cliente (Terminal del usuario, Mac): sudo /opt/homebrew/sbin/openvpn --config ~/zenite-vpn/revocado01.ovpn
+Resultado en el cliente: nunca llega a "Initialization Sequence Completed"; se corta con Ctrl+C. Al terminar: sin proceso openvpn, 0 IP 10.30.0.x (14:48:57 UTC).
+revocado01 se revoco en la instalacion (easyrsa revoke + gen-crl; "certificados revocados en la CRL: 1"). El servidor relee crl.pem en cada conexion nueva, sin reinicio.
+
+Servidor (CloudShell -> EICE): sudo journalctl -u openvpn-server@zenite --since "-15 min" | grep -iE "revoked|VERIFY|TLS Error|Peer Connection"
+(IP publica del cliente reemplazada por <cliente>)
+== zp-vpn-01 · 2026-11-09 14:48:47 UTC
+2026-11-09T14:46:01+00:00 zp-vpn-01 openvpn[3006]: <cliente>:41386 VERIFY OK: depth=1, CN=Zenite Prestige VPN CA
+2026-11-09T14:46:01+00:00 zp-vpn-01 openvpn[3006]: <cliente>:41386 VERIFY KU OK
+2026-11-09T14:46:01+00:00 zp-vpn-01 openvpn[3006]: <cliente>:41386 VERIFY EKU OK
+2026-11-09T14:46:01+00:00 zp-vpn-01 openvpn[3006]: <cliente>:41386 VERIFY OK: depth=0, CN=trabajador01
+2026-11-09T14:46:01+00:00 zp-vpn-01 openvpn[3006]: <cliente>:41386 [trabajador01] Peer Connection Initiated with [AF_INET]<cliente>:41386
+2026-11-09T14:47:53+00:00 zp-vpn-01 openvpn[3006]: <cliente>:44337 VERIFY ERROR: depth=0, error=certificate revoked: CN=revocado01, serial=239038274800412868038889128322757504466
+2026-11-09T14:47:53+00:00 zp-vpn-01 openvpn[3006]: <cliente>:44337 Sent fatal SSL alert: certificate revoked
+2026-11-09T14:47:53+00:00 zp-vpn-01 openvpn[3006]: <cliente>:44337 OpenSSL: error:0A000086:SSL routines::certificate verify failed:
+2026-11-09T14:47:53+00:00 zp-vpn-01 openvpn[3006]: <cliente>:44337 TLS Error: TLS object -> incoming plaintext read error
+2026-11-09T14:47:53+00:00 zp-vpn-01 openvpn[3006]: <cliente>:44337 TLS Error: TLS handshake failed

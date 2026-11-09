@@ -1,0 +1,39 @@
+VPN-01 · Servicio OpenVPN activo y UDP 1194 en escucha en zp-vpn-01 · 2026-11-09 ~07:55 UTC
+Comando (CloudShell -> EICE): bash P3_eice.sh zp-vpn-01 --copiar vpn ; bash P3_eice.sh zp-vpn-01 'sudo bash vpn/P3_vpn_servidor.sh instalar'
+(se omiten las lineas de apt y de easy-rsa; abajo, la validacion final que corre el propio modo instalar)
+
+[OK] PKI creada en /etc/openvpn/easy-rsa (CA, certificado de servidor zp-vpn-01 y CRL)
+[OK] paquete openvpn instalado
+[OK] paquete easy-rsa instalado
+[OK] paquete iptables instalado
+[INFO] OpenVPN 2.6.19 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] [DCO]
+[OK] servicio openvpn-server@zenite activo
+[OK] servicio openvpn-server@zenite habilitado al arranque
+[OK] UDP 1194 en escucha: 0.0.0.0:1194
+[OK] tun0 = 10.30.0.1/27 (pool 10.30.0.0/27)
+[OK] net.ipv4.ip_forward = 1
+[OK] NAT: MASQUERADE 10.30.0.0/27 -> 10.20.0.0/24
+[OK] FORWARD desde tun+ pasa por ZENITE-VPN-FWD
+[OK] INPUT desde tun+ pasa por ZENITE-VPN-IN
+[OK] perfil: TI bloqueado, solo TCP 80 hacia 10.20.0.71, resto bloqueado
+[OK] /etc/openvpn/server/ca.crt modo 644
+[OK] /etc/openvpn/server/zp-vpn-01.crt modo 644
+[OK] /etc/openvpn/server/zp-vpn-01.key modo 600
+[OK] /etc/openvpn/server/tls-crypt.key modo 600
+[OK] /etc/openvpn/server/crl.pem modo 644
+[OK] /etc/openvpn/server/zenite.conf modo 644
+[OK] /etc/openvpn/server/zenite-vpn-up.sh modo 755
+[OK] llave de la CA solo para root (modo 600)
+[OK] /etc/openvpn/easy-rsa modo 700
+[OK] zenite.conf: tls-crypt /etc/openvpn/server/tls-crypt.key
+[OK] zenite.conf: crl-verify /etc/openvpn/server/crl.pem
+[OK] zenite.conf: verify-client-cert require
+[OK] zenite.conf: remote-cert-tls client
+[OK] zenite.conf: tls-version-min 1.2
+[OK] CRL vigente hasta May 8 07:54:54 2027 GMT
+[INFO] certificados revocados en la CRL: 0
+[INFO] clientes conectados: 0
+RESULTADO: todo correcto.
+
+Despues: cliente trabajador01, cliente revocado01 y revocar revocado01 (CRL con 1 revocado).
+La misma validacion a las 14:47:12 UTC con el cliente conectado: ver FINAL_VPN-02_03_05_tunel.txt.

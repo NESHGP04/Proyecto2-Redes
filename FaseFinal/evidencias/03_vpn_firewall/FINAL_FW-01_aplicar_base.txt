@@ -1,0 +1,41 @@
+# CloudShell (us-east-1), usuario IAM Ernesto · bash P3_firewall_final.sh aplicar base · salida copiada de la terminal
+== P3_firewall_final.sh aplicar base · 2026-11-09 07:50:34 UTC
+[OK] VPC vpc-zenite-fase2 = vpc-0e4c1d0b2314ab4df (us-east-1)
+[OK] Security Groups: dmz=sg-06c3d521d3586f2b5 vpn=sg-044aad87e64e20906 servidores=sg-0bd52634dd2e6bb61 ti=sg-0e73e9942dd403016 eice=sg-0697e7f5646e28ab4
+[OK] F-01 ya existe (no se toca): zenite-dmz <- 0.0.0.0/0 tcp 80-80
+[OK] F-02 ya existe (no se toca): zenite-dmz <- 0.0.0.0/0 tcp 443-443
+Se van a AGREGAR 3 regla(s) de entrada:
+F-03 zenite-dmz <- zenite-ti tcp 22-22 (SSH desde TI (P3))
+F-04 zenite-vpn <- 0.0.0.0/0 udp 1194-1194 (OpenVPN (D10))
+F-05 zenite-vpn <- zenite-ti tcp 22-22 (SSH desde TI (P3))
+Escribe si para continuar: si
+[OK] Estado guardado en /home/cloudshell-user/final-config/p3-sg-antes-base.json y p3-acl-antes-base.json
+[OK] F-03 agregada: zenite-dmz <- zenite-ti tcp 22-22
+[OK] F-04 agregada: zenite-vpn <- 0.0.0.0/0 udp 1194-1194
+[OK] F-05 agregada: zenite-vpn <- zenite-ti tcp 22-22
+[OK] Estado guardado en /home/cloudshell-user/final-config/p3-sg-despues-base.json y p3-acl-despues-base.json
+--- paso base
+[OK] F-01 zenite-dmz <- 0.0.0.0/0 tcp 80-80
+[OK] F-02 zenite-dmz <- 0.0.0.0/0 tcp 443-443
+[OK] F-03 zenite-dmz <- zenite-ti tcp 22-22
+[OK] F-04 zenite-vpn <- 0.0.0.0/0 udp 1194-1194
+[OK] F-05 zenite-vpn <- zenite-ti tcp 22-22
+--- comprobaciones globales
+[OK] se conserva: SSH desde EICE (P1) en zenite-dmz
+[OK] se conserva: SSH desde EICE (P1) en zenite-vpn
+[OK] FW-01: las unicas entradas desde Internet son TCP 80 y 443 en zenite-dmz y UDP 1194 en zenite-vpn
+[INFO] IP publica 3.228.84.176 -> zp-vpn-01 (i-050e09727e2a06139)
+[INFO] IP publica 18.210.66.163 -> zp-web-01 (i-06b59507240cfa8e7)
+[OK] Solo zp-web-01 y zp-vpn-01 tienen IP publica
+[OK] zenite-servidores no admite entradas desde zenite-dmz
+[OK] zenite-ti no admite entradas desde zenite-dmz
+[OK] zenite-ti no admite entradas desde zenite-vpn
+[OK] zenite-servidores admite desde zenite-vpn solo TCP 80 (o nada)
+[OK] EICE disponible (create-complete)
+[OK] EICE: zenite-dmz admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-servidores admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-ti admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-ventas admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-visitantes admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-vpn admite TCP 22 desde zenite-eice
+[OK] EICE: acl-zenite-visitantes permite SSH (100) y su retorno (100) antes de cualquier denegacion
