@@ -1,0 +1,6 @@
+# Nunca se versionan: perfiles de cliente (llevan la llave privada), llaves, CA ni PKI de easy-rsa
+*.ovpn
+*.key
+*.pem
+*.p12
+pki/
