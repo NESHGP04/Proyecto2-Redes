@@ -1,0 +1,782 @@
+P4 · Diagnóstico LDAP · transcripción de salida compartida por el usuario
+Procedencia: texto pegado en el chat; no es una ejecución del asistente.
+Registro original indicado: /home/cloudshell-user/final-config/P4_ldap_nube_20261110T005734Z_242.txt
+Inicio inferido del nombre del registro: 2026-11-10 00:57:34 UTC / 2026-11-09 18:57:34 Guatemala.
+El texto recibido omite la primera línea con la fecha; no hay marcas individuales por consulta.
+Resultado: tres instancias necesarias detenidas; faltan comprobaciones de servicio y TLS.
+No acredita LDAP-01..05 ni confirma la causa del fallo histórico.
+
+--- Inicio del texto recibido, conservado sin correcciones ---
+Las consultas AWS no comprueban slapd, TLS ni el bind dentro de las instancias.
+Registro local: /home/cloudshell-user/final-config/P4_ldap_nube_20261110T005734Z_242.txt
+[OK] VPC única: vpc-0e4c1d0b2314ab4df · 10.20.0.0/24
+[INFO] zp-ldap-01 · i-04f9cc2b9ee3f77cd · stopped · 10.20.0.69 · subnet-0990205c298b0635d · SG=zenite-servidores
+[PENDIENTE] zp-ldap-01 está stopped. Solicitar a P1 su encendido antes de las pruebas remotas.
+[INFO] zp-ventas-01 · i-0f3bd7b0615933e00 · stopped · 10.20.0.10 · subnet-0234dd20474eef1aa · SG=zenite-ventas
+[PENDIENTE] zp-ventas-01 está stopped. Solicitar a P1 su encendido antes de las pruebas remotas.
+[INFO] zp-ti-01 · i-0378a8624df39958b · stopped · 10.20.0.102 · subnet-0688bbf577464f544 · SG=zenite-ti
+[PENDIENTE] zp-ti-01 está stopped. Solicitar a P1 su encendido antes de las pruebas remotas.
+[INFO] zp-visitantes-01 · i-05dc9139e9d858330 · stopped · 10.20.0.36 · subnet-0edb31ab5f88d89fb · SG=zenite-visitantes
+--- Salud EC2: sistema / instancia / EBS ---
+[INFO] zp-ldap-01 · not-applicable/not-applicable/sin dato
+[INFO] zp-ventas-01 · not-applicable/not-applicable/sin dato
+[INFO] zp-ti-01 · not-applicable/not-applicable/sin dato
+[INFO] zp-visitantes-01 · not-applicable/not-applicable/sin dato
+--- EICE ---
+{
+  "InstanceConnectEndpointId": "eice-0f41a9a04ed4dc3e2",
+  "State": "create-complete",
+  "SubnetId": "subnet-043e821cc9ee7c765",
+  "SecurityGroupIds": [
+    "sg-0697e7f5646e28ab4"
+  ],
+  "PreserveClientIp": false
+}
+--- Grupos efectivos de las cuatro instancias y del EICE ---
+{
+  "GroupName": "zenite-visitantes",
+  "GroupId": "sg-017872344baac8a39",
+  "IpPermissions": [
+    {
+      "IpProtocol": "udp",
+      "FromPort": 161,
+      "ToPort": 161,
+      "UserIdGroupPairs": [
+        {
+          "Description": "SNMP desde TI (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "tcp",
+      "FromPort": 22,
+      "ToPort": 22,
+      "UserIdGroupPairs": [
+        {
+          "Description": "SSH desde zenite-eice",
+          "UserId": "703461917799",
+          "GroupId": "sg-0697e7f5646e28ab4"
+        },
+        {
+          "Description": "SSH desde TI (P5)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "icmp",
+      "FromPort": -1,
+      "ToPort": -1,
+      "UserIdGroupPairs": [
+        {
+          "Description": "ICMP desde TI (P5)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ],
+  "IpPermissionsEgress": [
+    {
+      "IpProtocol": "-1",
+      "UserIdGroupPairs": [],
+      "IpRanges": [
+        {
+          "CidrIp": "0.0.0.0/0"
+        }
+      ],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ]
+}
+{
+  "GroupName": "zenite-eice",
+  "GroupId": "sg-0697e7f5646e28ab4",
+  "IpPermissions": [],
+  "IpPermissionsEgress": [
+    {
+      "IpProtocol": "tcp",
+      "FromPort": 22,
+      "ToPort": 22,
+      "UserIdGroupPairs": [],
+      "IpRanges": [
+        {
+          "Description": "SSH hacia la VPC",
+          "CidrIp": "10.20.0.0/24"
+        }
+      ],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ]
+}
+{
+  "GroupName": "zenite-servidores",
+  "GroupId": "sg-0bd52634dd2e6bb61",
+  "IpPermissions": [
+    {
+      "IpProtocol": "udp",
+      "FromPort": 161,
+      "ToPort": 161,
+      "UserIdGroupPairs": [
+        {
+          "Description": "SNMP desde TI (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "tcp",
+      "FromPort": 80,
+      "ToPort": 80,
+      "UserIdGroupPairs": [
+        {
+          "Description": "HTTP Intranet desde Ventas (P5)",
+          "UserId": "703461917799",
+          "GroupId": "sg-01f1eb855a2b85df7"
+        },
+        {
+          "Description": "HTTP Intranet desde TI (P5)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        },
+        {
+          "Description": "HTTP Intranet desde Servidores (P5)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0bd52634dd2e6bb61"
+        },
+        {
+          "Description": "Intranet desde la VPN (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-044aad87e64e20906"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "tcp",
+      "FromPort": 22,
+      "ToPort": 22,
+      "UserIdGroupPairs": [
+        {
+          "Description": "SSH desde zenite-eice",
+          "UserId": "703461917799",
+          "GroupId": "sg-0697e7f5646e28ab4"
+        },
+        {
+          "Description": "SSH desde TI (P5)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "tcp",
+      "FromPort": 636,
+      "ToPort": 636,
+      "UserIdGroupPairs": [
+        {
+          "Description": "LDAPS desde Ventas (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-01f1eb855a2b85df7"
+        },
+        {
+          "Description": "LDAPS desde TI (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "tcp",
+      "FromPort": 389,
+      "ToPort": 389,
+      "UserIdGroupPairs": [
+        {
+          "Description": "LDAP desde Ventas (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-01f1eb855a2b85df7"
+        },
+        {
+          "Description": "LDAP desde TI (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "icmp",
+      "FromPort": -1,
+      "ToPort": -1,
+      "UserIdGroupPairs": [
+        {
+          "Description": "ICMP desde TI (P5)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "udp",
+      "FromPort": 123,
+      "ToPort": 123,
+      "UserIdGroupPairs": [
+        {
+          "Description": "NTP desde zenite-ventas",
+          "UserId": "703461917799",
+          "GroupId": "sg-01f1eb855a2b85df7"
+        },
+        {
+          "Description": "NTP desde zenite-ti",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        },
+        {
+          "Description": "NTP desde zenite-servidores",
+          "UserId": "703461917799",
+          "GroupId": "sg-0bd52634dd2e6bb61"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ],
+  "IpPermissionsEgress": [
+    {
+      "IpProtocol": "-1",
+      "UserIdGroupPairs": [],
+      "IpRanges": [
+        {
+          "CidrIp": "0.0.0.0/0"
+        }
+      ],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ]
+}
+{
+  "GroupName": "zenite-ti",
+  "GroupId": "sg-0e73e9942dd403016",
+  "IpPermissions": [
+    {
+      "IpProtocol": "udp",
+      "FromPort": 161,
+      "ToPort": 161,
+      "UserIdGroupPairs": [
+        {
+          "Description": "SNMP desde TI (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "tcp",
+      "FromPort": 22,
+      "ToPort": 22,
+      "UserIdGroupPairs": [
+        {
+          "Description": "SSH desde EICE",
+          "UserId": "703461917799",
+          "GroupId": "sg-0697e7f5646e28ab4"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "icmp",
+      "FromPort": -1,
+      "ToPort": -1,
+      "UserIdGroupPairs": [
+        {
+          "Description": "ICMP TI-TI",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ],
+  "IpPermissionsEgress": [
+    {
+      "IpProtocol": "-1",
+      "UserIdGroupPairs": [],
+      "IpRanges": [
+        {
+          "CidrIp": "0.0.0.0/0"
+        }
+      ],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ]
+}
+{
+  "GroupName": "zenite-ventas",
+  "GroupId": "sg-01f1eb855a2b85df7",
+  "IpPermissions": [
+    {
+      "IpProtocol": "udp",
+      "FromPort": 161,
+      "ToPort": 161,
+      "UserIdGroupPairs": [
+        {
+          "Description": "SNMP desde TI (P3)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "tcp",
+      "FromPort": 22,
+      "ToPort": 22,
+      "UserIdGroupPairs": [
+        {
+          "Description": "SSH desde EICE",
+          "UserId": "703461917799",
+          "GroupId": "sg-0697e7f5646e28ab4"
+        },
+        {
+          "Description": "SSH desde TI (P5)",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    },
+    {
+      "IpProtocol": "icmp",
+      "FromPort": -1,
+      "ToPort": -1,
+      "UserIdGroupPairs": [
+        {
+          "Description": "ICMP Ventas-Ventas",
+          "UserId": "703461917799",
+          "GroupId": "sg-01f1eb855a2b85df7"
+        },
+        {
+          "Description": "ICMP TI-a-Ventas",
+          "UserId": "703461917799",
+          "GroupId": "sg-0e73e9942dd403016"
+        }
+      ],
+      "IpRanges": [],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ],
+  "IpPermissionsEgress": [
+    {
+      "IpProtocol": "-1",
+      "UserIdGroupPairs": [],
+      "IpRanges": [
+        {
+          "CidrIp": "0.0.0.0/0"
+        }
+      ],
+      "Ipv6Ranges": [],
+      "PrefixListIds": []
+    }
+  ]
+}
+[INFO] Revisar TCP 389/636 hacia LDAP desde los grupos efectivos de Ventas y TI, y TCP 22 desde EICE.
+--- Subredes y ACL efectivas (incluyen retornos y número de regla) ---
+{
+  "SubnetId": "subnet-043e821cc9ee7c765",
+  "CidrBlock": "10.20.0.144/28",
+  "Name": "subnet-zenite-infra"
+}
+{
+  "SubnetId": "subnet-0990205c298b0635d",
+  "CidrBlock": "10.20.0.64/27",
+  "Name": "subnet-zenite-servidores"
+}
+{
+  "SubnetId": "subnet-0234dd20474eef1aa",
+  "CidrBlock": "10.20.0.0/27",
+  "Name": "subnet-zenite-ventas"
+}
+{
+  "SubnetId": "subnet-0edb31ab5f88d89fb",
+  "CidrBlock": "10.20.0.32/27",
+  "Name": "subnet-zenite-visitantes"
+}
+{
+  "SubnetId": "subnet-0688bbf577464f544",
+  "CidrBlock": "10.20.0.96/28",
+  "Name": "subnet-zenite-ti"
+}
+{
+  "NetworkAclId": "acl-0f4182c4588b10b3c",
+  "IsDefault": false,
+  "Associations": [
+    {
+      "NetworkAclAssociationId": "aclassoc-07483dbfd78ac893f",
+      "NetworkAclId": "acl-0f4182c4588b10b3c",
+      "SubnetId": "subnet-0edb31ab5f88d89fb"
+    }
+  ],
+  "Entries": [
+    {
+      "CidrBlock": "10.20.0.144/28",
+      "Egress": true,
+      "PortRange": {
+        "From": 1024,
+        "To": 65535
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 100
+    },
+    {
+      "CidrBlock": "10.20.0.96/28",
+      "Egress": true,
+      "PortRange": {
+        "From": 1024,
+        "To": 65535
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 110
+    },
+    {
+      "CidrBlock": "10.20.0.96/28",
+      "Egress": true,
+      "IcmpTypeCode": {
+        "Code": -1,
+        "Type": -1
+      },
+      "Protocol": "1",
+      "RuleAction": "allow",
+      "RuleNumber": 120
+    },
+    {
+      "CidrBlock": "10.20.0.96/28",
+      "Egress": true,
+      "PortRange": {
+        "From": 1024,
+        "To": 65535
+      },
+      "Protocol": "17",
+      "RuleAction": "allow",
+      "RuleNumber": 130
+    },
+    {
+      "CidrBlock": "10.20.0.0/24",
+      "Egress": true,
+      "Protocol": "-1",
+      "RuleAction": "deny",
+      "RuleNumber": 200
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": true,
+      "PortRange": {
+        "From": 80,
+        "To": 80
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 300
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": true,
+      "PortRange": {
+        "From": 443,
+        "To": 443
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 310
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": true,
+      "PortRange": {
+        "From": 53,
+        "To": 53
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 320
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": true,
+      "PortRange": {
+        "From": 53,
+        "To": 53
+      },
+      "Protocol": "17",
+      "RuleAction": "allow",
+      "RuleNumber": 330
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": true,
+      "Protocol": "-1",
+      "RuleAction": "deny",
+      "RuleNumber": 32767
+    },
+    {
+      "CidrBlock": "10.20.0.144/28",
+      "Egress": false,
+      "PortRange": {
+        "From": 22,
+        "To": 22
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 100
+    },
+    {
+      "CidrBlock": "10.20.0.96/28",
+      "Egress": false,
+      "PortRange": {
+        "From": 22,
+        "To": 22
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 110
+    },
+    {
+      "CidrBlock": "10.20.0.96/28",
+      "Egress": false,
+      "IcmpTypeCode": {
+        "Code": -1,
+        "Type": -1
+      },
+      "Protocol": "1",
+      "RuleAction": "allow",
+      "RuleNumber": 120
+    },
+    {
+      "CidrBlock": "10.20.0.96/28",
+      "Egress": false,
+      "PortRange": {
+        "From": 161,
+        "To": 161
+      },
+      "Protocol": "17",
+      "RuleAction": "allow",
+      "RuleNumber": 130
+    },
+    {
+      "CidrBlock": "10.20.0.0/24",
+      "Egress": false,
+      "Protocol": "-1",
+      "RuleAction": "deny",
+      "RuleNumber": 200
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": false,
+      "PortRange": {
+        "From": 1024,
+        "To": 65535
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 300
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": false,
+      "PortRange": {
+        "From": 1024,
+        "To": 65535
+      },
+      "Protocol": "17",
+      "RuleAction": "allow",
+      "RuleNumber": 310
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": false,
+      "Protocol": "-1",
+      "RuleAction": "deny",
+      "RuleNumber": 32767
+    }
+  ]
+}
+{
+  "NetworkAclId": "acl-067acfb0422ab4b7e",
+  "IsDefault": true,
+  "Associations": [
+    {
+      "NetworkAclAssociationId": "aclassoc-02c63eed965fdd89e",
+      "NetworkAclId": "acl-067acfb0422ab4b7e",
+      "SubnetId": "subnet-0234dd20474eef1aa"
+    },
+    {
+      "NetworkAclAssociationId": "aclassoc-0fac97154f221688e",
+      "NetworkAclId": "acl-067acfb0422ab4b7e",
+      "SubnetId": "subnet-0990205c298b0635d"
+    },
+    {
+      "NetworkAclAssociationId": "aclassoc-05302e78b03268701",
+      "NetworkAclId": "acl-067acfb0422ab4b7e",
+      "SubnetId": "subnet-043e821cc9ee7c765"
+    }
+  ],
+  "Entries": [
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": true,
+      "Protocol": "-1",
+      "RuleAction": "allow",
+      "RuleNumber": 100
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": true,
+      "Protocol": "-1",
+      "RuleAction": "deny",
+      "RuleNumber": 32767
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": false,
+      "Protocol": "-1",
+      "RuleAction": "allow",
+      "RuleNumber": 100
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": false,
+      "Protocol": "-1",
+      "RuleAction": "deny",
+      "RuleNumber": 32767
+    }
+  ]
+}
+{
+  "NetworkAclId": "acl-0d1325ce978d9c23e",
+  "IsDefault": false,
+  "Associations": [
+    {
+      "NetworkAclAssociationId": "aclassoc-020d132d15d5bae1a",
+      "NetworkAclId": "acl-0d1325ce978d9c23e",
+      "SubnetId": "subnet-0688bbf577464f544"
+    }
+  ],
+  "Entries": [
+    {
+      "CidrBlock": "10.20.0.0/24",
+      "Egress": true,
+      "Protocol": "-1",
+      "RuleAction": "allow",
+      "RuleNumber": 100
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": true,
+      "Protocol": "-1",
+      "RuleAction": "deny",
+      "RuleNumber": 32767
+    },
+    {
+      "CidrBlock": "10.20.0.144/28",
+      "Egress": false,
+      "PortRange": {
+        "From": 22,
+        "To": 22
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 100
+    },
+    {
+      "CidrBlock": "10.20.0.0/24",
+      "Egress": false,
+      "PortRange": {
+        "From": 1024,
+        "To": 65535
+      },
+      "Protocol": "6",
+      "RuleAction": "allow",
+      "RuleNumber": 110
+    },
+    {
+      "CidrBlock": "10.20.0.0/24",
+      "Egress": false,
+      "PortRange": {
+        "From": 1024,
+        "To": 65535
+      },
+      "Protocol": "17",
+      "RuleAction": "allow",
+      "RuleNumber": 120
+    },
+    {
+      "CidrBlock": "10.20.0.0/24",
+      "Egress": false,
+      "IcmpTypeCode": {
+        "Code": -1,
+        "Type": 0
+      },
+      "Protocol": "1",
+      "RuleAction": "allow",
+      "RuleNumber": 130
+    },
+    {
+      "CidrBlock": "0.0.0.0/0",
+      "Egress": false,
+      "Protocol": "-1",
+      "RuleAction": "deny",
+      "RuleNumber": 32767
+    }
+  ]
+}
+[INFO] SG con estado; ACL sin estado. Revisar ida 389/636 y retorno efímero antes de atribuir la causa a una capa.
+[INFO] Recolección AWS terminada; pendientes de disponibilidad: 3.
+[INFO] Faltan las comprobaciones dentro de LDAP, Ventas y TI. Este registro no acredita LDAP-01..05 ni identifica por sí solo la falla histórica.
+~ $ 

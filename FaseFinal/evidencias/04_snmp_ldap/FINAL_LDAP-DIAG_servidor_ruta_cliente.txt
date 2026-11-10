@@ -1,0 +1,22 @@
+P4 · Diagnóstico LDAP · transcripción parcial compartida por el usuario
+Procedencia: últimos comandos del mensaje que repitió la consulta local correcta del servidor.
+No se recibió hora de ejecución de estos comandos.
+Todos se ejecutaron en zp-ldap-01; no son pruebas de Ventas ni de TI.
+El certificado del servidor en /etc/ldap/zenite-ldap.crt ya se verificó en FINAL_LDAP-DIAG_servidor_tls.txt.
+El archivo /home/ubuntu/zenite-ldap.crt no existe; no corresponde inferir de ello que falte en los clientes.
+
+--- Fragmento recibido ---
+ubuntu@zp-ldap-01:~$ openssl x509 -in "$HOME/zenite-ldap.crt" -noout -dates -fingerprint -sha256
+Could not open file or uri for loading certificate from /home/ubuntu/zenite-ldap.crt
+40873F8335740000:error:16000069:STORE routines:ossl_store_get0_loader_int:unregistered scheme:../crypto/store/store_register.c:237:scheme=file
+40873F8335740000:error:80000002:system library:file_open:No such file or directory:../providers/implementations/storemgmt/file_store.c:267:calling stat(/home/ubuntu/zenite-ldap.crt)
+Unable to load certificate
+ubuntu@zp-ldap-01:~$ openssl x509 -in "$HOME/zenite-ldap.crt" -noout -dates -fingerprint -sha256
+Could not open file or uri for loading certificate from /home/ubuntu/zenite-ldap.crt
+40B75EAADB720000:error:16000069:STORE routines:ossl_store_get0_loader_int:unregistered scheme:../crypto/store/store_register.c:237:scheme=file
+40B75EAADB720000:error:80000002:system library:file_open:No such file or directory:../providers/implementations/storemgmt/file_store.c:267:calling stat(/home/ubuntu/zenite-ldap.crt)
+Unable to load certificate
+ubuntu@zp-ldap-01:~$ timeout --kill-after=2s 10s env LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -b dc=zenite,dc=internal '(objectClass=posixGroup)' cn memberUid
+ldap_sasl_bind(SIMPLE): Can't contact LDAP server (-1)
+ubuntu@zp-ldap-01:~$ timeout --kill-after=2s 10s env LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -b dc=zenite,dc=internal '(objectClass=posixGroup)' cn memberUid
+ldap_sasl_bind(SIMPLE): Can't contact LDAP server (-1)

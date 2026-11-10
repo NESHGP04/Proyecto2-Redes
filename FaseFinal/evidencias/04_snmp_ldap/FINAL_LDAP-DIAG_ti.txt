@@ -1,0 +1,30 @@
+P4 · Diagnóstico LDAP desde TI · transcripción compartida por el usuario
+Procedencia: texto pegado en el chat; no es una ejecución del asistente.
+Hora de date: 2026-11-10 01:27:54 UTC / 2026-11-09 19:27:54 Guatemala.
+La hora no es una marca individual de todos los comandos.
+Hallazgo: con la configuración actual de confianza falla la consulta; con LDAPTLS_CACERT explícito funciona.
+Esto no confirma por sí solo la causa histórica de la demo ni comprueba el bind con contraseña.
+
+--- Inicio del texto recibido ---
+[ec2-user@zp-ti-01 ~]$ uname -n
+zp-ti-01
+[ec2-user@zp-ti-01 ~]$ date -u
+Tue Nov 10 01:27:54 UTC 2026
+[ec2-user@zp-ti-01 ~]$ openssl x509 -in "$HOME/zenite-ldap.crt" -noout -dates -fingerprint -sha256
+notBefore=Oct 28 00:09:34 2026 GMT
+notAfter=Oct 28 00:09:34 2027 GMT
+sha256 Fingerprint=A9:AE:94:A9:13:AA:7B:DC:10:FD:03:AF:D2:52:52:92:DD:B6:08:53:7F:72:7C:B2:68:65:F1:66:7F:B1:D5:0F
+[ec2-user@zp-ti-01 ~]$ timeout --kill-after=2s 10s env LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -b dc=zenite,dc=internal '(objectClass=posixGroup)' cn memberUid
+ldap_result: Can't contact LDAP server (-1)
+[ec2-user@zp-ti-01 ~]$ timeout --kill-after=2s 10s env LDAPTLS_REQCERT=demand LDAPTLS_CACERT="$HOME/zenite-ldap.crt" ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -b dc=zenite,dc=internal '(objectClass=posixGroup)' cn memberUid
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+[ec2-user@zp-ti-01 ~]$

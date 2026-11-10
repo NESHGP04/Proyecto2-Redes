@@ -1,0 +1,29 @@
+P4 · Diagnóstico LDAP · transcripción compartida por el usuario
+Procedencia: texto pegado en el chat; no es una ejecución del asistente.
+Esta salida no contiene fecha/hora de ejecución. Las fechas del certificado son su vigencia, no la hora de la prueba.
+Confirma identidad del servidor, certificado válido para su IP y consulta local por LDAPS con confianza explícita.
+Faltan las consultas desde Ventas/TI y las pruebas de bind.
+
+--- Inicio del texto recibido ---
+ubuntu@zp-ldap-01:~$ uname -n
+zp-ldap-01
+ubuntu@zp-ldap-01:~$
+ubuntu@zp-ldap-01:~$ openssl x509 -in /etc/ldap/zenite-ldap.crt -noout -subject -dates -ext subjectAltName -fingerprint -sha256
+subject=O = Zenite Prestige, CN = zp-ldap-01.zenite.internal
+notBefore=Oct 28 00:09:34 2026 GMT
+notAfter=Oct 28 00:09:34 2027 GMT
+X509v3 Subject Alternative Name:
+    IP Address:10.20.0.69, DNS:zp-ldap-01.zenite.internal
+sha256 Fingerprint=A9:AE:94:A9:13:AA:7B:DC:10:FD:03:AF:D2:52:52:92:DD:B6:08:53:7F:72:7C:B2:68:65:F1:66:7F:B1:D5:0F
+ubuntu@zp-ldap-01:~$ openssl verify -CAfile /etc/ldap/zenite-ldap.crt -verify_ip 10.20.0.69 /etc/ldap/zenite-ldap.crt
+/etc/ldap/zenite-ldap.crt: OK
+ubuntu@zp-ldap-01:~$ timeout --kill-after=2s 10s env LDAPTLS_REQCERT=demand LDAPTLS_CACERT=/etc/ldap/zenite-ldap.crt ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -b dc=zenite,dc=internal '(objectClass=posixGroup)' cn memberUid
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
