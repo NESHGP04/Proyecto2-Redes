@@ -1,0 +1,28 @@
+# GRAF-02 · Acceso TI por túnel y rechazo desde Ventas
+
+Horas UTC del 11-nov-2026. Correcciones de reloj Guatemala: UTC−6.
+
+## Controles y rechazo
+
+1. Control previo monitor (`--validar`) · 18:13:29 UTC / 12:13:29 Guatemala  
+   Grafana 13.3.0 activo en 127.0.0.1:3000, autenticación exigida, diez paneles y Prometheus local.  
+   SNMP respuesta 1: zp-ldap-01, zp-monitor-01, zp-ventas-01. Resto 0.
+
+2. Origen Ventas-01 (`origen`) · 18:13:35–18:13:40 UTC / 12:13:35–12:13:40 Guatemala  
+   `[OBSERVADO] Ventas-01 no puede conectar a 10.20.0.103:3000.`  
+   (Tras corrección del manejador `socket.timeout` de Python 3.9/AL2023 en `P4_grafana.py`.)
+
+3. Control posterior monitor (`--validar`) · 18:18:33 UTC / 12:18:33 Guatemala  
+   Misma validación `[OK]` que el control previo; Grafana sigue activo y privado.
+
+## Capturas correlacionadas
+
+- `FINAL_GRAF-01_dashboard.png` — dashboard por túnel Fedora; ≥4 paneles con datos AWS.
+- `FINAL_GRAF-03_caida.png` — panel Hosts sin respuesta SNMP = 7 (coherente con siete stopped).
+
+## Alcance
+
+- Acceso autorizado TI: túnel SSH/EICE a 127.0.0.1:3000 desde Fedora (perfil zenite-ti).
+- Escucha Grafana solo loopback del monitor; rechazo TCP 3000 desde Ventas-01.
+- No se abrió el puerto 3000/9090/9116 en AWS ni se creó NAT.
+- El mensaje `[PENDIENTE]` del validador local no invalida esta correlación: exige navegador/capturas, ya aportadas aparte.

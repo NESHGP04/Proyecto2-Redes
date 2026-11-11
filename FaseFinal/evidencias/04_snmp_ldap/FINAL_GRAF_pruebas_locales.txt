@@ -1,0 +1,48 @@
+P4 · Grafana: pruebas LOCALES, no resultados AWS ni capturas del despliegue.
+
+Descarga real oficial Grafana OSS 13.3.0 Linux amd64 (~459 MiB):
+SHA256 cec8f98cc59bc1a1945833b652371a073be678c5c159a9b1695ad63c04fae5a7
+Coincide con https://grafana.com/grafana/download/13.3.0?edition=oss&platform=linux
+17527 miembros, raíz grafana-13.3.0, sin enlaces ni nodos especiales.
+
+python3 FaseFinal/configuracion/tests/P4_grafana_casos.py
+Ran 13 tests in 0.011s
+OK
+Casos: paquete incorrecto, extracción peligrosa antes de escribir, raíz legítima,
+arquitectura, conflicto previo, estado parcial, cancelación, contraseña inválida,
+repetición, dashboard/servicio privado y tres controles de origen.
+
+Integración real Grafana 13.3.0 y Prometheus 3.16.0 con datos sintéticos,
+procesos sin root, puertos exclusivamente loopback, archivos temporales.
+No modifica systemd, servicios existentes ni recursos AWS.
+
+Primera pasada: SQLite, autenticación/provisión y dos consultas correctas;
+CPU sin datos porque el servidor de métricas del fixture omitía Content-Type,
+rechazado por Prometheus. Se corrigió ese fixture y se repitió desde bases vacías.
+
+Pasada corregida:
+PASS Grafana OSS 13.3.0 real: inicio sin root, SQLite y configuración file-provider
+PASS autenticación exigida, contraseña sintética y diez paneles provisionados
+PASS consulta Grafana -> Prometheus: Respuesta SNMP por host
+PASS consulta Grafana -> Prometheus: Recolector SNMP
+PASS consulta Grafana -> Prometheus: CPU media por host
+PASS consulta Grafana -> Prometheus: RAM física utilizada
+PASS consulta Grafana -> Prometheus: Tráfico recibido
+PASS consulta Grafana -> Prometheus: Tráfico enviado
+PASS consulta Grafana -> Prometheus: Disco raíz utilizado
+PASS consulta Grafana -> Prometheus: Uptime del agente SNMP
+PASS consulta Grafana -> Prometheus: Hosts sin respuesta SNMP
+PASS consulta Grafana -> Prometheus: Procesos declarados
+PASS estado sin respuesta visible como dato; un objetivo sintético down, nueve up
+
+No acredita unidad systemd real, permisos efectivos del usuario de servicio EC2,
+acceso Fedora/EICE ni GRAF-01 a GRAF-03. Pruebas reales pendientes del operador.
+
+Pruebas adicionales del túnel, AWS/SSH/socket sustituidos:
+python3 FaseFinal/configuracion/tests/P4_grafana_tunel_casos.py
+Ran 5 tests in 0.012s
+OK
+Cuenta ajena/monitor detenido bloquean conexión; perfil malicioso se rechaza antes
+ de herramientas; reenvío ligado a 127.0.0.1 y EICE puerto 22; clave privada temporal
+ eliminada también si SSH falla. No son pruebas IAM ni EICE reales.
+La integración de procesos anterior se hizo en Fedora 44, no en EC2 Ubuntu.
