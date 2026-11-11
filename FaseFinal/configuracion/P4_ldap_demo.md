@@ -1,7 +1,7 @@
 # P4 · LDAP: guion con CA explícita y revalidación
 
-Checkpoint 3 listo para revisión de cierre: LDAP-01..05 y R2 con PASS real; R1 como escenario representativo, con limitación histórica declarada. El humano aprobó CA explícita por comando, sin instalar confianza global, y la recuperación local de contraseña con permiso temporal ya retirado. La transición al checkpoint 4 aún requiere aprobación. Resumen de revisión: [P4_ldap_checkpoint3.md](P4_ldap_checkpoint3.md).
-Las consultas LDAPS del diagnóstico ya funcionaron desde servidor, TI y Ventas. El bind y la repetibilidad aún requieren pruebas reales.
+Checkpoint 3 revisado: LDAP-01..05 y R2 con PASS real; R1 como escenario representativo, con limitación histórica declarada. El humano aprobó CA explícita por comando, sin instalar confianza global, y la recuperación local de contraseña con permiso temporal ya retirado. Después pidió «hagamos todo», autorizando continuar al diseño del checkpoint 4. Resumen: [P4_ldap_checkpoint3.md](P4_ldap_checkpoint3.md).
+Las consultas LDAPS, el bind y las repeticiones ya tienen resultados reales correctos; véase la tabla de revalidación.
 
 ## Qué hace `P4_ldap_demo.sh`
 
@@ -25,8 +25,7 @@ En **AWS CloudShell, N. Virginia**, sube con **Actions → Upload file**:
 1. `FaseFinal/configuracion/P4_ldap_demo.sh`.
 2. `FaseFinal/configuracion/P3_eice.sh`, el ayudante existente de P3, que se reutiliza sin modificar.
 
-Si el navegador está en Windows, abre **Explorador → Linux → tu distribución → home → cisco** y sigue la ruta del repositorio.
-No se necesita instalar AWS CLI en WSL ni instalar paquetes en las instancias para la transferencia por EICE.
+El humano usa Fedora: en el selector de archivos del navegador abre la carpeta del repositorio local y selecciona `FaseFinal/configuracion/P4_ldap_demo.sh`. No se necesita WSL ni instalar paquetes en las instancias para la transferencia por EICE desde CloudShell.
 
 Los comandos de copia escriben únicamente `P4_ldap_demo.sh` en el directorio personal de cada instancia. Reemplazan una copia anterior del mismo guion si existe.
 El ayudante de P3 usa autenticación por EICE y conserva su llave en CloudShell; no se comparte ni se copia esa llave al repositorio.

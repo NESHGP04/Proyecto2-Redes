@@ -36,7 +36,7 @@ Esta opción **sí modifica brevemente una ACL de OpenLDAP**. Es una desviación
 
    Espera los controles de estado y la disponibilidad de EICE. No hace falta iniciar el monitor ni crear un NAT para esta operación.
 
-2. En CloudShell, **Actions → Upload file**, sube `P4_ldap_password_local.sh`. En el selector de Windows, la carpeta WSL está en Explorador → Linux → tu distribución → `home/cisco/universidad/cuarto/segundo_semestre/redes/proyecto2/Proyecto2-Redes/FaseFinal/configuracion`. Selecciona el archivo que termina en **`_local.sh`**.
+2. En CloudShell, **Actions → Upload file**, sube `P4_ldap_password_local.sh`. El humano usa Fedora: en el selector del navegador abre la carpeta de su repositorio local y entra a `FaseFinal/configuracion`. Selecciona el archivo que termina en **`_local.sh`**. No se necesita WSL. Este procedimiento ya se ejecutó con éxito; no repetir el cambio de contraseña para revisar su evidencia.
 
 3. En la terminal de **CloudShell** (`~ $`), copia y valida:
 

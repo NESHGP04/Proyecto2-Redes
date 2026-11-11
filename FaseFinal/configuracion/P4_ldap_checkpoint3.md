@@ -1,6 +1,6 @@
 # Checkpoint 3 · LDAP recuperado y revalidado
 
-**Estado: listo para revisión y aprobación del humano.** No se ha iniciado el checkpoint 4 de diseño SNMP.
+**Estado: cierre revisado; el humano pidió «hagamos todo» y autorizó continuar al checkpoint 4.** Se conserva explícitamente que R1 es representativo y que el comando histórico sigue desconocido. Se prepara el diseño SNMP, que necesita su propia elección y aprobación antes de desplegar.
 
 ## 1. Qué hice
 
@@ -79,11 +79,11 @@ Esta pausa corresponde a R2 y a la sección 8 del documento P4. La aprobación d
 - **P1:** Visitantes detenida; LDAP, Ventas y TI encendidas con salud EC2 correcta; no se crearon NAT ni nuevas instancias durante esta recuperación.
 - **P3:** LDAP revalidado sin solicitar nuevas reglas de SG/NACL. El permiso temporal fue de OpenLDAP, ya retirado. La contraseña nueva de laboratorio debe transmitirse únicamente por un canal privado si el responsable la necesita; no va en esta entrega.
 - **P5:** tabla de pruebas de `P4_ldap_demo.md` y TXT asociados para actualizar su matriz; conservar R1 con su limitación histórica. El asistente no editó la matriz ni envió mensajes externos.
-- No hay una dependencia operativa pendiente para revisar el checkpoint; sí la decisión humana sobre R1 y la transición.
+- No quedó una dependencia operativa pendiente de LDAP. Posteriormente el humano pidió continuar con todo P4 y se registró la transición al diseño, manteniendo la salvedad histórica de R1.
 
 ## 8. Propuesta de commit para el humano
 
-Desde el repositorio en WSL, revisar `git status` y el diff. Los patrones siguientes se limitan a los archivos P4 LDAP y sus TXT; las capturas se seleccionan después de revisarlas:
+Desde la terminal del repositorio local, revisar `git status` y el diff. El humano aclaró que usa Fedora; no se necesita WSL. Los patrones siguientes se limitan a los archivos P4 LDAP y sus TXT; las capturas se seleccionan después de revisarlas:
 
 ```bash
 git add -- FaseFinal/bitacora/P4.md \
@@ -97,4 +97,4 @@ git commit -m "feat(ldap): recuperar acceso y validar demo final"
 
 Estos comandos son una propuesta para ejecución humana; el asistente no ejecutó `git add`, `git commit` ni `git push`.
 
-**Espero tu aprobación para continuar con el checkpoint siguiente.**
+La solicitud de aprobación de esta revisión fue seguida por «hagamos todo». El siguiente documento de revisión es `P4_snmp_diseno.md`; no se interpreta esa transición como una elección automática de plataforma ni como permiso para omitir los checkpoints restantes.
