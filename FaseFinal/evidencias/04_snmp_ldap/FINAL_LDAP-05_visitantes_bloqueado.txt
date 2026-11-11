@@ -1,0 +1,34 @@
+Fuente: segmento literal de Visitantes extraído del adjunto del humano; ejecución real en AWS.
+LDAP-05: PASS, evaluado con ambos controles positivos de FINAL_LDAP-05_control_ventas.txt.
+Hostname comprobado: zp-visitantes-01. No se introdujeron contraseñas LDAP.
+Inicio mostrado: 2026-11-11 02:30:17 UTC / 2026-11-10 20:30:17 Guatemala.
+Fin mostrado: 2026-11-11 02:30:32 UTC / 2026-11-10 20:30:32 Guatemala.
+TCP 389 y 636: exit=124; ldapsearch anónimo: error de contacto y exit=255, sin usuarios.
+Los controles de Ventas por 389/636 pasan antes y después, a las 02:29:44 y 02:31:19 UTC.
+La prueba acredita la restricción observada; no identifica por sí sola qué SG/NACL descartó los paquetes.
+El apagado de Visitantes NO se confirma en este adjunto: aparece texto del comando, sin salida de ejecución/estado final.
+
+[ec2-user@zp-visitantes-01 ~]$ uname -n
+zp-visitantes-01
+[ec2-user@zp-visitantes-01 ~]$ date -u
+Wed Nov 11 02:30:17 UTC 2026
+[ec2-user@zp-visitantes-01 ~]$ 
+[ec2-user@zp-visitantes-01 ~]$ timeout --kill-after=2s 5s bash -c 'exec 3<>/dev/tcp/10.20.0.69/389'
+
+[ec2-user@zp-visitantes-01 ~]$ printf 'TCP389 exit=%s\n' "$?"
+TCP389 exit=124
+[ec2-user@zp-visitantes-01 ~]$ 
+[ec2-user@zp-visitantes-01 ~]$ timeout --kill-after=2s 5s bash -c 'exec 3<>/dev/tcp/10.20.0.69/636'
+[ec2-user@zp-visitantes-01 ~]$ printf 'TCP636 exit=%s\n' "$?"
+TCP636 exit=124
+[ec2-user@zp-visitantes-01 ~]$ 
+[ec2-user@zp-visitantes-01 ~]$ timeout --kill-after=2s 10s ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldap://10.20.0.69 -b dc=zenite,dc=internal '(uid=*)' uid
+ldap_sasl_bind(SIMPLE): Can't contact LDAP server (-1)
+[ec2-user@zp-visitantes-01 ~]$ printf 'ldapsearch exit=%s\n' "$?"
+ldapsearch exit=255
+[ec2-user@zp-visitantes-01 ~]$ 
+[ec2-user@zp-visitantes-01 ~]$ date -u
+Wed Nov 11 02:30:32 UTC 2026
+[ec2-user@zp-visitantes-01 ~]$ exit
+logout
+Connection to i-05dc9139e9d858330 closed.

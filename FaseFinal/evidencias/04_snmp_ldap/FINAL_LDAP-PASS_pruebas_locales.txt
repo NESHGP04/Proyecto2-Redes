@@ -1,0 +1,21 @@
+Pruebas LOCALES: no son resultados de AWS ni una recuperación real de ventas01.
+Registro del resumen: 2026-11-11 02:10:55 UTC
+Guion de producción SHA-256: c76c5a261dec2e4694486e5c37f44a1ee53760131f6807e535546fbe13975d34
+Ubuntu 24.04 / slapd 2.6.10+dfsg-0ubuntu0.24.04.1 en contenedor aislado, sin puertos publicados.
+Copia de prueba: IP loopback, certificado efímero y consulta de systemd sustituida por disponibilidad del socket.
+Operaciones LDAP/TLS reales; fallos inyectados mediante envoltorios de herramientas reales.
+Se verificaron permisos 600, eliminación de nueva y ausencia de contraseña sintética en terminal.
+
+PASS readonly validation invariants
+PASS actual password change / actual TLS bind / other users and rootPW unchanged
+PASS TLS bind failure restores exact password attribute
+PASS password modified but response lost restores old value
+PASS permission added but response lost removes own rule
+PASS interruption after grant removes permission
+PASS live permission limited to ventas01 / anonymous hash hidden / other user bind preserved
+PASS concurrent ACL preserved / own rule removed / no false success
+PASS conflicting baseline rejected without writes
+9 real-server scenarios passed; injected failures use wrappers around actual LDAP tools
+
+PASS Sintaxis de Bash y Python integrado.
+La causa interna del segfault anterior en slapmodify no fue determinada por estas pruebas.

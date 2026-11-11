@@ -1,0 +1,22 @@
+Fuente: salida compartida directamente por el humano desde CloudShell.
+Resultado real: apagado de zp-visitantes-01 confirmado por P1 y estado stopped.
+La salida de apagado no lleva hora. El date posterior a la operación muestra
+2026-11-11 02:35:01 UTC / 2026-11-10 20:35:01 Guatemala; no se asigna esa hora al apagado.
+La lista confirma tres instancias encendidas (LDAP, Ventas y TI) en ese momento.
+
+~ $ bash "$HOME/P1_instancias.sh" detener zp-visitantes-01
+Deteniendo zp-visitantes-01 (i-05dc9139e9d858330) ...
+Detenidas.
+
+Estado de las instancias zp-* de la VPC:
+  zp-intranet-01     stopped    10.20.0.71     i-07330a665030d940e
+  zp-ldap-01         running    10.20.0.69     i-04f9cc2b9ee3f77cd
+  zp-monitor-01      stopped    10.20.0.103    i-00e786cb51a422c36
+  zp-ntp-01          stopped    10.20.0.68     i-0410455bc4b28d3fe
+  zp-ti-01           running    10.20.0.102    i-0378a8624df39958b
+  zp-ventas-01       running    10.20.0.10     i-0f3bd7b0615933e00
+  zp-ventas-02       stopped    10.20.0.11     i-05a7f9ee1a6e93000
+  zp-visitantes-01   stopped    10.20.0.36     i-05dc9139e9d858330
+  zp-vpn-01          stopped    10.20.0.132    i-050e09727e2a06139
+  zp-web-01          stopped    10.20.0.116    i-06b59507240cfa8e7
+Encendidas ahora: 3

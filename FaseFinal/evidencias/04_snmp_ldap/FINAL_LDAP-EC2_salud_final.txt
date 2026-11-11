@@ -1,0 +1,23 @@
+Fuente: salida compartida directamente por el humano desde CloudShell.
+Consulta de solo lectura en us-east-1, después del apagado confirmado de Visitantes.
+Hora mostrada antes de consultar: 2026-11-11 02:35:01 UTC / 2026-11-10 20:35:01 Guatemala.
+No se dispone de una hora separada de finalización de la consulta.
+Resultado: sistema, instancia y EBS en ok para LDAP, Ventas y TI (tres checks por instancia).
+Estos checks no demuestran sincronización NTP ni sustituyen las pruebas LDAP.
+
+~ $ date -u
+Wed Nov 11 02:35:01 AM UTC 2026
+~ $ aws ec2 describe-instance-status --region us-east-1 --include-all-instances \
+>   --instance-ids i-04f9cc2b9ee3f77cd i-0f3bd7b0615933e00 i-0378a8624df39958b \
+>   --query 'InstanceStatuses[].{ID:InstanceId,Estado:InstanceState.Name,Sistema:SystemStatus.Status,Instancia:InstanceStatus.Status,EBS:AttachedEbsStatus.Status}' \
+>   --output table
+-------------------------------------------------------------------
+|                     DescribeInstanceStatus                      |
++-----+----------+-----------------------+------------+-----------+
+| EBS | Estado   |          ID           | Instancia  |  Sistema  |
++-----+----------+-----------------------+------------+-----------+
+|  ok |  running |  i-0378a8624df39958b  |  ok        |  ok       |
+|  ok |  running |  i-0f3bd7b0615933e00  |  ok        |  ok       |
+|  ok |  running |  i-04f9cc2b9ee3f77cd  |  ok        |  ok       |
++-----+----------+-----------------------+------------+-----------+
+~ $

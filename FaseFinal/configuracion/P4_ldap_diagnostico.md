@@ -1,6 +1,6 @@
 # P4 · Checkpoint 2: diagnóstico de LDAP desde el navegador
 
-Estado: preparación local; no se ha consultado AWS ni probado LDAP en esta sesión.
+Estado: diagnóstico recibido e interpretado; resultados reales en la sección 9. Opción A aprobada; el guion del checkpoint 3 está en `P4_ldap_demo.sh`, con operación en `P4_ldap_demo.md`.
 Fecha de preparación: 9 de noviembre de 2026, Guatemala. La recolección imprime su hora real en UTC.
 
 ## 1. Qué comprobar y en qué orden

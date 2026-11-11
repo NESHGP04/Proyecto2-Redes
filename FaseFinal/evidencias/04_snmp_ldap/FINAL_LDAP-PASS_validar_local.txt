@@ -1,0 +1,9 @@
+Fuente: fragmento de validación de solo lectura recibido en el adjunto del humano.
+Hora impresa: 2026-11-11 02:15:05 UTC / 2026-11-10 20:15:05 Guatemala.
+Comando mostrado por el humano en CloudShell:
+bash "$HOME/P3_eice.sh" zp-ldap-01 'sudo -n bash "$HOME/P4_ldap_password_local.sh" --validar'
+
+== zp-ldap-01 · 2026-11-11 02:15:05 UTC
+[INFO] Registro y respaldo privados: /root/final-config/P4_ldap_local_20261111T021505Z_9su2ecny · 2026-11-11 02:15:05 UTC
+[OK] Servicio, identidad local, base, tres ACL, usuario y certificado comprobados · 2026-11-11 02:15:05 UTC
+[OK] Validación terminada; no se modificaron LDAP ni slapd · 2026-11-11 02:15:05 UTC

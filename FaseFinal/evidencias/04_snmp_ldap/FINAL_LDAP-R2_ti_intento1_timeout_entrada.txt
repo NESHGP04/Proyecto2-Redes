@@ -1,0 +1,24 @@
+Fuente: salida pegada por el humano desde zp-ti-01, ejecución real en AWS.
+Este archivo conserva fragmentos literales y un resumen; no es el log íntegro.
+Inicio mostrado: 2026-11-11 02:21:33 UTC / 2026-11-10 20:21:33 Guatemala.
+La salida no muestra una hora de finalización ni el código de salida del guion; no se inventan.
+Log original: /home/ec2-user/final-config/P4_ldap_zp-ti-01_demo_20261111T022133Z_3020.txt
+
+Resumen de las comprobaciones previas recibidas:
+- Host zp-ti-01, IP 10.20.0.102 y CA /home/ec2-user/zenite-ldap.crt.
+- Certificado con huella aprobada y verificación de confianza/SAN correcta; ambos exit=0.
+- Lecturas anónimas por LDAP 389 y LDAPS 636 con exit=0, cuatro usuarios, dos grupos y miembros correctos.
+- El guion terminó al vencer la entrada oculta de contraseña, antes del primer bind autenticado.
+- No demuestra una contraseña incorrecta, fallo TLS o bloqueo de red. R2 desde TI sigue pendiente.
+
+Fragmentos literales:
+
+[ec2-user@zp-ti-01 ~]$ bash "$HOME/P4_ldap_demo.sh" demo
+== P4 LDAP · zp-ti-01 · 10.20.0.102 · demo · 2026-11-11 02:21:33 UTC
+Registro local: /home/ec2-user/final-config/P4_ldap_zp-ti-01_demo_20261111T022133Z_3020.txt
+[OK] Host e IP del plan. CA explícita: /home/ec2-user/zenite-ldap.crt
+
+[INFO] Usa la contraseña de laboratorio de ventas01. La entrada permanece oculta; plazo: hasta 20 s.
+Contraseña de ventas01:
+[FALLA] No se recibió la contraseña dentro del plazo. Ejecuta demo cuando la tengas disponible.
+[ec2-user@zp-ti-01 ~]$

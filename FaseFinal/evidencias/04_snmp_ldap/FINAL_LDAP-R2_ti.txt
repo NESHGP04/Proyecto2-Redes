@@ -1,0 +1,194 @@
+Fuente: segmento completo de la segunda demo de TI en el adjunto del humano, ejecución real en AWS.
+Inicio: 2026-11-11 02:23:55 UTC / 2026-11-10 20:23:55 Guatemala.
+Fin: 2026-11-11 02:24:01 UTC / 2026-11-10 20:24:01 Guatemala. Duración impresa: 6 s.
+Resultado: bind válido exit=0; contraseña incorrecta y usuario inexistente exit=49; tres búsquedas autenticadas exit=0 con árbol completo.
+LDAP-R2: PASS junto con las tres repeticiones de Ventas conservadas en FINAL_LDAP-04_ventas_bind.txt.
+Se comprobó que los seis comandos ldapsearch coinciden salvo la ruta aleatoria del fichero privado de contraseña.
+Se preserva el primer intento de TI fallido por tiempo de entrada; no lo sustituye esta corrida.
+No prueba bloqueo desde Visitantes ni el comando histórico desconocido de la demo original.
+
+[ec2-user@zp-ti-01 ~]$ bash "$HOME/P4_ldap_demo.sh" demo
+== P4 LDAP · zp-ti-01 · 10.20.0.102 · demo · 2026-11-11 02:23:55 UTC
+Registro local: /home/ec2-user/final-config/P4_ldap_zp-ti-01_demo_20261111T022355Z_3467.txt
+[OK] Host e IP del plan. CA explícita: /home/ec2-user/zenite-ldap.crt
+--- Certificado público · 2026-11-11 02:23:55 UTC
++ timeout --kill-after=2s 10s openssl x509 -in /home/ec2-user/zenite-ldap.crt -noout -subject -dates -ext subjectAltName -fingerprint -sha256 
+subject=O=Zenite Prestige, CN=zp-ldap-01.zenite.internal
+notBefore=Oct 28 00:09:34 2026 GMT
+notAfter=Oct 28 00:09:34 2027 GMT
+X509v3 Subject Alternative Name: 
+    IP Address:10.20.0.69, DNS:zp-ldap-01.zenite.internal
+sha256 Fingerprint=A9:AE:94:A9:13:AA:7B:DC:10:FD:03:AF:D2:52:52:92:DD:B6:08:53:7F:72:7C:B2:68:65:F1:66:7F:B1:D5:0F
+[INFO] exit=0
+--- Vigencia, confianza y SAN de IP · 2026-11-11 02:23:55 UTC
++ timeout --kill-after=2s 10s openssl verify -CAfile /home/ec2-user/zenite-ldap.crt -purpose sslserver -verify_ip 10.20.0.69 /home/ec2-user/zenite-ldap.crt 
+/home/ec2-user/zenite-ldap.crt: OK
+[INFO] exit=0
+--- Árbol por LDAP 389 · consulta anónima · 2026-11-11 02:23:55 UTC
++ timeout --kill-after=2s 10s ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldap://10.20.0.69 -D '' -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+--- Árbol por LDAPS 636 · CA explícita · 2026-11-11 02:23:55 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -D '' -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+[INFO] Usa la contraseña de laboratorio de ventas01. La entrada permanece oculta; plazo: hasta 20 s.
+Contraseña de ventas01: 
+--- LDAP-04 · bind válido de ventas01 por LDAPS · 2026-11-11 02:24:01 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapwhoami -x -o nettimeout=5 -H ldaps://10.20.0.69 -D uid=ventas01\,ou=People\,dc=zenite\,dc=internal -y /tmp/p4-ldap.ZwnPdOld/correcta 
+dn:uid=ventas01,ou=People,dc=zenite,dc=internal
+[INFO] exit=0
+[OK] Bind autenticado devuelve el DN esperado.
+--- LDAP-04 · contraseña incorrecta rechazada · 2026-11-11 02:24:01 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapwhoami -x -o nettimeout=5 -H ldaps://10.20.0.69 -D uid=ventas01\,ou=People\,dc=zenite\,dc=internal -y /tmp/p4-ldap.ZwnPdOld/incorrecta 
+ldap_bind: Invalid credentials (49)
+[INFO] exit=49
+[OK] Contraseña incorrecta rechazada con exit=49.
+--- Usuario inexistente rechazado · 2026-11-11 02:24:01 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapwhoami -x -o nettimeout=5 -H ldaps://10.20.0.69 -D uid=p4-inexistente\,ou=People\,dc=zenite\,dc=internal -y /tmp/p4-ldap.ZwnPdOld/incorrecta 
+ldap_bind: Invalid credentials (49)
+[INFO] exit=49
+[OK] Usuario inexistente rechazado con exit=49.
+--- LDAP-R2 · búsqueda autenticada 1/3 desde zp-ti-01 · 2026-11-11 02:24:01 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -D uid=ventas01\,ou=People\,dc=zenite\,dc=internal -y /tmp/p4-ldap.ZwnPdOld/correcta -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+[OK] LDAP-R2 1/3 desde zp-ti-01.
+--- LDAP-R2 · búsqueda autenticada 2/3 desde zp-ti-01 · 2026-11-11 02:24:01 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -D uid=ventas01\,ou=People\,dc=zenite\,dc=internal -y /tmp/p4-ldap.ZwnPdOld/correcta -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+[OK] LDAP-R2 2/3 desde zp-ti-01.
+--- LDAP-R2 · búsqueda autenticada 3/3 desde zp-ti-01 · 2026-11-11 02:24:01 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -D uid=ventas01\,ou=People\,dc=zenite\,dc=internal -y /tmp/p4-ldap.ZwnPdOld/correcta -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+[OK] LDAP-R2 3/3 desde zp-ti-01.
+[OK] Demo completada desde zp-ti-01 · duración 6 s · 2026-11-11 02:24:01 UTC
+[INFO] Repite demo desde la otra subred para completar LDAP-R2. LDAP-05 requiere la prueba de Visitantes.
+[ec2-user@zp-ti-01 ~]$ 

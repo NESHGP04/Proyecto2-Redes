@@ -1,0 +1,20 @@
+Fuente: transcripción de la salida compartida por el humano desde zp-ldap-01.
+Ejecución real en AWS. No se recibieron contraseñas, hashes ni contenidos privados del respaldo.
+Inicio: 2026-11-11 02:15:29 UTC / 2026-11-10 20:15:29 Guatemala.
+Fin confirmado: 2026-11-11 02:15:59 UTC / 2026-11-10 20:15:59 Guatemala.
+Resultado: recuperación de ventas01 y bind LDAPS local confirmados; tres ACL originales restauradas y slapd activo.
+No sustituye la demo autenticada desde Ventas/TI ni la prueba negativa desde Visitantes.
+
+ubuntu@zp-ldap-01:~$ sudo -n bash "$HOME/P4_ldap_password_local.sh" cambiar
+[INFO] Registro y respaldo privados: /root/final-config/P4_ldap_local_20261111T021529Z__aezmbvn · 2026-11-11 02:15:29 UTC
+[OK] Servicio, identidad local, base, tres ACL, usuario y certificado comprobados · 2026-11-11 02:15:29 UTC
+Permiso TEMPORAL: root local podrá escribir userPassword solo de ventas01.
+Se retirará al terminar; slapd seguirá activo. Escribe si para continuar: si
+Nueva contraseña de laboratorio para ventas01:
+Repite la nueva contraseña:
+[OK] Permiso temporal comprobado y atributo anterior respaldado de forma privada · 2026-11-11 02:15:59 UTC
+[OK] Permiso temporal retirado; las tres ACL originales coinciden · 2026-11-11 02:15:59 UTC
+[OK] slapd sigue activo · 2026-11-11 02:15:59 UTC
+[OK] Contraseña de ventas01 cambiada, bind LDAPS confirmado y ACL originales restauradas · 2026-11-11 02:15:59 UTC
+[INFO] Conserva la contraseña en tu gestor o .env local ignorado; no la compartas en el chat · 2026-11-11 02:15:59 UTC
+ubuntu@zp-ldap-01:~$

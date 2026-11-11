@@ -1,0 +1,11 @@
+Fuente: transcripción de la salida compartida por el humano desde zp-ldap-01.
+La salida no incluye fecha/hora. No se le asigna una marca de ejecución.
+Consultas de solo lectura; no demuestran un cambio de contraseña ni de ACL.
+
+ubuntu@zp-ldap-01:~$ sudo -n ldapwhoami -Q -Y EXTERNAL -H ldapi:///
+dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+ubuntu@zp-ldap-01:~$ sudo -n ldapsearch -Q -Y EXTERNAL -H ldapi:/// -LLL -o ldif_wrap=no -b cn=config '(olcSuffix=dc=zenite,dc=internal)' dn olcAccess
+dn: olcDatabase={1}mdb,cn=config
+olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none
+olcAccess: {1}to attrs=shadowLastChange by self write by * read
+olcAccess: {2}to * by * read

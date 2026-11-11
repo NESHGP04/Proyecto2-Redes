@@ -1,0 +1,161 @@
+Fuente: segmentos literales de los dos controles de Ventas del mismo adjunto que la prueba de Visitantes.
+Control previo: 2026-11-11 02:29:44 UTC / 2026-11-10 20:29:44 Guatemala.
+Control posterior: 2026-11-11 02:31:19 UTC / 2026-11-10 20:31:19 Guatemala.
+Ambos: certificado correcto, cuatro usuarios/dos grupos por 389 y 636, comandos exit=0.
+Se excluyen banners SSH y el texto de apagado intercalado antes del encabezado posterior; no se altera ningún resultado.
+
+CONTROL PREVIO
+== P4 LDAP · zp-ventas-01 · 10.20.0.10 · --validar · 2026-11-11 02:29:44 UTC
+Registro local: /home/ec2-user/final-config/P4_ldap_zp-ventas-01_validar_20261111T022944Z_3764.txt
+[OK] Host e IP del plan. CA explícita: /home/ec2-user/zenite-ldap.crt
+--- Certificado público · 2026-11-11 02:29:44 UTC
++ timeout --kill-after=2s 10s openssl x509 -in /home/ec2-user/zenite-ldap.crt -noout -subject -dates -ext subjectAltName -fingerprint -sha256 
+subject=O=Zenite Prestige, CN=zp-ldap-01.zenite.internal
+notBefore=Oct 28 00:09:34 2026 GMT
+notAfter=Oct 28 00:09:34 2027 GMT
+X509v3 Subject Alternative Name: 
+    IP Address:10.20.0.69, DNS:zp-ldap-01.zenite.internal
+sha256 Fingerprint=A9:AE:94:A9:13:AA:7B:DC:10:FD:03:AF:D2:52:52:92:DD:B6:08:53:7F:72:7C:B2:68:65:F1:66:7F:B1:D5:0F
+[INFO] exit=0
+--- Vigencia, confianza y SAN de IP · 2026-11-11 02:29:44 UTC
++ timeout --kill-after=2s 10s openssl verify -CAfile /home/ec2-user/zenite-ldap.crt -purpose sslserver -verify_ip 10.20.0.69 /home/ec2-user/zenite-ldap.crt 
+/home/ec2-user/zenite-ldap.crt: OK
+[INFO] exit=0
+--- Árbol por LDAP 389 · consulta anónima · 2026-11-11 02:29:44 UTC
++ timeout --kill-after=2s 10s ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldap://10.20.0.69 -D '' -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+--- Árbol por LDAPS 636 · CA explícita · 2026-11-11 02:29:44 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -D '' -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+[OK] Validación de lectura terminada. Bind, credenciales incorrectas, repetibilidad y bloqueo desde Visitantes se validan por separado.
+Connection to i-0f3bd7b0615933e00 closed.
+
+CONTROL POSTERIOR
+== P4 LDAP · zp-ventas-01 · 10.20.0.10 · --validar · 2026-11-11 02:31:19 UTC
+Registro local: /home/ec2-user/final-config/P4_ldap_zp-ventas-01_validar_20261111T023119Z_4204.txt
+[OK] Host e IP del plan. CA explícita: /home/ec2-user/zenite-ldap.crt
+--- Certificado público · 2026-11-11 02:31:19 UTC
++ timeout --kill-after=2s 10s openssl x509 -in /home/ec2-user/zenite-ldap.crt -noout -subject -dates -ext subjectAltName -fingerprint -sha256 
+subject=O=Zenite Prestige, CN=zp-ldap-01.zenite.internal
+notBefore=Oct 28 00:09:34 2026 GMT
+notAfter=Oct 28 00:09:34 2027 GMT
+X509v3 Subject Alternative Name: 
+    IP Address:10.20.0.69, DNS:zp-ldap-01.zenite.internal
+sha256 Fingerprint=A9:AE:94:A9:13:AA:7B:DC:10:FD:03:AF:D2:52:52:92:DD:B6:08:53:7F:72:7C:B2:68:65:F1:66:7F:B1:D5:0F
+[INFO] exit=0
+--- Vigencia, confianza y SAN de IP · 2026-11-11 02:31:19 UTC
++ timeout --kill-after=2s 10s openssl verify -CAfile /home/ec2-user/zenite-ldap.crt -purpose sslserver -verify_ip 10.20.0.69 /home/ec2-user/zenite-ldap.crt 
+/home/ec2-user/zenite-ldap.crt: OK
+[INFO] exit=0
+--- Árbol por LDAP 389 · consulta anónima · 2026-11-11 02:31:19 UTC
++ timeout --kill-after=2s 10s ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldap://10.20.0.69 -D '' -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+--- Árbol por LDAPS 636 · CA explícita · 2026-11-11 02:31:19 UTC
++ timeout --kill-after=2s 10s env -u LDAPNOINIT LDAPTLS_CACERT=/home/ec2-user/zenite-ldap.crt LDAPTLS_REQCERT=demand ldapsearch -x -LLL -o nettimeout=5 -l 5 -H ldaps://10.20.0.69 -D '' -b dc=zenite\,dc=internal \(\|\(objectClass=posixAccount\)\(objectClass=posixGroup\)\) uid cn memberUid 
+dn: cn=ventas,ou=Groups,dc=zenite,dc=internal
+cn: ventas
+memberUid: ventas01
+memberUid: ventas02
+
+dn: cn=ti,ou=Groups,dc=zenite,dc=internal
+cn: ti
+memberUid: ti01
+memberUid: ti02
+
+dn: uid=ventas01,ou=People,dc=zenite,dc=internal
+uid: ventas01
+cn: Usuario Ventas 01
+
+dn: uid=ventas02,ou=People,dc=zenite,dc=internal
+uid: ventas02
+cn: Usuario Ventas 02
+
+dn: uid=ti01,ou=People,dc=zenite,dc=internal
+uid: ti01
+cn: Usuario TI 01
+
+dn: uid=ti02,ou=People,dc=zenite,dc=internal
+uid: ti02
+cn: Usuario TI 02
+[INFO] exit=0
+[OK] Cuatro usuarios, dos grupos y sus miembros coinciden con el plan.
+[OK] Validación de lectura terminada. Bind, credenciales incorrectas, repetibilidad y bloqueo desde Visitantes se validan por separado.
+Connection to i-0f3bd7b0615933e00 closed.

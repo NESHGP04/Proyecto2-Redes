@@ -1,0 +1,22 @@
+Recuperación de ventas01 · intento 1 · FAIL en simulación, sin cambio de contraseña
+Procedencia: fragmento real compartido por el usuario. No es ejecución del asistente.
+El nombre del respaldo indica 2026-11-11 01:50:48 UTC / 2026-11-10 19:50:48 Guatemala.
+Ese dato corresponde al nombre del respaldo, no a una marca individual de cada paso.
+El servicio quedó activo. La causa concreta de la simulación fallida sigue por determinar.
+
+--- Fragmento recibido ---
+Se conserva un respaldo privado en /root/final-config/. No se cambia cn=admin, certificados ni reglas.
+Escribe si para continuar: si
+Nueva contraseña de laboratorio para ventas01:
+Repite la nueva contraseña:
+Respaldo privado: /root/final-config/P4_ldap_respaldo_20261111T015048Z_1694
+[FALLA] La simulación de la modificación falló; no se cambió la contraseña.
+[OK] slapd activo al finalizar.
+
+--- Diagnóstico posterior compartido por el usuario ---
+ubuntu@zp-ldap-01:~$ dpkg-query -W slapd
+slapd   2.6.10+dfsg-0ubuntu0.24.04.1
+Resultado de la lectura redactada de diagnostico-privado.txt:
+Segmentation fault (core dumped)
+
+No se recibió hora de ejecución de estos comandos posteriores. No se identifica una causa interna de la caída ni se acredita un cambio de contraseña.
