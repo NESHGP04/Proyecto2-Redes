@@ -1,0 +1,27 @@
+P4 · Intranet recibe archivos vacíos y el wrapper termina sin salida
+Fuente: fragmentos de terminal compartidos por el humano; sin hora propia de la transferencia/comando.
+Last login 2026-11-11 06:02:17 corresponde a una sesión previa, no se asigna a estas acciones.
+
+~ $ bash "$HOME/P3_eice.sh" zp-intranet-01 --copiar "$HOME/P4_snmp.sh" "$HOME/P4_snmp.py" "$HOME/P4_snmp_objetivos.csv" "$HOME/.config/zenite-p4/.env.p4-snmp"
+P4_snmp.sh                 100%    0     0.0KB/s   00:00
+P4_snmp.py                 100%   50KB   5.2MB/s   00:00
+P4_snmp_objetivos.csv      100%    0     0.0KB/s   00:00
+.env.p4-snmp              100%    0     0.0KB/s   00:00
+
+[ec2-user@zp-intranet-01 ~]$ sudo -n bash "$HOME/P4_snmp.sh" preflight && sudo -n bash "$HOME/P4_snmp.sh" instalar --credenciales "$HOME/.env.p4-snmp"
+
+Observado: el wrapper, CSV y transporte privado enviados desde CloudShell tienen cero bytes.
+No hay salida INFO/PLAN/OK del instalador. Bash de un archivo vacío no ejecuta la implementación.
+Intranet no queda acreditado como instalado por esta ejecución; siguen seis agentes acreditados.
+Los errores de redirección del incidente anterior son una causa probable de truncamiento local;
+no se afirma qué línea exacta vació cada archivo ni que todos los demás archivos estén intactos.
+
+Recuperación preparada, todavía no ejecutada: P4_recuperar_archivos_cloudshell.sh.
+- Verifica P4_snmp.py por checksum de la versión revisada antes de importarlo.
+- Respalda archivos existentes y solo repone públicos vacíos/idénticos a los esperados.
+- Recupera las mismas claves desde /etc/zenite-p4/snmp.env del monitor usando transporte privado.
+- Valida credenciales/permisos sin imprimir valores y rechaza claves locales distintas.
+- Elimina copias temporales; conserva archivo de servicio y copia canónica privada CloudShell.
+- Vuelve a copiar los cuatro archivos a Intranet; no instala servicios ni cambia recursos AWS.
+Pruebas locales del rescate: ocho casos con transporte simulado, sin AWS ni secretos reales.
+NAT/restauración ACL TI siguen pendientes de cierre. No generar claves nuevas para resolverlo.

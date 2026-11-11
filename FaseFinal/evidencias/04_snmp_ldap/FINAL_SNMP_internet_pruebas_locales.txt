@@ -1,0 +1,21 @@
+Pruebas LOCALES del conductor P4_snmp_internet.sh; no son resultados AWS.
+Ejecutado: python3 FaseFinal/configuracion/tests/P4_snmp_internet_casos.py
+Claves sintéticas, destinos ficticios sin consultas reales, EICE/AWS/red sustituidos.
+
+test_altered_core_rejected_before_import ... ok
+test_destinations_only_own_associated_eips ... ok
+test_empty_previous_control_blocks_public_queries ... ok
+test_failed_postcontrol_blocks_success ... ok
+test_partial_copy_is_cleaned ... ok
+test_public_response_fails_and_postcontrols_still_run ... ok
+test_success_same_keys_cleanup_and_four_controls ... ok
+test_unconfirmed_cleanup_blocks_success ... ok
+test_wrong_key_error_is_not_network_success ... ok
+
+Ran 9 tests in 0.004s
+OK
+
+bash -n FaseFinal/configuracion/P4_snmp_internet.sh: exit 0.
+Módulo P4_snmp.py conservado, SHA-256:
+22b74f5e5e2b87b863d30159e9289490d2a94165194a5651a71f274b3eadbc30
+Las consultas exteriores reales y sus controles siguen pendientes del operador.

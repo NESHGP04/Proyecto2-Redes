@@ -1,0 +1,22 @@
+P4 · Agente NTP instalado tras el intento anterior sin confirmar
+Fuente: salida real compartida por el humano; no ejecutada desde el repositorio.
+Inicio: 2026-11-11 05:58:35 UTC / 2026-11-10 23:58:35 Guatemala.
+Final: 2026-11-11 05:59:05 UTC / 2026-11-10 23:59:05 Guatemala.
+El banner Last login corresponde a la sesión anterior; no es hora de esta instalación.
+
+[ec2-user@zp-ntp-01 ~]$ sudo -n bash "$HOME/P4_snmp.sh" instalar --credenciales "$HOME/.env.p4-snmp"
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ntp-01_20261111T055835Z_7o7fd1h4 · 2026-11-11 05:58:35 UTC
+[PLAN] Instalar agente v3 en zp-ntp-01, escucha 10.20.0.68:161; crear usuario de solo lectura. Solo se administra snmpd. · 2026-11-11 05:58:35 UTC
+Escribe si para continuar: si
+
+
+[OK] SNMP-01 local: agente activo, escucha privada y autenticación v3 correctas: zp-ntp-01 · 2026-11-11 05:59:05 UTC
+[DATO] .1.3.6.1.2.1.1.3.0 = Timeticks: (15) 0:00:00.15 · 2026-11-11 05:59:05 UTC
+[OK] Agente instalado y validado; respaldo privado: /root/final-config/P4_snmp_zp-ntp-01_20261111T055835Z_7o7fd1h4/respaldo-privado · 2026-11-11 05:59:05 UTC
+[OK] Copia de transporte de credenciales eliminada; archivo de servicio privado conservado. · 2026-11-11 05:59:05 UTC
+
+Resultado: SNMP-01 local de NTP comprobado; agentes acreditados 6/10.
+El intento previo interrumpido se conserva por separado; no se convierte en éxito retrospectivo.
+Pendientes: consulta remota de métricas de NTP, Intranet, Visitantes, web y VPN según sus estados.
+No acredita sincronización chrony ni pruebas de origen/caída; no se recibió cierre NAT/restauración TI.
+No se adjuntan credenciales, diagnóstico privado ni respaldo USM.

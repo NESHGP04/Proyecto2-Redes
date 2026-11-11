@@ -1,0 +1,132 @@
+{
+  "procedencia": "Transcripción normalizada de los campos compartidos por el humano; no es una llamada AWS del asistente.",
+  "hora": "El volcado no incluye hora propia. Se extrajo del diagnóstico iniciado 2026-11-11 03:43:32 UTC.",
+  "vpc": "vpc-0e4c1d0b2314ab4df",
+  "acl_ti": {
+    "NetworkAclId": "acl-0d1325ce978d9c23e",
+    "SubnetId": "subnet-0688bbf577464f544",
+    "NetworkAclAssociationId": "aclassoc-020d132d15d5bae1a",
+    "IsDefault": false,
+    "Name": "acl-zenite-ti",
+    "Entries": [
+      {
+        "CidrBlock": "10.20.0.0/24",
+        "Egress": true,
+        "Protocol": "-1",
+        "RuleAction": "allow",
+        "RuleNumber": 100
+      },
+      {
+        "CidrBlock": "10.20.0.144/28",
+        "Egress": false,
+        "Protocol": "6",
+        "RuleAction": "allow",
+        "RuleNumber": 100,
+        "PortRange": {
+          "From": 22,
+          "To": 22
+        }
+      },
+      {
+        "CidrBlock": "10.20.0.0/24",
+        "Egress": false,
+        "Protocol": "6",
+        "RuleAction": "allow",
+        "RuleNumber": 110,
+        "PortRange": {
+          "From": 1024,
+          "To": 65535
+        }
+      },
+      {
+        "CidrBlock": "10.20.0.0/24",
+        "Egress": false,
+        "Protocol": "17",
+        "RuleAction": "allow",
+        "RuleNumber": 120,
+        "PortRange": {
+          "From": 1024,
+          "To": 65535
+        }
+      },
+      {
+        "CidrBlock": "10.20.0.0/24",
+        "Egress": false,
+        "Protocol": "1",
+        "RuleAction": "allow",
+        "RuleNumber": 130,
+        "IcmpTypeCode": {
+          "Type": 0,
+          "Code": -1
+        }
+      },
+      {
+        "CidrBlock": "0.0.0.0/0",
+        "Egress": false,
+        "Protocol": "-1",
+        "RuleAction": "deny",
+        "RuleNumber": 32767
+      },
+      {
+        "CidrBlock": "0.0.0.0/0",
+        "Egress": true,
+        "Protocol": "-1",
+        "RuleAction": "deny",
+        "RuleNumber": 32767
+      }
+    ]
+  },
+  "acl_predeterminada": {
+    "NetworkAclId": "acl-067acfb0422ab4b7e",
+    "IsDefault": true,
+    "Entries": [
+      {
+        "CidrBlock": "0.0.0.0/0",
+        "Egress": false,
+        "Protocol": "-1",
+        "RuleAction": "allow",
+        "RuleNumber": 100
+      },
+      {
+        "CidrBlock": "0.0.0.0/0",
+        "Egress": true,
+        "Protocol": "-1",
+        "RuleAction": "allow",
+        "RuleNumber": 100
+      },
+      {
+        "CidrBlock": "0.0.0.0/0",
+        "Egress": false,
+        "Protocol": "-1",
+        "RuleAction": "deny",
+        "RuleNumber": 32767
+      },
+      {
+        "CidrBlock": "0.0.0.0/0",
+        "Egress": true,
+        "Protocol": "-1",
+        "RuleAction": "deny",
+        "RuleNumber": 32767
+      }
+    ]
+  },
+  "comparacion": "Las cinco reglas explícitas de TI coinciden con ACL_TI del P5_acls.sh del repositorio. Sin reglas explícitas adicionales en el JSON recibido; ACL TI asociada solo a TI.",
+  "archivos_cloudshell": {
+    "P1_gateways.sh": {
+      "presente": true,
+      "bytes": 17971,
+      "fecha_mostrada": "Oct 29 01:27",
+      "contenido_verificado": false
+    },
+    "P5_acls.sh": {
+      "presente": false
+    },
+    "P1_dmz_infra.sh": {
+      "presente": false
+    },
+    "P1_costos.sh": {
+      "presente": false
+    }
+  },
+  "pendiente": "Subir archivos faltantes, comprobar versión NAT y preflight del piloto. No se ejecutó reversión, NAT ni encendido nuevo."
+}

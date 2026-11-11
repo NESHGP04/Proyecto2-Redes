@@ -1,0 +1,25 @@
+P4 · Tercer agente real: Ventas-01, Amazon Linux 2023
+Fuente: salida de terminal compartida por el humano; no ejecutada desde el repositorio.
+Inicio: 2026-11-11 05:30:17 UTC / 2026-11-10 23:30:17 Guatemala.
+Final: 2026-11-11 05:30:26 UTC / 2026-11-10 23:30:26 Guatemala.
+Se omiten el banner y las transferencias previas completadas; no se recibió su hora propia.
+
+[ec2-user@zp-ventas-01 ~]$ sudo -n bash "$HOME/P4_snmp.sh" preflight &&
+> sudo -n bash "$HOME/P4_snmp.sh" instalar \
+>   --credenciales "$HOME/.env.p4-snmp"
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ventas-01_20261111T053017Z_7ax0sc6f · 2026-11-11 05:30:17 UTC
+[INFO] zp-ventas-01 10.20.0.10 amzn; paquete SNMP presente=False; modo solo lectura. · 2026-11-11 05:30:17 UTC
+[INFO] Espacio libre raíz: 6295 MiB · 2026-11-11 05:30:17 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ventas-01_20261111T053017Z_ra02ehwj · 2026-11-11 05:30:17 UTC
+[PLAN] Instalar agente v3 en zp-ventas-01, escucha 10.20.0.10:161; crear usuario de solo lectura. Solo se administra snmpd. · 2026-11-11 05:30:17 UTC
+Escribe si para continuar: si
+[OK] SNMP-01 local: agente activo, escucha privada y autenticación v3 correctas: zp-ventas-01 · 2026-11-11 05:30:26 UTC
+[DATO] .1.3.6.1.2.1.1.3.0 = Timeticks: (14) 0:00:00.14 · 2026-11-11 05:30:26 UTC
+[OK] Agente instalado y validado; respaldo privado: /root/final-config/P4_snmp_zp-ventas-01_20261111T053017Z_ra02ehwj/respaldo-privado · 2026-11-11 05:30:26 UTC
+[OK] Copia de transporte de credenciales eliminada; archivo de servicio privado conservado. · 2026-11-11 05:30:26 UTC
+
+Resultado: SNMP-01 local de Ventas comprobado; tres agentes de diez contando monitor/LDAP.
+Primera instalación real recibida en Amazon Linux 2023. Métricas remotas de este host pendientes.
+La muestra Prometheus previa de las 05:29:26 UTC no es un scrape posterior a esta instalación.
+No se recibieron secretos ni contenido del diagnóstico o respaldo privados.
+NAT temporal y restauración de ACL TI siguen pendientes de cierre.

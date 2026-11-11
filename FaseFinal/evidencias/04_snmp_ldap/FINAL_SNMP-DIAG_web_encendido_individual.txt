@@ -1,0 +1,39 @@
+P4 · Inventario posterior, lectura de cuota denegada y Web iniciado individualmente
+Fuente: salida compartida por el humano; no ejecutada desde el repositorio.
+Marca al principio: 2026-11-11 07:19:58 UTC / 2026-11-11 01:19:58 Guatemala.
+La consulta de cuota y el encendido no incluyen hora propia; no se les asigna esa hora como exacta.
+
+El DescribeInstances regional recibido confirma seis running antes del encendido individual:
+Ventas-01, TI, LDAP, NTP, Intranet y monitor. Stopped: Ventas-02, Visitantes, VPN y Web.
+Los diez tipos coinciden con el plan: t3.micro salvo monitor t3.small.
+
+Consulta de cuota:
+aws service-quotas get-service-quota --region us-east-1 --service-code ec2 --quota-code L-1216C47A --query 'Quota.{Nombre:QuotaName,Valor:Value,Ajustable:Adjustable}' --output table
+Resultado: AccessDeniedException en GetServiceQuota. No hay política de identidad que permita
+servicequotas:GetServiceQuota para la cuota ec2/L-1216C47A de us-east-1.
+Se resume la causa técnica y se omite el ARN de la identidad; no es transcripción literal del error completo.
+No se obtuvo valor de cuota efectivo por esta consulta ni se modificó IAM.
+
+Encendido individual:
+~ $ bash "$HOME/P1_instancias.sh" encender zp-web-01
+Encendiendo zp-web-01 (i-06b59507240cfa8e7) ...
+En ejecución. Los status checks tardan unos 3 a 5 minutos en llegar a 2/2 antes de poder conectarte por EICE.
+
+Resumen final normalizado de P1:
+zp-intranet-01    running  10.20.0.71   i-07330a665030d940e
+zp-ldap-01        running  10.20.0.69   i-04f9cc2b9ee3f77cd
+zp-monitor-01     running  10.20.0.103  i-00e786cb51a422c36
+zp-ntp-01         running  10.20.0.68   i-0410455bc4b28d3fe
+zp-ti-01          running  10.20.0.102  i-0378a8624df39958b
+zp-ventas-01      running  10.20.0.10   i-0f3bd7b0615933e00
+zp-ventas-02      stopped  10.20.0.11   i-05a7f9ee1a6e93000
+zp-visitantes-01  stopped  10.20.0.36   i-05dc9139e9d858330
+zp-vpn-01         stopped  10.20.0.132  i-050e09727e2a06139
+zp-web-01         running  10.20.0.116  i-06b59507240cfa8e7
+Encendidas ahora: 7
+
+Resultado: Web running por inicio individual; siete running en el resumen.
+No se acredita todavía salud 2/2/3 ni agente SNMP de Web. VPN sigue stopped.
+La causa del rechazo conjunto previo sigue sin confirmar; no se atribuye a propagación o consumo ajeno.
+Agentes instalados acreditados 8/10, con Ventas-02 y Visitantes detenidos.
+NAT/restauración TI, origen/caída y limpieza temporal del rescate siguen pendientes de cierre.

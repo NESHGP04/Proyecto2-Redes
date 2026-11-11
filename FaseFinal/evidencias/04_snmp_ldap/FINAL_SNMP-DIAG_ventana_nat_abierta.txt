@@ -1,0 +1,42 @@
+Fuente: fragmentos de la salida compartida por el humano desde CloudShell.
+Las líneas de limpieza de pantalla y el nombre del operador no se conservan.
+La primera preparación se interrumpió antes de confirmar; el bloque && no llamó entonces al creador NAT.
+Segundo intento: credenciales privadas guardadas sin imprimirlas, 2026-11-11 04:43:47 UTC / 2026-11-10 22:43:47 Guatemala.
+La rama de ejecución demuestra que los tres archivos exigidos estaban legibles en ese momento; el ls anterior era previo.
+NAT identificado: nat-0c06dfd843c771516, disponible en validación 2026-11-11 04:46:18 UTC / 2026-11-10 22:46:18 Guatemala.
+Creación etiquetada: 2026-11-11T04:44:16Z / 2026-11-10 22:44:16 Guatemala. EIP temporal asociada, sin ID/IP pública recibidos.
+Fallo heredado de validación: espera DMZ sin default, mientras la FaseFinal exige IGW para la web pública. No se elimina esa ruta.
+No prueba aún salida de TI: su ACL dedicada todavía requiere la ventana temporal explicada.
+
+[PLAN] Generar dos claves de laboratorio privadas para los agentes v3; no modifica AWS. · 2026-11-11 04:41:53 UTC
+Escribe si para continuar: ^C[FALLA] Interrupción recibida; la operación no se considera completa. · 2026-11-11 04:41:58 UTC
+
+[PLAN] Generar dos claves de laboratorio privadas para los agentes v3; no modifica AWS. · 2026-11-11 04:43:38 UTC
+Escribe si para continuar: si
+[OK] Credenciales guardadas sin imprimirlas: /home/cloudshell-user/.config/zenite-p4/.env.p4-snmp · 2026-11-11 04:43:47 UTC
+[INFO] Conservar copia privada local .env; no pegar contenido ni subirlo a git. · 2026-11-11 04:43:47 UTC
+Plan: Internet Gateway igw-zenite-fase3 (se queda), Elastic IP eip-nat-zenite-fase3, NAT Gateway nat-zenite-fase3 en subnet-zenite-infra (10.20.0.148),
+      ruta 0.0.0.0/0 -> IGW en rt-zenite-infra y 0.0.0.0/0 -> NAT en rt-zenite-interna. Región us-east-1, VPC vpc-0e4c1d0b2314ab4df.
+      Costo: ≈ US$0.05 por hora (≈ US$1.20 por día) mientras exista el NAT Gateway.
+AVISO: rt-zenite-dmz tiene ruta por defecto; el plan es dejarla solo local.
+Escribe 'si' para continuar: si
+Ya existe igw-zenite-fase3 (igw-00f6efb87a444f270); se reutiliza.
+Reservando Elastic IP eip-nat-zenite-fase3 ...
+Creando NAT Gateway nat-zenite-fase3 en subnet-zenite-infra con IP privada 10.20.0.148 ...
+Esperando que el NAT Gateway esté disponible (suele tardar 1 a 3 minutos) ..........
+rt-zenite-infra ya tiene 0.0.0.0/0 -> igw-00f6efb87a444f270.
+Ruta 0.0.0.0/0 -> nat-0c06dfd843c771516 en rt-zenite-interna ...
+RECORDATORIO: el NAT Gateway cobra por hora mientras exista. Al terminar la sesión: bash P1_gateways.sh destruir
+
+Validación de gateways (encendido) · vpc-zenite-fase2 · vpc-0e4c1d0b2314ab4df · 2026-11-11 04:46:18 UTC
+  [OK]    Internet Gateway igw-zenite-fase3 adjunto a la VPC sí
+  [OK]    rt-zenite-infra: 0.0.0.0/0 -> IGW (activa)     igw-00f6efb87a444f270 active
+  [FALLA] rt-zenite-dmz sin ruta por defecto (solo local) esperado=ninguna real=igw-00f6efb87a444f270 active
+  [OK]    NAT Gateway nat-zenite-fase3 disponible        available
+  [OK]    NAT en subnet-zenite-infra                     subnet-043e821cc9ee7c765
+  [OK]    IP privada del NAT                             10.20.0.148
+  [OK]    IPv4 pública (Elastic IP) asociada            sí
+  [OK]    rt-zenite-interna: 0.0.0.0/0 -> NAT (activa)   nat-0c06dfd843c771516 active
+RESULTADO: hay fallas; revísalas antes de continuar.
+
+Archivos en /home/cloudshell-user/fase3-config: gateways-validacion.txt, gateways-sesiones.log, internet-gateways.json, nat-gateways.json, addresses.json, route-tables.json.

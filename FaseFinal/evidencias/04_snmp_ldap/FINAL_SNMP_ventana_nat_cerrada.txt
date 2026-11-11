@@ -1,0 +1,36 @@
+P4 · Cierre efectivo del NAT temporal y EIP
+Fuente: salida compartida por el humano; no ejecutada desde el repositorio.
+Se omite explícitamente el nombre del operador en la etiqueta; resto del fragmento conservado.
+Validación: 2026-11-11 07:47:29 UTC / 01:47:29 Guatemala.
+La eliminación ocurrió antes de esa validación, sin instante exacto propio en el fragmento.
+La línea inicial solo muestra cierre de sesión al monitor; no contiene el resultado uname pedido.
+
+Connection to i-00e786cb51a422c36 closed.
+~ $ bash "$HOME/P1_gateways.sh" destruir
+Plan: quitar 0.0.0.0/0 de rt-zenite-interna, eliminar el NAT Gateway nat-zenite-fase3 y liberar la Elastic IP eip-nat-zenite-fase3.
+      El Internet Gateway y su ruta en rt-zenite-infra se conservan.
+      NAT actual: nat-0c06dfd843c771516 · creado por [operador omitido] el 2026-11-11T04:44:16Z (hace 3 h).
+      ¿Alguien más lo está usando? Avisa al grupo antes de destruirlo.
+Escribe 'si' para continuar: si
+Quitando la ruta 0.0.0.0/0 de rt-zenite-interna ...
+Eliminando el NAT Gateway nat-0c06dfd843c771516 ...
+Esperando a que el NAT Gateway quede eliminado .....
+Liberando la Elastic IP eipalloc-0d4b2f085e3786e66 ...
+Listo. El Internet Gateway se conserva (no cobra).
+
+Validación de gateways (apagado) · vpc-zenite-fase2 · vpc-0e4c1d0b2314ab4df · 2026-11-11 07:47:29 UTC
+  [OK]    Internet Gateway igw-zenite-fase3 adjunto a la VPC sí
+  [OK]    rt-zenite-infra: 0.0.0.0/0 -> IGW (activa)     igw-00f6efb87a444f270 active
+  [FALLA] rt-zenite-dmz sin ruta por defecto (solo local) esperado=ninguna real=igw-00f6efb87a444f270 active
+  [OK]    NAT Gateway vivo (pending/available/deleting)  0
+  [OK]    rt-zenite-interna sin ruta por defecto         ninguna
+  [OK]    Elastic IP del proyecto                        liberada
+  [FALLA] Elastic IP en la cuenta/región                esperado=0 real=2
+RESULTADO: hay fallas; revísalas antes de continuar.
+
+Archivos en /home/cloudshell-user/fase3-config: gateways-validacion.txt, gateways-sesiones.log, internet-gateways.json, nat-gateways.json, addresses.json, route-tables.json.
+
+Resultado efectivo: nat-0c06dfd843c771516 eliminado; eipalloc-0d4b2f085e3786e66 liberada.
+Ruta interna por defecto retirada e IGW conservado. Validador global conserva dos FALLA:
+DMZ con ruta IGW y dos EIP regionales, diferencias previstas con Fase3.
+No se transforma todo el comando en PASS ni se borran las excepciones públicas de Final.

@@ -1,0 +1,69 @@
+P4 SNMP: pruebas LOCALES de implementación, NO resultados de EC2.
+Resumen registrado: 2026-11-11 03:38:22 UTC / 2026-11-10 21:38:22 Guatemala
+Archivo P4_snmp.py SHA-256: aa6ac0e91bac30a23edd1d7bf0434d58d7a8c1b50c5208861b83499dd4c3460d
+Ubuntu 24.04 y Amazon Linux 2023 en contenedores locales sin puertos publicados.
+SNMP real; direcciones loopback, claves sintéticas, paquetes ya instalados en el fixture y controlador systemd sustituido por procesos.
+La unidad systemd real en EC2, instalación con NAT/ACL y filtros AWS aún no se ejecutaron.
+Prometheus 3.16.0 y snmp_exporter 0.31.0 descargados de releases oficiales y verificados con sha256sums.txt.
+En la integración Ubuntu ambos procesos se ejecutaron como p4monitor sin root, leyendo los ExecStart generados.
+
+Integración Ubuntu completa
+PASS actual SNMPv3 SHA-256/AES; private listener; all OID families; negative auth; agent idempotence
+PASS actual snmp_exporter 0.31.0: CPU raw counters and eleven other required metrics, RAM/root labels
+PASS actual Prometheus 3.16.0 config/readiness/ten targets; monitor idempotence
+PASS secrets absent from public output; client temporary profiles and transport copy removed; createUser consumed
+
+Integración Amazon Linux y límite de disco overlay
+PASS actual AL2023 Net-SNMP 5.9.3 SHA-256/AES; USM persistent path verified
+PASS local private UDP listener; CPU/RAM/interfaces/processes/uptime; overlay root unavailable and correctly rejected; negative auth; idempotence
+PASS secrets absent from public output; createUser consumed
+
+Rollback de agente real con fallo de bind inyectado
+PASS failed real-agent bind stops service and restores original config/USM bytes; partial retry guarded
+
+Regresiones sin servicios ni AWS
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.007s
+
+OK
+
+AWS simulado, solo describe-*
+PASS read-only ten-host inventory and restricted SNMP sources
+PASS public source rejected
+PASS TI outside CIDR rejected
+PASS missing target rejected
+PASS duplicate target rejected
+PASS wrong private IP rejected
+PASS unexpected public IP rejected
+PASS additional SG rejected
+PASS ACL earlier deny takes precedence
+PASS missing UDP return rejected
+PASS missing EICE rejected
+PASS wrong VPC rejected
+PASS empty TI interface addresses rejected
+PASS blocked TI SG outbound rejected
+14 AWS-simulation scenarios passed; every attempted API call was describe-*
+
+Limitación explícita: AL2023 no expuso el disco raíz overlay del contenedor. La recolección lo rechazó y no se afirma PASS de disco EBS.
+Se consultó otro montaje local en dskTable y respondió, sin equipararlo a raíz. CPU, RAM, interfaces, procesos y autenticación sí se comprobaron.
+Los fallos iniciales de formato YAML/enums, readiness, permisos de directorios y OIDs se corrigieron antes de la pasada final.
+No se generaron credenciales reales ni se modificaron recursos AWS; SNMP-01..05 y FW-05 siguen pendientes.
+La salvaguarda final que rechaza configuración residual sin paquete se comprobó por regresión sin instalar ni sobrescribir archivos.
+
+Regresión posterior al fallo real de release (corrección local, no resultado AWS):
+- Reproducido rechazo del miembro raíz directorio sin barra en ambos tar oficiales conservados.
+- 19 pruebas de seguridad pasan, incluidas aceptación de raíz, rechazo antes de escribir
+  de travesías/enlaces/nodos especiales y rechazo de archivo vacío.
+- Extracción real corregida de snmp_exporter 0.31.0 amd64 y Prometheus 3.16.0 amd64: OK.
+- Las integraciones previas no habían detectado este error en la extracción del instalador.
+- Reintento remoto todavía pendiente; no implica Prometheus/exporter activos en EC2.
+
+Recuperación acotada del estado parcial (pruebas locales posteriores):
+- 28 casos pasan como root en contenedor sin red, código montado de solo lectura.
+- Nueve casos de recuperación usan únicamente archivos temporales y servicios simulados:
+  estado válido sin mutación, datos existentes, unidades existentes, fallo distinto,
+  procesos activos, bloqueo ordinario, cancelación, segundo fallo y finalización/idempotencia.
+- Marca anterior archivada; agente/credenciales preservados. Ninguna operación AWS.
+- 14 escenarios AWS simulados pasan nuevamente; solo se intentan APIs describe-*.
+- No son resultados del reintento remoto, todavía pendiente.

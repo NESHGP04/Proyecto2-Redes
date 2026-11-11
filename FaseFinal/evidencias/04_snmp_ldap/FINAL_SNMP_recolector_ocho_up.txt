@@ -1,0 +1,22 @@
+P4 · Primera tanda con ocho scrapes up
+Fuente: fragmento real compartido por el humano; no ejecutado desde el repositorio.
+Hora: 2026-11-11 07:02:40 UTC / 2026-11-11 01:02:40 Guatemala.
+
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T070240Z_yz22izak · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-ldap-01 10.20.0.69: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-vpn-01 10.20.0.132: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-ventas-02 10.20.0.11: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-ntp-01 10.20.0.68: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-visitantes-01 10.20.0.36: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-ventas-01 10.20.0.10: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-intranet-01 10.20.0.71: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-ti-01 10.20.0.102: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-monitor-01 10.20.0.103: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[ESTADO] zp-web-01 10.20.0.116: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 07:02:40 UTC
+[OK] Recolector y Prometheus activos y privados; diez objetivos configurados. Estados down no se aceptan como SNMP-02 PASS. · 2026-11-11 07:02:40 UTC
+ubuntu@zp-monitor-01:~$
+
+Resultado: monitor, LDAP, Ventas-01, TI, Ventas-02, NTP, Intranet y Visitantes scrape=up.
+Web/VPN scrape=down, reservados para segunda tanda; este dato no confirma por sí solo estado EC2.
+Prometheus/exporter activos y privados; diez objetivos conservados.
+Faltan agentes/métricas de web/VPN, aislamiento, caída/recuperación y cierre NAT/restauración TI.

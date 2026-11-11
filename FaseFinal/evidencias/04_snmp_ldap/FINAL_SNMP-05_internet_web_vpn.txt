@@ -1,0 +1,248 @@
+P4 · SNMP-05, parte exterior · Transcripción real recibida del humano
+Fecha de la ejecución: 11-nov-2026.
+Guion: 08:21:39–08:22:33 UTC / 02:21:39–02:22:33 Guatemala.
+Controles previos monitor: Web 08:22:06 UTC, VPN 08:22:12 UTC, exit 0.
+Desde CloudShell: VPN timeout exit 1 08:22:14 UTC; Web timeout exit 1 08:22:16 UTC.
+Controles posteriores monitor: Web 08:22:22 UTC, VPN 08:22:28 UTC, exit 0.
+Limpieza temporal confirmada 08:22:33 UTC. Claves originales conservadas.
+Origen exterior comprobado por el guion; dirección de salida guardada solo en privado.
+Las dos EIP de Web/VPN son las excepciones públicas autorizadas del proyecto.
+Alcance: sin datos SNMP desde ese origen/intervalo; correlacionar con SG/ACL revisados.
+No identifica por sí solo el dispositivo que descarta ni todos los orígenes posibles.
+SNMP-05 completo aún pendiente de Visitantes. FW-05 Ventas tiene evidencia separada.
+
+Se conserva también la instalación de cliente en CloudShell y el primer intento
+fallido por archivo todavía ausente. No se atribuye hora exacta a instalación/subida;
+la fecha de metadatos DNF no equivale al instante de completar la instalación.
+
+--- Inicio de transcripción recibida, sin reconstruir comandos ni salidas ---
+~ $ sudo dnf -y install net-snmp-utils
+Amazon Linux 2023 repository                                                                                                                                                                                                       80 MB/s |  89 MB     00:01    
+Last metadata expiration check: 0:00:15 ago on Wed 11 Nov 2026 08:19:10 AM UTC.
+Dependencies resolved.
+==================================================================================================================================================================================================================================================================
+ Package                                                        Architecture                                           Version                                                                  Repository                                                   Size
+==================================================================================================================================================================================================================================================================
+Installing:
+ net-snmp-utils                                                 x86_64                                                 1:5.9.3-2.amzn2023.0.4                                                   amazonlinux                                                 189 k
+Installing dependencies:
+ net-snmp-libs                                                  x86_64                                                 1:5.9.3-2.amzn2023.0.4                                                   amazonlinux                                                 740 k
+
+Transaction Summary
+==================================================================================================================================================================================================================================================================
+Install  2 Packages
+
+Total download size: 930 k
+Installed size: 3.6 M
+Downloading Packages:
+(1/2): net-snmp-utils-5.9.3-2.amzn2023.0.4.x86_64.rpm                                                                                                                                                                             7.4 MB/s | 189 kB     00:00    
+(2/2): net-snmp-libs-5.9.3-2.amzn2023.0.4.x86_64.rpm                                                                                                                                                                               23 MB/s | 740 kB     00:00    
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                                                                              12 MB/s | 930 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                                                                                                                                          1/1 
+  Installing       : net-snmp-libs-1:5.9.3-2.amzn2023.0.4.x86_64                                                                                                                                                                                              1/2 
+  Installing       : net-snmp-utils-1:5.9.3-2.amzn2023.0.4.x86_64                                                                                                                                                                                             2/2 
+  Running scriptlet: net-snmp-utils-1:5.9.3-2.amzn2023.0.4.x86_64                                                                                                                                                                                             2/2 
+  Verifying        : net-snmp-libs-1:5.9.3-2.amzn2023.0.4.x86_64                                                                                                                                                                                              1/2 
+  Verifying        : net-snmp-utils-1:5.9.3-2.amzn2023.0.4.x86_64                                                                                                                                                                                             2/2 
+
+Installed:
+  net-snmp-libs-1:5.9.3-2.amzn2023.0.4.x86_64                                                                                     net-snmp-utils-1:5.9.3-2.amzn2023.0.4.x86_64                                                                                    
+
+Complete!
+~ $ bash "$HOME/P4_snmp_internet.sh"
+bash: /home/cloudshell-user/P4_snmp_internet.sh: No such file or directory
+~ $ bash "$HOME/P4_snmp_internet.sh"
+[PLAN] Consultar UDP 161 en las EIP actuales de Web/VPN desde CloudShell.
+[PLAN] Controles privados desde monitor con las mismas claves; copia temporal privada y limpieza al terminar.
+[PLAN] No cambia servicios, reglas ni recursos AWS; conserva las credenciales originales.
+Escribe si para continuar: si
+[INFO] Registro público: /home/cloudshell-user/final-config/P4_snmp_internet_20261111T082139Z_a0tirhbv/resultado.txt · 2026-11-11 08:21:39 UTC
+[OK] Origen sin dirección local de la VPC; salida IPv4 pública comprobada por HTTPS (guardada en privado). · 2026-11-11 08:21:39 UTC
+[DATO] Control previo monitor -> zp-web-01
+== zp-monitor-01 · 2026-11-11 08:22:05 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T082206Z_zlyfon53 · 2026-11-11 08:22:06 UTC
+[DATO] Control snmpwalk desde monitor hacia zp-web-01
+.1.3.6.1.2.1.1.1.0 = STRING: "Linux zp-web-01 7.0.0-1014-aws #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026 x86_64"
+.1.3.6.1.2.1.1.2.0 = OID: .1.3.6.1.4.1.8072.3.2.10
+.1.3.6.1.2.1.1.3.0 = Timeticks: (205559) 0:34:15.59
+.1.3.6.1.2.1.1.4.0 = STRING: "root"
+.1.3.6.1.2.1.1.5.0 = STRING: "zp-web-01"
+.1.3.6.1.2.1.1.6.0 = STRING: "Zenite-laboratorio"
+.1.3.6.1.2.1.1.8.0 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.2.1 = OID: .1.3.6.1.6.3.10.3.1.1
+.1.3.6.1.2.1.1.9.1.2.2 = OID: .1.3.6.1.6.3.11.3.1.1
+.1.3.6.1.2.1.1.9.1.2.3 = OID: .1.3.6.1.6.3.15.2.1.1
+.1.3.6.1.2.1.1.9.1.2.4 = OID: .1.3.6.1.6.3.1
+.1.3.6.1.2.1.1.9.1.2.5 = OID: .1.3.6.1.6.3.16.2.2.1
+.1.3.6.1.2.1.1.9.1.2.6 = OID: .1.3.6.1.2.1.49
+.1.3.6.1.2.1.1.9.1.2.7 = OID: .1.3.6.1.2.1.50
+.1.3.6.1.2.1.1.9.1.2.8 = OID: .1.3.6.1.2.1.4
+.1.3.6.1.2.1.1.9.1.2.9 = OID: .1.3.6.1.6.3.13.3.1.3
+.1.3.6.1.2.1.1.9.1.2.10 = OID: .1.3.6.1.2.1.92
+.1.3.6.1.2.1.1.9.1.3.1 = STRING: "The SNMP Management Architecture MIB."
+.1.3.6.1.2.1.1.9.1.3.2 = STRING: "The MIB for Message Processing and Dispatching."
+.1.3.6.1.2.1.1.9.1.3.3 = STRING: "The management information definitions for the SNMP User-based Security Model."
+.1.3.6.1.2.1.1.9.1.3.4 = STRING: "The MIB module for SNMPv2 entities"
+.1.3.6.1.2.1.1.9.1.3.5 = STRING: "View-based Access Control Model for SNMP."
+.1.3.6.1.2.1.1.9.1.3.6 = STRING: "The MIB module for managing TCP implementations"
+.1.3.6.1.2.1.1.9.1.3.7 = STRING: "The MIB module for managing UDP implementations"
+.1.3.6.1.2.1.1.9.1.3.8 = STRING: "The MIB module for managing IP and ICMP implementations"
+.1.3.6.1.2.1.1.9.1.3.9 = STRING: "The MIB modules for managing SNMP Notification, plus filtering."
+.1.3.6.1.2.1.1.9.1.3.10 = STRING: "The MIB module for logging SNMP Notifications."
+.1.3.6.1.2.1.1.9.1.4.1 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.2 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.3 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.4 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.5 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.6 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.7 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.8 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.9 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.10 = Timeticks: (0) 0:00:00.00 · 2026-11-11 08:22:06 UTC
+[OK] Control autenticado desde monitor, exit=0. · 2026-11-11 08:22:06 UTC · 2026-11-11 08:22:06 UTC
+[DATO] Control previo monitor -> zp-vpn-01
+== zp-monitor-01 · 2026-11-11 08:22:12 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T082212Z_rdf6axxu · 2026-11-11 08:22:12 UTC
+[DATO] Control snmpwalk desde monitor hacia zp-vpn-01
+.1.3.6.1.2.1.1.1.0 = STRING: "Linux zp-vpn-01 7.0.0-1014-aws #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026 x86_64"
+.1.3.6.1.2.1.1.2.0 = OID: .1.3.6.1.4.1.8072.3.2.10
+.1.3.6.1.2.1.1.3.0 = Timeticks: (282930) 0:47:09.30
+.1.3.6.1.2.1.1.4.0 = STRING: "root"
+.1.3.6.1.2.1.1.5.0 = STRING: "zp-vpn-01"
+.1.3.6.1.2.1.1.6.0 = STRING: "Zenite-laboratorio"
+.1.3.6.1.2.1.1.8.0 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.2.1 = OID: .1.3.6.1.6.3.10.3.1.1
+.1.3.6.1.2.1.1.9.1.2.2 = OID: .1.3.6.1.6.3.11.3.1.1
+.1.3.6.1.2.1.1.9.1.2.3 = OID: .1.3.6.1.6.3.15.2.1.1
+.1.3.6.1.2.1.1.9.1.2.4 = OID: .1.3.6.1.6.3.1
+.1.3.6.1.2.1.1.9.1.2.5 = OID: .1.3.6.1.6.3.16.2.2.1
+.1.3.6.1.2.1.1.9.1.2.6 = OID: .1.3.6.1.2.1.49
+.1.3.6.1.2.1.1.9.1.2.7 = OID: .1.3.6.1.2.1.50
+.1.3.6.1.2.1.1.9.1.2.8 = OID: .1.3.6.1.2.1.4
+.1.3.6.1.2.1.1.9.1.2.9 = OID: .1.3.6.1.6.3.13.3.1.3
+.1.3.6.1.2.1.1.9.1.2.10 = OID: .1.3.6.1.2.1.92
+.1.3.6.1.2.1.1.9.1.3.1 = STRING: "The SNMP Management Architecture MIB."
+.1.3.6.1.2.1.1.9.1.3.2 = STRING: "The MIB for Message Processing and Dispatching."
+.1.3.6.1.2.1.1.9.1.3.3 = STRING: "The management information definitions for the SNMP User-based Security Model."
+.1.3.6.1.2.1.1.9.1.3.4 = STRING: "The MIB module for SNMPv2 entities"
+.1.3.6.1.2.1.1.9.1.3.5 = STRING: "View-based Access Control Model for SNMP."
+.1.3.6.1.2.1.1.9.1.3.6 = STRING: "The MIB module for managing TCP implementations"
+.1.3.6.1.2.1.1.9.1.3.7 = STRING: "The MIB module for managing UDP implementations"
+.1.3.6.1.2.1.1.9.1.3.8 = STRING: "The MIB module for managing IP and ICMP implementations"
+.1.3.6.1.2.1.1.9.1.3.9 = STRING: "The MIB modules for managing SNMP Notification, plus filtering."
+.1.3.6.1.2.1.1.9.1.3.10 = STRING: "The MIB module for logging SNMP Notifications."
+.1.3.6.1.2.1.1.9.1.4.1 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.2 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.3 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.4 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.5 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.6 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.7 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.8 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.9 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.10 = Timeticks: (0) 0:00:00.00 · 2026-11-11 08:22:12 UTC
+[OK] Control autenticado desde monitor, exit=0. · 2026-11-11 08:22:12 UTC · 2026-11-11 08:22:12 UTC
+[CONSULTA] CloudShell exterior -> zp-vpn-01 EIP 3.228.84.176, UDP 161, SNMPv3 authPriv. · 2026-11-11 08:22:12 UTC
+[DATO] zp-vpn-01: exit=1
+
+snmpget: Timeout · 2026-11-11 08:22:14 UTC
+[OBSERVADO] zp-vpn-01: sin datos SNMP, timeout; exit=1 · 2026-11-11 08:22:14 UTC
+[CONSULTA] CloudShell exterior -> zp-web-01 EIP 18.210.66.163, UDP 161, SNMPv3 authPriv. · 2026-11-11 08:22:14 UTC
+[DATO] zp-web-01: exit=1
+
+snmpget: Timeout · 2026-11-11 08:22:16 UTC
+[OBSERVADO] zp-web-01: sin datos SNMP, timeout; exit=1 · 2026-11-11 08:22:16 UTC
+[DATO] Control posterior monitor -> zp-web-01
+== zp-monitor-01 · 2026-11-11 08:22:22 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T082222Z_c3ib8w2f · 2026-11-11 08:22:22 UTC
+[DATO] Control snmpwalk desde monitor hacia zp-web-01
+.1.3.6.1.2.1.1.1.0 = STRING: "Linux zp-web-01 7.0.0-1014-aws #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026 x86_64"
+.1.3.6.1.2.1.1.2.0 = OID: .1.3.6.1.4.1.8072.3.2.10
+.1.3.6.1.2.1.1.3.0 = Timeticks: (207183) 0:34:31.83
+.1.3.6.1.2.1.1.4.0 = STRING: "root"
+.1.3.6.1.2.1.1.5.0 = STRING: "zp-web-01"
+.1.3.6.1.2.1.1.6.0 = STRING: "Zenite-laboratorio"
+.1.3.6.1.2.1.1.8.0 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.2.1 = OID: .1.3.6.1.6.3.10.3.1.1
+.1.3.6.1.2.1.1.9.1.2.2 = OID: .1.3.6.1.6.3.11.3.1.1
+.1.3.6.1.2.1.1.9.1.2.3 = OID: .1.3.6.1.6.3.15.2.1.1
+.1.3.6.1.2.1.1.9.1.2.4 = OID: .1.3.6.1.6.3.1
+.1.3.6.1.2.1.1.9.1.2.5 = OID: .1.3.6.1.6.3.16.2.2.1
+.1.3.6.1.2.1.1.9.1.2.6 = OID: .1.3.6.1.2.1.49
+.1.3.6.1.2.1.1.9.1.2.7 = OID: .1.3.6.1.2.1.50
+.1.3.6.1.2.1.1.9.1.2.8 = OID: .1.3.6.1.2.1.4
+.1.3.6.1.2.1.1.9.1.2.9 = OID: .1.3.6.1.6.3.13.3.1.3
+.1.3.6.1.2.1.1.9.1.2.10 = OID: .1.3.6.1.2.1.92
+.1.3.6.1.2.1.1.9.1.3.1 = STRING: "The SNMP Management Architecture MIB."
+.1.3.6.1.2.1.1.9.1.3.2 = STRING: "The MIB for Message Processing and Dispatching."
+.1.3.6.1.2.1.1.9.1.3.3 = STRING: "The management information definitions for the SNMP User-based Security Model."
+.1.3.6.1.2.1.1.9.1.3.4 = STRING: "The MIB module for SNMPv2 entities"
+.1.3.6.1.2.1.1.9.1.3.5 = STRING: "View-based Access Control Model for SNMP."
+.1.3.6.1.2.1.1.9.1.3.6 = STRING: "The MIB module for managing TCP implementations"
+.1.3.6.1.2.1.1.9.1.3.7 = STRING: "The MIB module for managing UDP implementations"
+.1.3.6.1.2.1.1.9.1.3.8 = STRING: "The MIB module for managing IP and ICMP implementations"
+.1.3.6.1.2.1.1.9.1.3.9 = STRING: "The MIB modules for managing SNMP Notification, plus filtering."
+.1.3.6.1.2.1.1.9.1.3.10 = STRING: "The MIB module for logging SNMP Notifications."
+.1.3.6.1.2.1.1.9.1.4.1 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.2 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.3 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.4 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.5 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.6 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.7 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.8 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.9 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.10 = Timeticks: (0) 0:00:00.00 · 2026-11-11 08:22:22 UTC
+[OK] Control autenticado desde monitor, exit=0. · 2026-11-11 08:22:22 UTC · 2026-11-11 08:22:22 UTC
+[DATO] Control posterior monitor -> zp-vpn-01
+== zp-monitor-01 · 2026-11-11 08:22:28 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T082228Z_ugbrlqqo · 2026-11-11 08:22:28 UTC
+[DATO] Control snmpwalk desde monitor hacia zp-vpn-01
+.1.3.6.1.2.1.1.1.0 = STRING: "Linux zp-vpn-01 7.0.0-1014-aws #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026 x86_64"
+.1.3.6.1.2.1.1.2.0 = OID: .1.3.6.1.4.1.8072.3.2.10
+.1.3.6.1.2.1.1.3.0 = Timeticks: (284528) 0:47:25.28
+.1.3.6.1.2.1.1.4.0 = STRING: "root"
+.1.3.6.1.2.1.1.5.0 = STRING: "zp-vpn-01"
+.1.3.6.1.2.1.1.6.0 = STRING: "Zenite-laboratorio"
+.1.3.6.1.2.1.1.8.0 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.2.1 = OID: .1.3.6.1.6.3.10.3.1.1
+.1.3.6.1.2.1.1.9.1.2.2 = OID: .1.3.6.1.6.3.11.3.1.1
+.1.3.6.1.2.1.1.9.1.2.3 = OID: .1.3.6.1.6.3.15.2.1.1
+.1.3.6.1.2.1.1.9.1.2.4 = OID: .1.3.6.1.6.3.1
+.1.3.6.1.2.1.1.9.1.2.5 = OID: .1.3.6.1.6.3.16.2.2.1
+.1.3.6.1.2.1.1.9.1.2.6 = OID: .1.3.6.1.2.1.49
+.1.3.6.1.2.1.1.9.1.2.7 = OID: .1.3.6.1.2.1.50
+.1.3.6.1.2.1.1.9.1.2.8 = OID: .1.3.6.1.2.1.4
+.1.3.6.1.2.1.1.9.1.2.9 = OID: .1.3.6.1.6.3.13.3.1.3
+.1.3.6.1.2.1.1.9.1.2.10 = OID: .1.3.6.1.2.1.92
+.1.3.6.1.2.1.1.9.1.3.1 = STRING: "The SNMP Management Architecture MIB."
+.1.3.6.1.2.1.1.9.1.3.2 = STRING: "The MIB for Message Processing and Dispatching."
+.1.3.6.1.2.1.1.9.1.3.3 = STRING: "The management information definitions for the SNMP User-based Security Model."
+.1.3.6.1.2.1.1.9.1.3.4 = STRING: "The MIB module for SNMPv2 entities"
+.1.3.6.1.2.1.1.9.1.3.5 = STRING: "View-based Access Control Model for SNMP."
+.1.3.6.1.2.1.1.9.1.3.6 = STRING: "The MIB module for managing TCP implementations"
+.1.3.6.1.2.1.1.9.1.3.7 = STRING: "The MIB module for managing UDP implementations"
+.1.3.6.1.2.1.1.9.1.3.8 = STRING: "The MIB module for managing IP and ICMP implementations"
+.1.3.6.1.2.1.1.9.1.3.9 = STRING: "The MIB modules for managing SNMP Notification, plus filtering."
+.1.3.6.1.2.1.1.9.1.3.10 = STRING: "The MIB module for logging SNMP Notifications."
+.1.3.6.1.2.1.1.9.1.4.1 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.2 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.3 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.4 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.5 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.6 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.7 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.8 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.9 = Timeticks: (0) 0:00:00.00
+.1.3.6.1.2.1.1.9.1.4.10 = Timeticks: (0) 0:00:00.00 · 2026-11-11 08:22:28 UTC
+[OK] Control autenticado desde monitor, exit=0. · 2026-11-11 08:22:28 UTC · 2026-11-11 08:22:28 UTC
+[OK] Copias temporales eliminadas; credenciales originales conservadas. · 2026-11-11 08:22:33 UTC
+[OK] Dos EIP propias sin respuesta desde este origen exterior, con controles privados antes/después y las mismas claves. · 2026-11-11 08:22:33 UTC
+[ALCANCE] Un timeout UDP no identifica el dispositivo que filtra ni demuestra todos los orígenes de Internet. Correlacionar con SG/ACL revisados. · 2026-11-11 08:22:33 UTC
+~ $ 

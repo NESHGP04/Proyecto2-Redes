@@ -1,0 +1,32 @@
+P4 · Recuperación real del recolector
+Fuente: fragmento de terminal compartido por el humano; no ejecutado desde el repositorio.
+Inicio: 2026-11-11 05:26:33 UTC / 2026-11-10 23:26:33 Guatemala.
+Final: 2026-11-11 05:26:56 UTC / 2026-11-10 23:26:56 Guatemala.
+La primera línea del comando no venía en el fragmento; se conserva la continuación recibida.
+
+>   --registro-fallido /root/final-config/P4_snmp_zp-monitor-01_20261111T051132Z_fanx09ls/resultado.txt
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T052633Z_cegz2cjb · 2026-11-11 05:26:33 UTC
+[OK] SNMP-01 local: agente activo, escucha privada y autenticación v3 correctas: zp-monitor-01 · 2026-11-11 05:26:33 UTC
+[DATO] .1.3.6.1.2.1.1.3.0 = Timeticks: (146237) 0:24:22.37 · 2026-11-11 05:26:33 UTC
+[OK] Fallo de extracción y estado parcial comprobados; agente y credenciales conservados. · 2026-11-11 05:26:33 UTC
+[PLAN] Archivar marca de extracción fallida y reutilizar usuario/directorio vacío comprobados. Instalar Prometheus 3.16.0 y snmp_exporter 0.31.0 desde releases oficiales verificadas; servicios solo en loopback. No instala Grafana. · 2026-11-11 05:26:33 UTC
+Escribe si para continuar: si
+[ESTADO] zp-ventas-01 10.20.0.10: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-intranet-01 10.20.0.71: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-ti-01 10.20.0.102: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-monitor-01 10.20.0.103: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-web-01 10.20.0.116: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-ldap-01 10.20.0.69: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-vpn-01 10.20.0.132: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-ventas-02 10.20.0.11: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-ntp-01 10.20.0.68: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[ESTADO] zp-visitantes-01 10.20.0.36: scrape=unknown; no equivale por sí solo a estado EC2. · 2026-11-11 05:26:56 UTC
+[OK] Recolector y Prometheus activos y privados; diez objetivos configurados. Estados down no se aceptan como SNMP-02 PASS. · 2026-11-11 05:26:56 UTC
+[OK] Monitor instalado; los estados de las diez instancias se validan con recolectar. · 2026-11-11 05:26:56 UTC
+
+Resultado: instalación real del recolector completada tras corregir el fallo conservado por separado.
+El validador comprobó servicios, readiness, escucha loopback y diez objetivos registrados.
+Todos los scrapes estaban unknown: aún no había resultados de primera muestra al validar.
+Pendiente comprobar scrapes posteriores; no se acredita SNMP-02 global ni respuesta de diez agentes.
+Agentes comprobados: monitor y LDAP. Grafana no instalado.
+No se recibió cierre NAT/restauración ACL TI ni contenido privado.

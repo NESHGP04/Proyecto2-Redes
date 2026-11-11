@@ -1,0 +1,23 @@
+P4 · Encendido del lote bloqueado por cuota regional EC2
+Fuente: error compartido por el humano desde CloudShell; sin hora propia recibida.
+
+aws: [ERROR]: An error occurred (VcpuLimitExceeded) when calling the StartInstances operation: You have requested more vCPU capacity than your current vCPU limit of 16 allows for the instance bucket that the specified instance type belongs to. Please visit http://aws.amazon.com/contact-us/ec2-request to request an adjustment to this limit.
+~ $
+
+Resultado: el lote de encendido no se acredita como completo. No se recibió inventario posterior.
+No se infiere qué instancias quedaron running ni si se ejecutó el bucle posterior.
+Últimos agentes acreditados: monitor, LDAP y Ventas-01 (3/10).
+El inventario previo indicaba t3.micro salvo monitor t3.small; ambos tipos tienen 2 vCPU.
+Diez instancias de esos tipos requieren 20 vCPU; el error informa cuota de 16.
+La cuota es por cuenta/región y categoría, no solo por esta VPC; puede haber otros consumos.
+
+Siguiente paso: describe-instances de solo lectura para toda us-east-1, por nombre/tipo/estado/ID,
+incluidos otros proyectos para revisar consumo; no detener instancias ajenas.
+Plan B propuesto: instalar y comprobar por tandas sin cambiar tipos ni crear recursos.
+No implica aceptar PASS global de diez scrapes simultáneos. Si se requiere simultaneidad,
+hará falta revisar y solicitar aumento de cuota con el humano; no se solicitó ninguno.
+NAT y ACL TI temporales siguen pendientes de cierre/restauración.
+
+Fuentes oficiales consultadas para interpretar el error:
+https://aws.amazon.com/ec2/instance-types/t3/
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html

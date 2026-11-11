@@ -1,0 +1,47 @@
+P4 · Diagnóstico real después de restaurar TI y eliminar NAT
+Fuente: salida compartida por el humano; no ejecutada desde el repositorio.
+Inicio: 2026-11-11 07:50:19 UTC / 01:50:19 Guatemala.
+Final: 07:50:27 UTC / 01:50:27 Guatemala.
+
+~ $ bash "$HOME/P4_snmp_nube.sh" --validar
+[INFO] Solo lectura AWS us-east-1. Registro público: /home/cloudshell-user/final-config/P4_snmp_nube_20261111T075019Z_6i546x_h/resultado.txt · 2026-11-11 07:50:19 UTC
+[INVENTARIO] zp-ventas-01 i-0f3bd7b0615933e00 10.20.0.10 running t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-ventas-02 i-05a7f9ee1a6e93000 10.20.0.11 stopped t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-ti-01 i-0378a8624df39958b 10.20.0.102 running t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-ldap-01 i-04f9cc2b9ee3f77cd 10.20.0.69 running t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-visitantes-01 i-05dc9139e9d858330 10.20.0.36 stopped t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-ntp-01 i-0410455bc4b28d3fe 10.20.0.68 running t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-intranet-01 i-07330a665030d940e 10.20.0.71 running t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-vpn-01 i-050e09727e2a06139 10.20.0.132 running t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-web-01 i-06b59507240cfa8e7 10.20.0.116 running t3.micro x86_64 · 2026-11-11 07:50:21 UTC
+[INVENTARIO] zp-monitor-01 i-00e786cb51a422c36 10.20.0.103 running t3.small x86_64 · 2026-11-11 07:50:21 UTC
+[INFO] Monitor actual: t3.small; confirmar capacidad antes de instalar, sin cambiar tipo. · 2026-11-11 07:50:21 UTC
+[DISCO] Monitor: vol-0337fbff64ccd7451 16 GiB; espacio libre dentro del SO pendiente. · 2026-11-11 07:50:22 UTC
+[OK] SG zenite-ti: UDP 161 desde TI, sin otros orígenes detectados. · 2026-11-11 07:50:23 UTC
+[OK] SG zenite-ventas: UDP 161 desde TI, sin otros orígenes detectados. · 2026-11-11 07:50:23 UTC
+[OK] SG zenite-visitantes: UDP 161 desde TI, sin otros orígenes detectados. · 2026-11-11 07:50:23 UTC
+[OK] SG zenite-servidores: UDP 161 desde TI, sin otros orígenes detectados. · 2026-11-11 07:50:23 UTC
+[OK] SG zenite-dmz: UDP 161 desde TI, sin otros orígenes detectados. · 2026-11-11 07:50:23 UTC
+[OK] SG zenite-vpn: UDP 161 desde TI, sin otros orígenes detectados. · 2026-11-11 07:50:23 UTC
+[OK] ACL consulta/retorno UDP de zp-ventas-01 según reglas IPv4 actuales. · 2026-11-11 07:50:24 UTC
+[OK] ACL consulta/retorno UDP de zp-ventas-02 según reglas IPv4 actuales. · 2026-11-11 07:50:24 UTC
+[INFO] zp-ti-01: agente local/TI; consulta real pendiente. · 2026-11-11 07:50:24 UTC
+[OK] ACL consulta/retorno UDP de zp-ldap-01 según reglas IPv4 actuales. · 2026-11-11 07:50:24 UTC
+[OK] ACL consulta/retorno UDP de zp-visitantes-01 según reglas IPv4 actuales. · 2026-11-11 07:50:24 UTC
+[OK] ACL consulta/retorno UDP de zp-ntp-01 según reglas IPv4 actuales. · 2026-11-11 07:50:24 UTC
+[OK] ACL consulta/retorno UDP de zp-intranet-01 según reglas IPv4 actuales. · 2026-11-11 07:50:24 UTC
+[OK] ACL consulta/retorno UDP de zp-vpn-01 según reglas IPv4 actuales. · 2026-11-11 07:50:24 UTC
+[OK] ACL consulta/retorno UDP de zp-web-01 según reglas IPv4 actuales. · 2026-11-11 07:50:24 UTC
+[INFO] zp-monitor-01: agente local/TI; consulta real pendiente. · 2026-11-11 07:50:24 UTC
+[RUTA] rt-zenite-interna: [] · 2026-11-11 07:50:25 UTC
+[RUTA] rt-zenite-infra: [{"DestinationCidrBlock": "0.0.0.0/0", "GatewayId": "igw-00f6efb87a444f270", "Origin": "CreateRoute", "State": "active"}] · 2026-11-11 07:50:25 UTC
+[RUTA] rt-zenite-dmz: [{"DestinationCidrBlock": "0.0.0.0/0", "GatewayId": "igw-00f6efb87a444f270", "Origin": "CreateRoute", "State": "active"}] · 2026-11-11 07:50:25 UTC
+[RUTA] rtb-0018789e96aaf0a54: [] · 2026-11-11 07:50:25 UTC
+[RUTA] rt-zenite-vpn: [{"DestinationCidrBlock": "0.0.0.0/0", "GatewayId": "igw-00f6efb87a444f270", "Origin": "CreateRoute", "State": "active"}] · 2026-11-11 07:50:25 UTC
+[NAT] Estados actuales: [] · 2026-11-11 07:50:26 UTC
+[OK] Inventario y reglas comprobados por lectura. Agentes, repositorios y consultas reales siguen pendientes. · 2026-11-11 07:50:27 UTC
+~ $
+
+Resultado: diez objetivos del plan, ocho running y dos clientes stopped; seis SG restringidos a TI,
+rutas y retorno SNMP comprobados por lectura, NAT ausente y ruta interna sin default.
+No sustituye consultas reales posteriores a restaurar TI ni métricas Web/VPN aún pendientes.

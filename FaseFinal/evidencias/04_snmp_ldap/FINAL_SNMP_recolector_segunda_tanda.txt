@@ -1,0 +1,23 @@
+P4 · Scrapes después de segunda tanda y cierre de red temporal
+Fuente: salida real compartida por el humano; no ejecutada desde el repositorio.
+Hora: 2026-11-11 07:56:42 UTC / 2026-11-11 01:56:42 Guatemala.
+
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T075642Z_klujuz1m · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-intranet-01 10.20.0.71: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-ti-01 10.20.0.102: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-monitor-01 10.20.0.103: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-web-01 10.20.0.116: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-ldap-01 10.20.0.69: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-vpn-01 10.20.0.132: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-ventas-02 10.20.0.11: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-ntp-01 10.20.0.68: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-visitantes-01 10.20.0.36: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[ESTADO] zp-ventas-01 10.20.0.10: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 07:56:42 UTC
+[OK] Recolector y Prometheus activos y privados; diez objetivos configurados. Estados down no se aceptan como SNMP-02 PASS. · 2026-11-11 07:56:42 UTC
+ubuntu@zp-monitor-01:~$
+
+Resultado: ocho up; Ventas-02 y Visitantes down, correlacionados con EC2 stopped
+en inventario de 07:50:21 UTC y parada explícita previa por P1.
+SNMP-04: pérdida de scrape tras parada comprobada; recuperación del cliente aún pendiente.
+El recolector sigue activo/privado y mantiene los diez objetivos. No se altera la configuración
+para ocultar hosts detenidos ni se declara que todos están encendidos.

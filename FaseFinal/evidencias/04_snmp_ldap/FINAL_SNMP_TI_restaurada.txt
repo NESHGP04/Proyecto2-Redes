@@ -1,0 +1,36 @@
+P4 · Restauración efectiva de ACL TI con diferencias heredadas del validador
+Fuente: salida compartida por el humano; no ejecutada desde el repositorio.
+nmap comprobado en TI: 2026-11-11 07:40:47 UTC / 01:40:47 Guatemala.
+La restauración viene después en la transcripción, sin marca de hora propia exacta.
+
+~ $ bash "$HOME/P3_eice.sh" zp-ti-01 'command -v nmap || sudo -n dnf -y install nmap'
+== zp-ti-01 · 2026-11-11 07:40:47 UTC
+/usr/bin/nmap
+Connection to i-0378a8624df39958b closed.
+
+P5 aplicar ti, fragmentos recibidos tras confirmar ambas preguntas con si:
+[OK] Estado guardado en /home/cloudshell-user/fase3-config/p5-acl-estado-antes-ti.json
+[OK] ACL creada: acl-zenite-ti = acl-0d435e6e99660f33f (todavia sin asociar)
+[OK] agregada in 100 tcp 22-22 10.20.0.144/28 allow
+[OK] agregada in 110 tcp 1024-65535 10.20.0.0/24 allow
+[OK] agregada in 120 udp 1024-65535 10.20.0.0/24 allow
+[OK] agregada in 130 icmp 0--1 10.20.0.0/24 allow
+[OK] agregada out 100 all --- 10.20.0.0/24 allow
+[OK] subnet-zenite-ti asociada a acl-0d435e6e99660f33f
+[OK] Estado guardado en /home/cloudshell-user/fase3-config/p5-acl-estado-despues-ti.json
+[OK] ti: existe acl-zenite-ti = acl-0d435e6e99660f33f
+[OK] ti in 100 tcp 22-22 10.20.0.144/28 allow
+[OK] ti in 110 tcp 1024-65535 10.20.0.0/24 allow
+[OK] ti in 120 udp 1024-65535 10.20.0.0/24 allow
+[OK] ti in 130 icmp 0--1 10.20.0.0/24 allow
+[OK] ti out 100 all --- 10.20.0.0/24 allow
+[OK] ti: subnet-zenite-ti (subnet-0688bbf577464f544) esta asociada a acl-0d435e6e99660f33f
+[FALLA] subnet-zenite-vpn no esta en la ACL predeterminada
+[FALLA] subnet-zenite-dmz no esta en la ACL predeterminada
+
+Resultado: reglas/asociación TI restauradas; la ACL tiene nuevo ID, política original.
+nmap ya estaba instalado, por lo que el || no ejecutó dnf.
+Se conservan las dos fallas del validador: espera ACL predeterminada en DMZ/VPN,
+pero FaseFinal usa las ACL dedicadas de P3. No se cambiaron esas ACL para eliminar los avisos.
+Pendiente EICE después de restauración, eliminación NAT/EIP temporal y controles posteriores.
+La repetición de la salida VPN al inicio del mensaje no es una segunda instalación y no se duplica.

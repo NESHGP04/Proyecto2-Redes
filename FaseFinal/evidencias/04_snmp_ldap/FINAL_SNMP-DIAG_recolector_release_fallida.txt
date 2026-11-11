@@ -1,0 +1,17 @@
+P4 · Intento fallido real de instalación del recolector
+Fuente: salida compartida por el humano; no ejecutada desde el repositorio.
+Inicio: 2026-11-11 05:11:32 UTC / 2026-11-10 23:11:32 Guatemala.
+Fallo: 2026-11-11 05:11:39 UTC / 2026-11-10 23:11:39 Guatemala.
+
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T051132Z_fanx09ls · 2026-11-11 05:11:32 UTC
+[PLAN] Instalar Prometheus 3.16.0 y snmp_exporter 0.31.0 desde releases oficiales verificadas; servicios solo en loopback. No instala Grafana. · 2026-11-11 05:11:32 UTC
+Escribe si para continuar: si
+[FALLA] Servicios P4 detenidos. Archivos parciales conservados para revisión. No se informa instalación completa. · 2026-11-11 05:11:39 UTC
+[FALLA] Archivo de release con rutas inesperadas. · 2026-11-11 05:11:39 UTC
+
+Causa reproducida localmente en ambos tar oficiales: el miembro raíz es un directorio
+cuyo nombre no termina en barra. La validación anterior exigía stem + / en cada miembro.
+Se corrigió para aceptar ese directorio y rechazar rutas fuera del prefijo, travesías,
+enlaces y nodos especiales antes de extraer ningún miembro.
+La recuperación de archivos/usuario parciales requiere comprobar el estado real.
+No se ha confirmado instalación del recolector ni cierre NAT/restauración TI.

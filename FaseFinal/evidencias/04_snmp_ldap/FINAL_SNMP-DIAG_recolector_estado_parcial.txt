@@ -1,0 +1,18 @@
+P4 · Estado parcial del recolector comunicado por el humano
+Consulta de solo lectura en zp-monitor-01. Sin hora propia de ejecución recibida.
+Los Nov 11 05:11 siguientes son metadatos de archivos, no hora de la consulta.
+
+Salida anterior recibida: ambos servicios inactive.
+
+ls: cannot access '/usr/local/lib/zenite-p4': No such file or directory
+ls: cannot access '/etc/systemd/system/p4-prometheus.service': No such file or directory
+ls: cannot access '/etc/systemd/system/p4-snmp-exporter.service': No such file or directory
+drwxr-x--- 2 root      p4monitor 4096 Nov 11 05:11 /etc/zenite-p4
+drwxr-x--- 3 root      p4monitor 4096 Nov 11 05:11 /var/lib/zenite-p4
+-rw------- 1 root      root        88 Nov 11 05:11 /var/lib/zenite-p4/monitor.failed
+drwx------ 2 p4monitor p4monitor 4096 Nov 11 05:11 /var/lib/zenite-p4/prometheus
+ubuntu@zp-monitor-01:~$
+
+No se recibió ficha getent ni listado del contenido de datos.
+El modo recuperar-descarga comprueba esas condiciones antes de cambiar el estado.
+Recuperación remota todavía pendiente; no se informa instalación completa.

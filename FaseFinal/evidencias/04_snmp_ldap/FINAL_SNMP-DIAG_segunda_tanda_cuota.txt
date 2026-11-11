@@ -1,0 +1,39 @@
+P4 · Parada confirmada de dos clientes y segundo error de cuota
+Fuente: transcripción compartida por el humano con formato Markdown/entidades HTML.
+Se normaliza texto y tabla; no es una nueva ejecución AWS. Sin hora propia recibida.
+
+~ $ bash "$HOME/P1_instancias.sh" detener zp-ventas-02 zp-visitantes-01 &&
+> bash "$HOME/P1_instancias.sh" encender zp-web-01 zp-vpn-01
+Deteniendo zp-ventas-02 (i-05a7f9ee1a6e93000) ...
+Deteniendo zp-visitantes-01 (i-05dc9139e9d858330) ...
+Detenidas.
+
+Estado inmediatamente después de la parada y antes del intento de encendido:
+zp-intranet-01    running  10.20.0.71   i-07330a665030d940e
+zp-ldap-01        running  10.20.0.69   i-04f9cc2b9ee3f77cd
+zp-monitor-01     running  10.20.0.103  i-00e786cb51a422c36
+zp-ntp-01         running  10.20.0.68   i-0410455bc4b28d3fe
+zp-ti-01          running  10.20.0.102  i-0378a8624df39958b
+zp-ventas-01      running  10.20.0.10   i-0f3bd7b0615933e00
+zp-ventas-02      stopped  10.20.0.11   i-05a7f9ee1a6e93000
+zp-visitantes-01  stopped  10.20.0.36   i-05dc9139e9d858330
+zp-vpn-01         stopped  10.20.0.132  i-050e09727e2a06139
+zp-web-01         stopped  10.20.0.116  i-06b59507240cfa8e7
+Encendidas ahora: 6
+Encendiendo zp-vpn-01 (i-050e09727e2a06139) ...
+Encendiendo zp-web-01 (i-06b59507240cfa8e7) ...
+
+Fragmento exacto de error recibido (truncado en origen):
+aws: [ERROR]: An error occurred (VcpuLimitExceeded) when calling the StartInstances oper
+
+Resultado: dos clientes stopped confirmados. No se acredita encendido de web/VPN
+ni se infiere el estado posterior a la llamada fallida. La cuota de 16 procede del error anterior,
+no del texto nuevo truncado; se consultará la cuota efectiva y el inventario regional actual.
+Ocho agentes instalados permanecen acreditados; dos estaban detenidos en la tabla recibida.
+SNMP-04 aún no completo: falta correlacionar scrape caído y recuperación del cliente.
+
+Siguiente paso: describe-instances regional y service-quotas get-service-quota, solo lectura.
+Después, intento individual de Web con P1, dentro del alcance de encendido ya autorizado.
+No se detienen otros hosts ni se cambian tipos/reglas; no se solicita aumento de cuota.
+No se afirma causa: ni retraso de liberación ni consumo ajeno están comprobados.
+NAT/restauración TI siguen pendientes de cierre.

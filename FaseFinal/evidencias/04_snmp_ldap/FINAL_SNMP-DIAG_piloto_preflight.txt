@@ -1,0 +1,46 @@
+Fuente: fragmentos literales de la salida compartida por el humano desde CloudShell.
+El hash de P1_gateways coincide con el archivo revisado del repositorio.
+El encendido confirma monitor running y cuatro instancias encendidas; no incluye una hora propia ni salida de checks EC2.
+Preflight monitor: 2026-11-11 04:32:42 UTC / 2026-11-10 22:32:42 Guatemala.
+Preflight LDAP: 2026-11-11 04:32:55 UTC / 2026-11-10 22:32:55 Guatemala.
+Ambos confirman Ubuntu e IP prevista, paquete SNMP ausente y espacio libre de raíz.
+No demuestra agente instalado, repositorios accesibles ni consulta SNMP remota.
+El último ls recibido sigue sin mostrar P5_acls.sh, P1_dmz_infra.sh y P1_costos.sh.
+Se omiten las barras de progreso de transferencias; las copias públicas se completaron.
+
+~ $ ls -l "$HOME/P1_gateways.sh" "$HOME/P5_acls.sh" \
+>   "$HOME/P1_dmz_infra.sh" "$HOME/P1_costos.sh"
+ls: cannot access '/home/cloudshell-user/P5_acls.sh': No such file or directory
+ls: cannot access '/home/cloudshell-user/P1_dmz_infra.sh': No such file or directory
+ls: cannot access '/home/cloudshell-user/P1_costos.sh': No such file or directory
+-rw-r--r--. 1 cloudshell-user cloudshell-user 17971 Oct 29 01:27 /home/cloudshell-user/P1_gateways.sh
+~ $ printf '%s  %s\n' 'cb673fd865399b6d42a0fc6c745bd42a53e515012b14d25d21fc7fa668b61fe1' "$HOME/P1_gateways.sh" | sha256sum --check
+/home/cloudshell-user/P1_gateways.sh: OK
+~ $ bash "$HOME/P1_instancias.sh" encender zp-monitor-01
+Encendiendo zp-monitor-01 (i-00e786cb51a422c36) ...
+En ejecución. Los status checks tardan unos 3 a 5 minutos en llegar a 2/2 antes de poder conectarte por EICE.
+
+Estado de las instancias zp-* de la VPC:
+  zp-intranet-01     stopped    10.20.0.71     i-07330a665030d940e
+  zp-ldap-01         running    10.20.0.69     i-04f9cc2b9ee3f77cd
+  zp-monitor-01      running    10.20.0.103    i-00e786cb51a422c36
+  zp-ntp-01          stopped    10.20.0.68     i-0410455bc4b28d3fe
+  zp-ti-01           running    10.20.0.102    i-0378a8624df39958b
+  zp-ventas-01       running    10.20.0.10     i-0f3bd7b0615933e00
+  zp-ventas-02       stopped    10.20.0.11     i-05a7f9ee1a6e93000
+  zp-visitantes-01   stopped    10.20.0.36     i-05dc9139e9d858330
+  zp-vpn-01          stopped    10.20.0.132    i-050e09727e2a06139
+  zp-web-01          stopped    10.20.0.116    i-06b59507240cfa8e7
+Encendidas ahora: 4
+
+== zp-monitor-01 · 2026-11-11 04:32:42 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T043242Z_lz0ps0eh · 2026-11-11 04:32:42 UTC
+[INFO] zp-monitor-01 10.20.0.103 ubuntu; paquete SNMP presente=False; modo solo lectura. · 2026-11-11 04:32:42 UTC
+[INFO] Espacio libre raíz: 12699 MiB · 2026-11-11 04:32:42 UTC
+Connection to i-00e786cb51a422c36 closed.
+
+== zp-ldap-01 · 2026-11-11 04:32:55 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ldap-01_20261111T043255Z_hrbtwc73 · 2026-11-11 04:32:55 UTC
+[INFO] zp-ldap-01 10.20.0.69 ubuntu; paquete SNMP presente=False; modo solo lectura. · 2026-11-11 04:32:55 UTC
+[INFO] Espacio libre raíz: 4482 MiB · 2026-11-11 04:32:55 UTC
+Connection to i-04f9cc2b9ee3f77cd closed.

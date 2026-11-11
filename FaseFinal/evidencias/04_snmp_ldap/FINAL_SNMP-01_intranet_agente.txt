@@ -1,0 +1,24 @@
+P4 · Intranet instalado tras el incidente de archivos vacíos
+Fuente: salida real compartida por el humano; no ejecutada desde el repositorio.
+Preflight: 2026-11-11 06:24:14 UTC / 2026-11-11 00:24:14 Guatemala.
+Instalación: 06:24:15–06:24:23 UTC / 00:24:15–00:24:23 Guatemala.
+Last login 06:03:11 corresponde a una sesión previa, no a esta instalación.
+
+[ec2-user@zp-intranet-01 ~]$ sudo -n bash "$HOME/P4_snmp.sh" preflight && sudo -n bash "$HOME/P4_snmp.sh" instalar --credenciales "$HOME/.env.p4-snmp"
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-intranet-01_20261111T062414Z_tunioqw8 · 2026-11-11 06:24:14 UTC
+[INFO] zp-intranet-01 10.20.0.71 amzn; paquete SNMP presente=False; modo solo lectura. · 2026-11-11 06:24:14 UTC
+[INFO] Espacio libre raíz: 6317 MiB · 2026-11-11 06:24:14 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-intranet-01_20261111T062415Z_u8b0f821 · 2026-11-11 06:24:15 UTC
+[PLAN] Instalar agente v3 en zp-intranet-01, escucha 10.20.0.71:161; crear usuario de solo lectura. Solo se administra snmpd. · 2026-11-11 06:24:15 UTC
+Escribe si para continuar: si
+[OK] SNMP-01 local: agente activo, escucha privada y autenticación v3 correctas: zp-intranet-01 · 2026-11-11 06:24:23 UTC
+[DATO] .1.3.6.1.2.1.1.3.0 = Timeticks: (15) 0:00:00.15 · 2026-11-11 06:24:23 UTC
+[OK] Agente instalado y validado; respaldo privado: /root/final-config/P4_snmp_zp-intranet-01_20261111T062415Z_u8b0f821/respaldo-privado · 2026-11-11 06:24:23 UTC
+[OK] Copia de transporte de credenciales eliminada; archivo de servicio privado conservado. · 2026-11-11 06:24:23 UTC
+
+Resultado: SNMP-01 local de Intranet comprobado; agentes acreditados 7/10.
+El wrapper, CSV y credenciales de Intranet ya permitieron ejecutar el instalador y validar v3.
+No se recibió salida pública del rescate: no acredita por sí solo su backup ni limpieza temporal del monitor.
+El intento previo con archivos vacíos se conserva por separado, sin convertirlo en éxito retrospectivo.
+Pendientes: métricas remotas de este host, Visitantes, web/VPN y restantes pruebas globales.
+No se recibieron secretos, diagnóstico privado, respaldo USM ni cierre NAT/restauración TI.

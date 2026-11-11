@@ -1,0 +1,11 @@
+P4 · SNMP-03: clave incorrecta contra LDAP desde monitor
+Fuente: salida compartida por el humano; no ejecutada desde el repositorio.
+Hora: 2026-11-11 05:36:16 UTC / 2026-11-10 23:36:16 Guatemala.
+Resultado: clave incorrecta exit=1 y controles válidos previo/posterior correctos.
+PASS acotado a esta prueba de autenticación contra LDAP.
+No demuestra aislamiento desde Ventas/Visitantes ni aprueba FW-05.
+
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T053616Z_v9v9y7dd · 2026-11-11 05:36:16 UTC
+[OK] SNMP-03 zp-ldap-01: clave incorrecta falla con exit=1; controles previo/posterior correctos. · 2026-11-11 05:36:16 UTC
+Connection to i-00e786cb51a422c36 closed.
+~ $

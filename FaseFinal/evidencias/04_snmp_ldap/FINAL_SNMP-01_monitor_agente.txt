@@ -1,0 +1,26 @@
+P4 · SNMP-01 · Agente local del monitor
+Fuente: salida de terminal compartida por el humano; no ejecutada desde el repositorio.
+Alcance: instalación real del agente en zp-monitor-01, no del recolector ni de Grafana.
+Inicio: 2026-11-11 05:01:17 UTC / 2026-11-10 23:01:17 Guatemala.
+Final: 2026-11-11 05:01:43 UTC / 2026-11-10 23:01:43 Guatemala.
+
+Prueba HTTPS previa (sin marca de hora propia en la salida):
+HTTPS OK 200 https://archive.ubuntu.com/ubuntu/
+HTTPS OK 200 https://github.com/prometheus/snmp_exporter/releases/download/v0.31.0/sha256sums.txt
+Esto acredita acceso a esas dos URL; no acredita instalación de snmp_exporter.
+
+Transcripción de la instalación:
+ubuntu@zp-monitor-01:~$ sudo -n bash "$HOME/P4_snmp.sh" instalar --credenciales "$HOME/.env.p4-snmp"
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T050117Z_d2ydmszj · 2026-11-11 05:01:17 UTC
+[PLAN] Instalar agente v3 en zp-monitor-01, escucha 10.20.0.103:161; crear usuario de solo lectura. Solo se administra snmpd. · 2026-11-11 05:01:17 UTC
+Escribe si para continuar: si
+[OK] SNMP-01 local: agente activo, escucha privada y autenticación v3 correctas: zp-monitor-01 · 2026-11-11 05:01:43 UTC
+[DATO] .1.3.6.1.2.1.1.3.0 = Timeticks: (12) 0:00:00.12 · 2026-11-11 05:01:43 UTC
+[OK] Agente instalado y validado; respaldo privado: /root/final-config/P4_snmp_zp-monitor-01_20261111T050117Z_d2ydmszj/respaldo-privado · 2026-11-11 05:01:43 UTC
+[OK] Copia de transporte de credenciales eliminada; archivo de servicio privado conservado. · 2026-11-11 05:01:43 UTC
+
+Resultado: SNMP-01 local del monitor comprobado. Un agente de diez previsto.
+Pendientes: agente LDAP y demás hosts, consultas remotas, seis familias de métricas,
+recolector Prometheus/exporter, rechazo de claves, aislamiento y prueba de caída.
+NAT y ACL TI temporal: no se recibió evidencia de cierre/restauración todavía.
+No se adjuntan credenciales, diagnóstico privado ni respaldos USM.

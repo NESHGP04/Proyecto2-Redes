@@ -1,0 +1,63 @@
+P4 · Primer lote: TI y Ventas-02 instalados, NTP interrumpido
+Fuente: fragmento real compartido por el humano, antes de los comandos pegados erróneamente.
+TI: 2026-11-11 05:45:59–05:46:07 UTC / 2026-11-10 23:45:59–23:46:07 Guatemala.
+Ventas-02: 05:48:53–05:49:23 UTC / 23:48:53–23:49:23 Guatemala.
+NTP: 05:49:36–05:51:36 UTC / 23:49:36–23:51:36 Guatemala.
+La primera línea > done es continuación de un comando cuyo inicio no está en el fragmento.
+
+> done
+P4_snmp.sh                                                                                                                                                                                                                      100%  213    21.4KB/s   00:00    
+P4_snmp.py                                                                                                                                                                                                                      100%   50KB   4.5MB/s   00:00    
+P4_snmp_objetivos.csv                                                                                                                                                                                                           100%  598    59.8KB/s   00:00    
+.env.p4-snmp                                                                                                                                                                                                                    100%  155    15.4KB/s   00:00    
+== zp-ti-01 · 2026-11-11 05:45:59 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ti-01_20261111T054559Z_s254ndv1 · 2026-11-11 05:45:59 UTC
+[INFO] zp-ti-01 10.20.0.102 amzn; paquete SNMP presente=False; modo solo lectura. · 2026-11-11 05:45:59 UTC
+[INFO] Espacio libre raíz: 6300 MiB · 2026-11-11 05:45:59 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ti-01_20261111T054559Z_hm23wpfs · 2026-11-11 05:45:59 UTC
+[PLAN] Instalar agente v3 en zp-ti-01, escucha 10.20.0.102:161; crear usuario de solo lectura. Solo se administra snmpd. · 2026-11-11 05:45:59 UTC
+Escribe si para continuar: si
+[OK] SNMP-01 local: agente activo, escucha privada y autenticación v3 correctas: zp-ti-01 · 2026-11-11 05:46:07 UTC
+[DATO] .1.3.6.1.2.1.1.3.0 = Timeticks: (15) 0:00:00.15 · 2026-11-11 05:46:07 UTC
+[OK] Agente instalado y validado; respaldo privado: /root/final-config/P4_snmp_zp-ti-01_20261111T054559Z_hm23wpfs/respaldo-privado · 2026-11-11 05:46:07 UTC
+[OK] Copia de transporte de credenciales eliminada; archivo de servicio privado conservado. · 2026-11-11 05:46:07 UTC
+Connection to i-0378a8624df39958b closed.
+Warning: Permanently added 'i-05a7f9ee1a6e93000' (ED25519) to the list of known hosts.
+P4_snmp.sh                                                                                                                                                                                                                      100%  213    20.2KB/s   00:00    
+P4_snmp.py                                                                                                                                                                                                                      100%   50KB   4.8MB/s   00:00    
+P4_snmp_objetivos.csv                                                                                                                                                                                                           100%  598    54.3KB/s   00:00    
+.env.p4-snmp                                                                                                                                                                                                                    100%  155    15.7KB/s   00:00    
+== zp-ventas-02 · 2026-11-11 05:48:53 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ventas-02_20261111T054853Z_g31nhnfs · 2026-11-11 05:48:53 UTC
+[INFO] zp-ventas-02 10.20.0.11 amzn; paquete SNMP presente=False; modo solo lectura. · 2026-11-11 05:48:53 UTC
+[INFO] Espacio libre raíz: 6426 MiB · 2026-11-11 05:48:53 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ventas-02_20261111T054853Z_68vn7spy · 2026-11-11 05:48:53 UTC
+[PLAN] Instalar agente v3 en zp-ventas-02, escucha 10.20.0.11:161; crear usuario de solo lectura. Solo se administra snmpd. · 2026-11-11 05:48:53 UTC
+Escribe si para continuar: si
+[OK] SNMP-01 local: agente activo, escucha privada y autenticación v3 correctas: zp-ventas-02 · 2026-11-11 05:49:23 UTC
+[DATO] .1.3.6.1.2.1.1.3.0 = Timeticks: (15) 0:00:00.15 · 2026-11-11 05:49:23 UTC
+[OK] Agente instalado y validado; respaldo privado: /root/final-config/P4_snmp_zp-ventas-02_20261111T054853Z_68vn7spy/respaldo-privado · 2026-11-11 05:49:23 UTC
+[OK] Copia de transporte de credenciales eliminada; archivo de servicio privado conservado. · 2026-11-11 05:49:23 UTC
+Connection to i-05a7f9ee1a6e93000 closed.
+Warning: Permanently added 'i-0410455bc4b28d3fe' (ED25519) to the list of known hosts.
+P4_snmp.sh                                                                                                                                                                                                                      100%  213    20.5KB/s   00:00    
+P4_snmp.py                                                                                                                                                                                                                      100%   50KB   5.2MB/s   00:00    
+P4_snmp_objetivos.csv                                                                                                                                                                                                           100%  598    59.1KB/s   00:00    
+.env.p4-snmp                                                                                                                                                                                                                    100%  155    15.1KB/s   00:00    
+== zp-ntp-01 · 2026-11-11 05:49:36 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ntp-01_20261111T054936Z_l7xztxy1 · 2026-11-11 05:49:36 UTC
+[INFO] zp-ntp-01 10.20.0.68 amzn; paquete SNMP presente=False; modo solo lectura. · 2026-11-11 05:49:36 UTC
+[INFO] Espacio libre raíz: 6435 MiB · 2026-11-11 05:49:36 UTC
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-ntp-01_20261111T054936Z_wxv3tq2i · 2026-11-11 05:49:36 UTC
+[PLAN] Instalar agente v3 en zp-ntp-01, escucha 10.20.0.68:161; crear usuario de solo lectura. Solo se administra snmpd. · 2026-11-11 05:49:36 UTC
+Escribe si para continuar: [FALLA] Interrupción recibida; la operación no se considera completa. · 2026-11-11 05:51:36 UTC
+Connection to i-0410455bc4b28d3fe closed.
+
+Resultado: SNMP-01 local correcto en TI y Ventas-02; agentes acreditados 5/10.
+NTP llegó al prompt de confirmación sin respuesta si y se interrumpió 120 s después.
+En el código la confirmación precede a instalar paquetes y configurar el servicio.
+No se acredita instalación de NTP ni de los destinos posteriores Intranet/Visitantes.
+Las credenciales de transporte de NTP se copiaron y no se informó su eliminación.
+No hay nueva prueba de estado global de ocho instancias: la línea Encendidas ahora: 8
+posterior fue pegada como comando y recibió command not found.
+No se recibieron secretos ni contenido de archivos privados.

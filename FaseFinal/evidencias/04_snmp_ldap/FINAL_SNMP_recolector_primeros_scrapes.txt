@@ -1,0 +1,22 @@
+P4 · Primera validación recibida después del arranque del recolector
+Fuente: salida de terminal compartida por el humano; no ejecutada desde el repositorio.
+Hora: 2026-11-11 05:29:26 UTC / 2026-11-10 23:29:26 Guatemala.
+Se conserva el resultado del comando; se omite el exit pegado junto a la salida.
+
+ubuntu@zp-monitor-01:~$ sudo -n bash "$HOME/P4_monitor_snmp.sh" --validar
+[INFO] Registro público resultado.txt y diagnóstico privado en /root/final-config/P4_snmp_zp-monitor-01_20261111T052926Z_9j2c4bde · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-ldap-01 10.20.0.69: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-vpn-01 10.20.0.132: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-ventas-02 10.20.0.11: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-ntp-01 10.20.0.68: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-visitantes-01 10.20.0.36: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-ventas-01 10.20.0.10: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-intranet-01 10.20.0.71: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-ti-01 10.20.0.102: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-monitor-01 10.20.0.103: scrape=up; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[ESTADO] zp-web-01 10.20.0.116: scrape=down; no equivale por sí solo a estado EC2. · 2026-11-11 05:29:26 UTC
+[OK] Recolector y Prometheus activos y privados; diez objetivos configurados. Estados down no se aceptan como SNMP-02 PASS. · 2026-11-11 05:29:26 UTC
+
+Resultado: dos scrapes up (monitor y LDAP), ocho down en esta muestra.
+La muestra precede a la instalación del agente de Ventas-01; no describe su estado posterior.
+No se acredita respuesta SNMP de diez hosts, ni apagado EC2 a partir de down.

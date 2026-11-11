@@ -1,0 +1,18 @@
+P4 · Incidente de pegado después de interrumpirse NTP
+Fuente: fragmentos representativos de la transcripción compartida; sin hora propia.
+Se omiten repeticiones del mismo pegado; no son nuevas ejecuciones válidas del lote.
+
+~ $ Encendidas ahora: 8
+bash: Encendidas: command not found
+~ $ ~ $ for p4_host in zp-ti-01 zp-ventas-02 zp-ntp-01 zp-intranet-01 zp-visitantes-01; do
+bash: syntax error near unexpected token `do'
+bash: break: only meaningful in a `for', `while', or `until' loop
+~ $ >   bash "$HOME/P3_eice.sh" "$p4_host" --copiar \
+bash: /home/cloudshell-user/P3_eice.sh: Permission denied
+
+Diagnóstico: se pegaron prompts, continuaciones y salidas como si fueran comandos.
+En > bash ..., bash es el destino de redirección; el helper se intenta ejecutar
+directamente. El Permission denied no demuestra que el archivo esté dañado
+ni justifica chmod o modificar el ayudante ajeno.
+Usar bash "$HOME/P3_eice.sh" y copiar solo el comando del recuadro, sin prompts.
+Siguiente paso: sesión individual a NTP y reintento con confirmación a tiempo.

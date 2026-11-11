@@ -1,0 +1,26 @@
+Fuente: fragmentos de la salida compartida por el humano; no es el log íntegro.
+Resultado real: TI reasociada a la ACL predeterminada; ACL dedicada eliminada para la ventana temporal.
+Archivo de credenciales copiado al monitor (solo nombre/tamaño recibidos, sin contenido).
+Conexión por EICE al monitor correcta después del cambio de seguridad.
+La reversión y copia no incluyen hora propia. El banner informa 2026-11-11 04:53:50 UTC / 2026-11-10 22:53:50 Guatemala; no se asigna esa hora a los cambios.
+Los intentos de ejecutar P3_eice.sh dentro del monitor fallaron por ruta/contexto; no implican fallo de la copia privada.
+HTTPS y agente SNMP siguen pendientes. Al finalizar se debe restaurar TI y cerrar NAT.
+
+~ $ bash "$HOME/P5_acls.sh" --revertir ti
+[OK] VPC vpc-zenite-fase2 = vpc-0e4c1d0b2314ab4df (us-east-1)
+[OK] ACL predeterminada = acl-067acfb0422ab4b7e
+Se va a volver a la ACL predeterminada y BORRAR: ti
+Escribe si para continuar: si
+[OK] Estado guardado en /home/cloudshell-user/fase3-config/p5-acl-estado-antes-revertir.json
+[OK] subnet-zenite-ti de vuelta en la ACL predeterminada
+[OK] acl-zenite-ti (acl-0d1325ce978d9c23e) eliminada
+Reversion completa.
+~ $ bash "$HOME/P3_eice.sh" zp-monitor-01 --copiar "$HOME/.config/zenite-p4/.env.p4-snmp"
+.env.p4-snmp 100% 155 16.3KB/s 00:00
+~ $ bash "$HOME/P3_eice.sh" zp-monitor-01
+Welcome to Ubuntu 24.04.5 LTS (GNU/Linux 7.0.0-1014-aws x86_64)
+
+ubuntu@zp-monitor-01:~$ bash "$HOME/P3_eice.sh" zp-monitor-01 --copiar "$HOME/.config/zenite-p4/.env.p4-snmp"
+bash: /home/ubuntu/P3_eice.sh: No such file or directory
+ubuntu@zp-monitor-01:~$ bash "$HOME/P3_eice.sh" zp-monitor-01
+bash: /home/ubuntu/P3_eice.sh: No such file or directory

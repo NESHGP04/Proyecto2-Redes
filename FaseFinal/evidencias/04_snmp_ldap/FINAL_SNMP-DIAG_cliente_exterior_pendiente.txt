@@ -1,0 +1,9 @@
+P4 · Disponibilidad de cliente SNMP en CloudShell
+Fuente: salida compartida por el humano después de los controles FW-05.
+Sin hora propia recibida para esta consulta local.
+
+~ $ command -v snmpget snmpwalk || echo '[PENDIENTE] Cliente SNMP ausente en CloudShell'
+[PENDIENTE] Cliente SNMP ausente en CloudShell
+
+No se acredita prueba desde Internet ni instalación de herramientas en CloudShell.
+La repetición de métricas 07:56 al inicio del pegado no es nueva ejecución.
