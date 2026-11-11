@@ -24,3 +24,4 @@ ReporteFase*
 Zenite_Prestige_ReporteV3.pdf
 *.docx
 
+__pycache__/
