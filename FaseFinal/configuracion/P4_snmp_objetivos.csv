@@ -1,0 +1,11 @@
+host,ip_privada,grupo,sistema_previsto,servicio_principal_a_confirmar
+zp-ventas-01,10.20.0.10,zenite-ventas,al2023,sshd
+zp-ventas-02,10.20.0.11,zenite-ventas,al2023,sshd
+zp-visitantes-01,10.20.0.36,zenite-visitantes,al2023,sshd
+zp-ntp-01,10.20.0.68,zenite-servidores,al2023,chronyd
+zp-ldap-01,10.20.0.69,zenite-servidores,ubuntu24.04,slapd
+zp-intranet-01,10.20.0.71,zenite-servidores,al2023,nginx
+zp-ti-01,10.20.0.102,zenite-ti,al2023,sshd
+zp-monitor-01,10.20.0.103,zenite-ti,ubuntu24.04,snmpd
+zp-web-01,10.20.0.116,zenite-dmz,ubuntu24.04,nginx
+zp-vpn-01,10.20.0.132,zenite-vpn,ubuntu24.04,openvpn
