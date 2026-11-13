@@ -1,0 +1,172 @@
+$ cat ~/final-config/P5_validar_todo_20261113_051733.log
+[INFO] 2026-11-13 05:17:33 Iniciando suite de validación integrada de solo lectura...
+[INFO] 2026-11-13 05:17:33 --- 1. Validando P1 (Infraestructura, Elastic IPs y DNS) ---
+[INFO] 2026-11-13 05:17:33 Comprobando resolución DNS con P1_dns_check.sh...
+Validación de DNS · zenite.dernait.com · IP esperada 18.210.66.163 · 2026-11-13 05:17:33 UTC
+  -- DNS-01 · el dominio resuelve a la Elastic IP de la web
+  [OK]    A zenite.dernait.com -> Elastic IP (@8.8.8.8)        18.210.66.163
+  [OK]    A zenite.dernait.com -> Elastic IP (@1.1.1.1)        18.210.66.163
+  -- DNS-02 · dos resolutores distintos coinciden
+  [OK]    8.8.8.8 y 1.1.1.1 dan la misma respuesta             18.210.66.163
+RESULTADO: todo correcto.
+[OK] 2026-11-13 05:17:33 P1.1 DNS Web: zenite.dernait.com resuelve correctamente a 18.210.66.163
+[INFO] 2026-11-13 05:17:34 Ejecutando P1_dmz_infra.sh --validar...
+Validación de la base pública (encendido) · vpc-zenite-fase2 · vpc-0e4c1d0b2314ab4df · 2026-11-13 05:17:43 UTC
+  -- Rutas
+  [OK]    Internet Gateway igw-zenite-fase3 adjunto            sí
+  [OK]    rt-zenite-dmz: 0.0.0.0/0 -> IGW (activa)             igw-00f6efb87a444f270 active
+  [OK]    Existe rt-zenite-vpn                                 sí
+  [OK]    rt-zenite-vpn: 0.0.0.0/0 -> IGW (activa)             igw-00f6efb87a444f270 active
+  [OK]    subnet-zenite-vpn asociada a rt-zenite-vpn           rtb-0c4e169f00a248de8
+  -- Security Group zenite-dmz (sg-06c3d521d3586f2b5)
+  [OK]    Existe                                               sí
+  [OK]    TCP/22 de entrada desde zenite-eice                  sí
+  [OK]    Entradas 0.0.0.0/0 fuera de las excepciones D10      ninguna
+    [INFO] entrada actual: udp:161, tcp:80, tcp:22, icmp:-1, tcp:443 (la Persona 3 completa las reglas)
+  -- Security Group zenite-vpn (sg-044aad87e64e20906)
+  [OK]    Existe                                               sí
+  [OK]    TCP/22 de entrada desde zenite-eice                  sí
+  [OK]    Entradas 0.0.0.0/0 fuera de las excepciones D10      ninguna
+    [INFO] entrada actual: udp:161, udp:1194, tcp:22, icmp:-1 (la Persona 3 completa las reglas)
+  -- zp-web-01 · i-06b59507240cfa8e7 · t3.micro · ami-0d6dd9e8265d48906 · ubuntu
+  [OK]    Estado y status checks                               running ok/ok
+  [OK]    Subred (subnet-zenite-dmz)                           subnet-0d29453584ea726c0
+  [OK]    IP privada                                           10.20.0.116
+  [OK]    Tipo de instancia                                    t3.micro
+  [OK]    Security Group                                       zenite-dmz
+  [OK]    IMDSv2 obligatorio                                   required
+  [OK]    Tags Name/Project/Phase/Role                         zp-web-01/ZenitePrestige/Final/Web
+  [OK]    Elastic IP eip-zenite-web asociada a zp-web-01       i-06b59507240cfa8e7
+    [INFO] IP pública: 18.210.66.163
+  [OK]    TCP/22 de 18.210.66.163 desde CloudShell (DMZ-04)    cerrado
+  -- zp-vpn-01 · i-050e09727e2a06139 · t3.micro · ami-0d6dd9e8265d48906 · ubuntu
+  [OK]    Estado y status checks                               running ok/ok
+  [OK]    Subred (subnet-zenite-vpn)                           subnet-061f6bea484702eec
+  [OK]    IP privada                                           10.20.0.132
+  [OK]    Tipo de instancia                                    t3.micro
+  [OK]    Security Group                                       zenite-vpn
+  [OK]    IMDSv2 obligatorio                                   required
+  [OK]    Tags Name/Project/Phase/Role                         zp-vpn-01/ZenitePrestige/Final/VPN
+  [OK]    Elastic IP eip-zenite-vpn asociada a zp-vpn-01       i-050e09727e2a06139
+    [INFO] IP pública: 3.228.84.176
+  [OK]    TCP/22 de 3.228.84.176 desde CloudShell (DMZ-04)     cerrado
+  -- zp-monitor-01 · i-00e786cb51a422c36 · t3.small · ami-0d6dd9e8265d48906 · ubuntu
+  [OK]    Estado y status checks                               running ok/ok
+  [OK]    Subred (subnet-zenite-ti)                            subnet-0688bbf577464f544
+  [OK]    IP privada                                           10.20.0.103
+  [OK]    Tipo de instancia                                    t3.small
+  [OK]    Security Group                                       zenite-ti
+  [OK]    IMDSv2 obligatorio                                   required
+  [OK]    Tags Name/Project/Phase/Role                         zp-monitor-01/ZenitePrestige/Final/Monitor
+  [OK]    Sin IPv4 pública                                     ninguna
+  -- Barrido de IP públicas (DMZ-03)
+  [OK]    zp-* con IP pública distintas de web y VPN          ninguna
+  [INFO]  Elastic IP en la cuenta: 2 · instancias zp-* encendidas: 3
+RESULTADO: todo correcto.
+
+Archivos en /home/cloudshell-user/final-config: dmz-infra-validacion.txt, final-sesiones.log, addresses.json, route-tables.json, security-groups.json, instancias-final.json.
+[OK] 2026-11-13 05:18:05 P1.2 AWS Infraestructura: Rutas e IPs elásticas validadas en AWS
+[INFO] 2026-11-13 05:18:05 --- 2. Validando P2 (Web Pública, Redirección 301 y Certificado TLS) ---
+[OK] 2026-11-13 05:18:05 P2.1 Redirección HTTP: http://zenite.dernait.com responde con código 301
+[OK] 2026-11-13 05:18:05 P2.2 Acceso HTTPS: https://zenite.dernait.com responde HTTP 200 OK
+[OK] 2026-11-13 05:18:05 P2.3 Certificado TLS válido: Expira el Feb  6 23:13:09 2027 GMT
+[INFO] 2026-11-13 05:18:05 --- 3. Validando P3 (OpenVPN y Firewall Final) ---
+[INFO] 2026-11-13 05:18:06 Ejecutando P3_firewall_final.sh --validar...
+== P3_firewall_final.sh --validar  · 2026-11-13 05:18:06 UTC
+[OK] VPC vpc-zenite-fase2 = vpc-0e4c1d0b2314ab4df (us-east-1)
+[OK] Security Groups: dmz=sg-06c3d521d3586f2b5 vpn=sg-044aad87e64e20906 servidores=sg-0bd52634dd2e6bb61 ti=sg-0e73e9942dd403016 eice=sg-0697e7f5646e28ab4
+--- paso base
+[OK] F-01 zenite-dmz <- 0.0.0.0/0 tcp 80-80
+[OK] F-02 zenite-dmz <- 0.0.0.0/0 tcp 443-443
+[OK] F-03 zenite-dmz <- zenite-ti tcp 22-22
+[OK] F-04 zenite-vpn <- 0.0.0.0/0 udp 1194-1194
+[OK] F-05 zenite-vpn <- zenite-ti tcp 22-22
+--- paso vpn
+[OK] F-06 zenite-servidores <- zenite-vpn tcp 80-80
+--- paso monitoreo
+[OK] F-07 zenite-dmz <- zenite-ti udp 161-161
+[OK] F-07 zenite-vpn <- zenite-ti udp 161-161
+[OK] F-07 zenite-servidores <- zenite-ti udp 161-161
+[OK] F-07 zenite-ventas <- zenite-ti udp 161-161
+[OK] F-07 zenite-visitantes <- zenite-ti udp 161-161
+[OK] F-07 zenite-ti <- zenite-ti udp 161-161
+[OK] F-08 zenite-dmz <- zenite-ti icmp -1--1
+[OK] F-08 zenite-vpn <- zenite-ti icmp -1--1
+[OK] visitantes in 130 udp 161-161 10.20.0.96/28 allow
+[OK] visitantes out 130 udp 1024-65535 10.20.0.96/28 allow
+--- paso acl-dmz
+[OK] dmz: existe acl-zenite-dmz = acl-05c8ba767f1345c57
+[OK] dmz in 100 tcp 22-22 10.20.0.144/28 allow
+[OK] dmz in 110 tcp 22-22 10.20.0.96/28 allow
+[OK] dmz in 120 udp 161-161 10.20.0.96/28 allow
+[OK] dmz in 130 icmp -1--1 10.20.0.96/28 allow
+[OK] dmz in 200 all --- 10.20.0.0/24 deny
+[OK] dmz in 300 tcp 80-80 0.0.0.0/0 allow
+[OK] dmz in 310 tcp 443-443 0.0.0.0/0 allow
+[OK] dmz in 320 tcp 1024-65535 0.0.0.0/0 allow
+[OK] dmz in 330 udp 1024-65535 0.0.0.0/0 allow
+[OK] dmz out 100 tcp 1024-65535 10.20.0.144/28 allow
+[OK] dmz out 110 tcp 1024-65535 10.20.0.96/28 allow
+[OK] dmz out 120 udp 1024-65535 10.20.0.96/28 allow
+[OK] dmz out 130 icmp -1--1 10.20.0.96/28 allow
+[OK] dmz out 200 all --- 10.20.0.0/24 deny
+[OK] dmz out 300 tcp 80-80 0.0.0.0/0 allow
+[OK] dmz out 310 tcp 443-443 0.0.0.0/0 allow
+[OK] dmz out 320 tcp 1024-65535 0.0.0.0/0 allow
+[OK] dmz out 330 udp 53-53 0.0.0.0/0 allow
+[OK] dmz out 340 tcp 53-53 0.0.0.0/0 allow
+[OK] dmz out 350 udp 123-123 0.0.0.0/0 allow
+[OK] dmz: subnet-zenite-dmz (subnet-0d29453584ea726c0) esta asociada a acl-05c8ba767f1345c57
+--- paso acl-vpn
+[OK] vpn: existe acl-zenite-vpn = acl-0d68b812eba2c9ddb
+[OK] vpn in 100 tcp 22-22 10.20.0.144/28 allow
+[OK] vpn in 110 tcp 22-22 10.20.0.96/28 allow
+[OK] vpn in 120 udp 161-161 10.20.0.96/28 allow
+[OK] vpn in 130 icmp -1--1 10.20.0.96/28 allow
+[OK] vpn in 140 tcp 1024-65535 10.20.0.64/27 allow
+[OK] vpn in 200 all --- 10.20.0.0/24 deny
+[OK] vpn in 300 udp 1194-1194 0.0.0.0/0 allow
+[OK] vpn in 310 tcp 1024-65535 0.0.0.0/0 allow
+[OK] vpn in 320 udp 1024-65535 0.0.0.0/0 allow
+[OK] vpn out 100 tcp 1024-65535 10.20.0.144/28 allow
+[OK] vpn out 110 tcp 1024-65535 10.20.0.96/28 allow
+[OK] vpn out 120 udp 1024-65535 10.20.0.96/28 allow
+[OK] vpn out 130 icmp -1--1 10.20.0.96/28 allow
+[OK] vpn out 140 tcp 80-80 10.20.0.64/27 allow
+[OK] vpn out 200 all --- 10.20.0.0/24 deny
+[OK] vpn out 300 udp 1024-65535 0.0.0.0/0 allow
+[OK] vpn out 310 tcp 80-80 0.0.0.0/0 allow
+[OK] vpn out 320 tcp 443-443 0.0.0.0/0 allow
+[OK] vpn out 330 udp 53-53 0.0.0.0/0 allow
+[OK] vpn out 340 tcp 53-53 0.0.0.0/0 allow
+[OK] vpn out 350 udp 123-123 0.0.0.0/0 allow
+[OK] vpn: subnet-zenite-vpn (subnet-061f6bea484702eec) esta asociada a acl-0d68b812eba2c9ddb
+--- comprobaciones globales
+[OK] se conserva: SSH desde EICE (P1) en zenite-dmz
+[OK] se conserva: SSH desde EICE (P1) en zenite-vpn
+[OK] FW-01: las unicas entradas desde Internet son TCP 80 y 443 en zenite-dmz y UDP 1194 en zenite-vpn
+[INFO] IP publica 3.228.84.176 -> zp-vpn-01 (i-050e09727e2a06139)
+[INFO] IP publica 18.210.66.163 -> zp-web-01 (i-06b59507240cfa8e7)
+[OK] Solo zp-web-01 y zp-vpn-01 tienen IP publica
+[OK] zenite-servidores no admite entradas desde zenite-dmz
+[OK] zenite-ti no admite entradas desde zenite-dmz
+[OK] zenite-ti no admite entradas desde zenite-vpn
+[OK] zenite-servidores admite desde zenite-vpn solo TCP 80 (o nada)
+[OK] EICE disponible (create-complete)
+[OK] EICE: zenite-dmz admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-servidores admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-ti admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-ventas admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-visitantes admite TCP 22 desde zenite-eice
+[OK] EICE: zenite-vpn admite TCP 22 desde zenite-eice
+[OK] EICE: acl-zenite-visitantes permite SSH (100) y su retorno (100) antes de cualquier denegacion
+[OK] EICE: acl-zenite-dmz permite SSH (100) y su retorno (100) antes de cualquier denegacion
+[OK] EICE: acl-zenite-ti permite SSH (100) y su retorno (100) antes de cualquier denegacion
+[OK] EICE: acl-zenite-vpn permite SSH (100) y su retorno (100) antes de cualquier denegacion
+[INFO] La prueba real del EICE (FW-04) es entrar a cada instancia: bash P3_eice.sh <zp-nombre> true
+RESULTADO: todo correcto.
+[OK] 2026-11-13 05:19:42 P3.1 Firewall Final: Security Groups y ACLs perimetrales validadas
+[OK] 2026-11-13 05:19:42 P3.2 DNS VPN: zenite-vpn.dernait.com resuelve a 3.228.84.176
+[INFO] 2026-11-13 05:19:42 --- 4. Validando P4 (SNMP Monitoreo y OpenLDAP) ---
+[OK] 2026-11-13 05:19:42 P4.1 Artefactos de monitoreo y LDAP presentes y verificados
+[OK] 2026-11-13 05:19:42 INT-01: Verificación global terminada con éxito. Todos los paquetes en PASS.
