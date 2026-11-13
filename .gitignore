@@ -16,3 +16,11 @@ credentials
 *accessKeys*.csv
 *rootkey*.csv
 *credentials*.csv
+
+# Informes maestros y entregables de plataforma
+Informe Fase 3 - Servicios de red y seguridad (Zenite Prestige).md
+Informe Fase Final - Implementacion de una Red (Zenite Prestige).md
+ReporteFase*
+Zenite_Prestige_ReporteV3.pdf
+*.docx
+
